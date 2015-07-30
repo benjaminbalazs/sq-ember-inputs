@@ -5,20 +5,32 @@ export default Ember.Mixin.create({
 	//
 
 	email : function(text) {
-		var pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$/;
-		return pattern.test(text);
+		if ( text ) {
+			var pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$/;
+			return pattern.test(text);
+		} else {
+			return false;
+		}
 	},
 
 	//
 
 	empty : function(text) {
-		return !/([^\s])/.test(text);
+		if ( text ) {
+			return !/([^\s])/.test(text);
+		} else {
+			return true;
+		}
 	},
 
 	//
 
 	anything : function(text) {
-		return text.length > 3;
+		if ( text ) {
+			return text.length > 3;
+		} else {
+			return false;
+		}
 	},
 
 	//
