@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="10px" height="6px" viewBox="0 0 10 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3 (11970) - http://www.bohemiancoding.com/sketch -->
+    <title>DropdownArrow</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="01-Landing" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="01-Landing-01-Desktop" sketch:type="MSArtboardGroup" transform="translate(-1170.000000, -513.000000)" fill="#979797">
+            <g id="Form" sketch:type="MSLayerGroup" transform="translate(900.000000, 168.000000)">
+                <g id="Fields" transform="translate(0.000000, 62.000000)" sketch:type="MSShapeGroup">
+                    <g id="Prefilled" transform="translate(0.000000, 252.000000)">
+                        <g id="DropdownArrow-Copy" transform="translate(270.000000, 31.000000)">
+                            <path d="M0,0 L10,0 L5,6 L0,0 Z" id="DropdownArrow"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

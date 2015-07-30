@@ -1,0 +1,75 @@
+.sq-input-text {
+
+	@extend .sq-input-animation;
+
+	& {
+		display: inline-block;
+		width: inherit;
+		height: 56px;
+		font-weight: 300;
+		text-align: left;
+		border-bottom: solid 2px $sq-input-bar-default;
+		margin-bottom: 30px;
+	}
+
+	input, label {
+		@extend .sq-input-animation;
+		margin-top: 12px;
+		line-height: 42px;
+		min-height: 42px;
+		font-size: 22px;
+		width: inherit;
+	}
+
+	input {
+		display: inline-block;
+		outline: none;
+		position: absolute;
+		border: none;
+		background: none;
+		color: $sq-input-input-default;
+		font-weight: 400;
+	}
+
+	label {
+		pointer-events: none;
+		position: absolute;
+		color: $sq-input-label-default;
+	}
+
+	&.filled {
+		label {
+			line-height: 12px;
+			font-size: 12px;
+			margin-top: 0px;
+		}
+	}
+
+	&.valid {
+		border-bottom: solid 2px $sq-input-bar-valid;
+		input {
+			color: $sq-input-input-valid;
+		}
+		label {
+			color: $sq-input-label-valid;
+		}
+	}
+
+	&.invalid {
+		input, label {
+			color: $sq-input-invalid;
+		}
+		border-bottom: solid 2px $sq-input-invalid;
+	}
+
+	&.focus {
+		border-bottom: solid 2px $sq-input-bar-focus;
+		label {
+			color: $sq-input-label-focus;
+		}
+		input:focus {
+			color: $sq-input-input-focus;
+		}
+	}
+
+}

@@ -1,0 +1,14 @@
+{{sq-input
+		focusIn='focusIn'
+		disabled=true
+		placeholder=placeholder
+		value=preview
+		required=required
+		criteria=criteria
+}}
+
+<ul>
+	{{#each items as |model|}}
+		<li {{action 'select' model }}>{{model.name}}</li>
+	{{/each}}
+</ul>
