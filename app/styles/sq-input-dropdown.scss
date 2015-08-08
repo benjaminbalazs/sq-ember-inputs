@@ -20,10 +20,10 @@
 	.sq-input-text {
 		position: absolute;
 		overflow: hidden;
-	}
-
-	.sq-input-text {
 		cursor: pointer;
+		input, label {
+			transition: all 0s ease-out;
+		}
 	}
 
 	.sq-input-text input:disabled {
@@ -80,7 +80,6 @@
 
 		.sq-input-text {
 			input, label {
-				padding-top: $sq-dropdown-padding;
 			}
 		}
 

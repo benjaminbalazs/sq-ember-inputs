@@ -7,36 +7,14 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 	// PARAMETERS
 	required: false,
 	criteria: null,
-	active: false,
-	focus: false,
+	initialValidation: false,
 
-	//
-	value: null,
-
-	list : null,
+	// SETTINGS
 	classNames: ['sq-input-dropdown'],
-
+	//
 	classNameBindings: ['focus'],
 
-	//
-
-	actions : {
-
-		select : function(data) {
-			if ( data.get('id') !== this.get('value.id') ) {
-				this.set('value', data);
-				this.sendAction('change', data);
-			}
-			//this.set('focus', false);
-		},
-
-		focusIn: function() {
-			//this.set('focus', true);
-		},
-
-	},
-
-	//
+	// CLICK ---------------------------------------------------------
 
 	click : function() {
 		if ( !this.get('focus') ) {
@@ -44,10 +22,9 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 		} else {
 			this.set('focus', false);
 		}
-		//console.log("click");
 	},
 
-	//
+	// CLICK OUTSIDE -------------------------------------------------
 
 	clickoutside : function() {
 		if ( this.get('focus') ) {
@@ -55,27 +32,48 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 		}
 	},
 
+	// ACTIONS -------------------------------------------------------
+
+	actions : {
+
+		select : function(data) {
+			if ( data.get('id') !== this.get('value.id') ) {
+				this.set('input.focus', true);
+				this.set('value', data);
+				this.set('input.focus', false);
+				this.sendAction('change', data);
+			}
+			return true;
+		},
+
+	},
+
 	//
 
-	preview : Ember.computed('value', function() {
-
-		return this.get('value.name');
-
-	}),
-
-	//
-
-	isValid : Ember.computed('value', function() {
-
-		return true;
-
+	isValid : Ember.computed('input.isValid', function() {
+		return this.get('input.isValid');
 	}),
 
 	validate : function() {
-		
-		//this.set('isFocus', true);
-		//this.set('isFocus', false);
+
+		this.get('input').validate();
 
 	},
+
+	//
+
+	initialize : Ember.on('didInsertElement', function() {
+
+		this.set('input', this.get('childViews')[0] );
+
+	}),
+
+	// DEFAULT DISPLAY VALUE
+
+	display : Ember.computed('value', function() {
+		return this.get('value.name');
+	}),
+
+	//
 
 });

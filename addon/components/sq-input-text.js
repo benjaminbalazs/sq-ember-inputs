@@ -6,22 +6,18 @@ export default Ember.Component.extend(Validators, {
 	// PARAMETERS
 	required: false,
 	criteria: null,
-	live: false,
 	initialValidation: false,
 	disabled: false,
 
 	// SETTINGS
-	tagName: "div",
-
 	classNames: ['sq-input-text'],
-	classNameBindings: ['isFilled:filled', 'valid', 'invalid', 'isFocus:focus'],
-
 	//
+	classNameBindings: ['isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus'],
+
+	// CLICK ---------------------------------------------------------
 	
 	click: function() {
-
 		return this.sendAction('focusIn');
-		
 	},
 
 	// ACTIONS -------------------------------------------------------
@@ -29,24 +25,20 @@ export default Ember.Component.extend(Validators, {
 	actions: {
 
 		focusIn: function() {
-			this.toggleProperty('isFocus');
+			this.toggleProperty('focus');
 			return true;
 		},
 
 		focusOut: function() {
-			this.toggleProperty('isFocus');
+			this.toggleProperty('focus');
 			return true;
 		},
-
-		onchange : function(object) {
-			this.sendAction('onchange', object);
-		}
 
 	},
 
 	//
 
-	// METHODS --------------------------------------------------
+	// METHODS --------------------------------------------------------
 
 	initialize : Ember.on('init', function() {
 
@@ -58,23 +50,23 @@ export default Ember.Component.extend(Validators, {
 
 	validate : function() {
 		
-		this.set('isFocus', true);
-		this.set('isFocus', false);
+		this.set('focus', true);
+		this.set('focus', false);
 
 	},
 
-	invalid : Ember.computed('isFocus', 'isFilled', function() {
+	// PROXIES -------------------------------------------------------
+
+	isInvalidProxy : Ember.computed('focus', 'isFilled', function() {
 
 		// INVALIDATE ONLY IF IT HAS NO FOCUS
-		if ( this.get('isFocus') === false ) {
+		if ( this.get('focus') === false ) {
 			return !this.get('isValid');
 		}
 
 	}),
 
-	//
-
-	valid : Ember.computed('isFocus','isFilled', function() {
+	isValidProxy : Ember.computed('focus','isFilled', function() {
 
 		// VALIDATE ONLY IF IT IS FILLED, OTHERWISE THERE IS NO POINT
 		if ( this.get('isFilled') ) {
@@ -85,20 +77,15 @@ export default Ember.Component.extend(Validators, {
 
 	// COMPUTED -------------------------------------------------------
 
-	isFilled : Ember.computed('isFocus', function() {
-
-		if ( this.get('isFocus') ) {
+	isFilled : Ember.computed('focus', function() {
+		if ( this.get('focus') ) {
 			return true;
 		} else {
 			return !this.get('isEmpty');
 		}
-
 	}),
 
-	// IS VALID
-
 	isValid : Ember.computed('value', function() {
-		
 		// ONLY HANDLE THIS IS required IS ON
 		if ( this.get('required') !== false ) {
 
@@ -114,7 +101,6 @@ export default Ember.Component.extend(Validators, {
 		} else { // OTHERWISE, JUST PASS TRUE
 			return true;
 		}
-
 	}),
 
 	// VALIDATORS --------------------------------------------------
@@ -138,6 +124,5 @@ export default Ember.Component.extend(Validators, {
 	isYoutube : Ember.computed('value', function() {
 		return this.youtube(this.get('value'));
 	}),
-
 
 });
