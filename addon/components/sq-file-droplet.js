@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import Uploader from 'sq-ember-inputs/services/uploader';
+import Inputviews from '.././mixins/inputviews';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(Inputviews, {
 
 	classNames: ['sq-file-droplet'],
 
@@ -82,7 +83,7 @@ export default Ember.Component.extend({
 
 	uploading: false,
 	failed: false,
-	percentage: 0,
+	percentage: '0%',
 
 	upload(file) {
 
@@ -101,7 +102,7 @@ export default Ember.Component.extend({
     		current = this.get('value.id');
     	}
 
-		this.uploader.upload( this.get('type'), current, data, function(percentage) { self.set('percentage', percentage) } )
+		this.uploader.upload( this.get('type'), current, data, function(value) { self.set('percentage', value); } )
 
 		.then(function(model) {
 		

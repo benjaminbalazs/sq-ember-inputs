@@ -1,13 +1,15 @@
 import Ember from 'ember';
+import Inputviews from '.././mixins/inputviews';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(Inputviews, {
 
 	//
 	tagName: '',
-	type: 'file',
 
 	//
 	value: null,
+	type: 'file',
+	required: false,
 
 	actions: {
 
@@ -16,18 +18,6 @@ export default Ember.Component.extend({
 			this.set('value', model);
 			
 		}
-
-	},
-
-	// VALIDATOR
-
-	isValid : Ember.computed(function() {
-		return true;
-	}),
-
-	validate() {
-
-		//this.get('input').validate();
 
 	},
 
