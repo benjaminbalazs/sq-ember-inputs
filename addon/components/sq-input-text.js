@@ -16,7 +16,7 @@ export default Ember.Component.extend(Validators, {
 
 	// CLICK ---------------------------------------------------------
 	
-	click: function() {
+	click() {
 		return this.sendAction('focusIn');
 	},
 
@@ -24,12 +24,12 @@ export default Ember.Component.extend(Validators, {
 
 	actions: {
 
-		focusIn: function() {
+		focusIn() {
 			this.toggleProperty('focus');
 			return true;
 		},
 
-		focusOut: function() {
+		focusOut() {
 			this.toggleProperty('focus');
 			return true;
 		},
@@ -48,7 +48,7 @@ export default Ember.Component.extend(Validators, {
 
 	}),
 
-	validate : function() {
+	validate() {
 		
 		this.set('focus', true);
 		this.set('focus', false);
@@ -77,7 +77,7 @@ export default Ember.Component.extend(Validators, {
 
 	// COMPUTED -------------------------------------------------------
 
-	isFilled : Ember.computed('focus', function() {
+	isFilled : Ember.computed('focus', 'value', function() {
 		if ( this.get('focus') ) {
 			return true;
 		} else {

@@ -8,15 +8,15 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 	required: false,
 	criteria: null,
 	initialValidation: false,
+	value: null,
 
 	// SETTINGS
 	classNames: ['sq-input-dropdown'],
-	//
 	classNameBindings: ['focus'],
 
 	// CLICK ---------------------------------------------------------
 
-	click : function() {
+	click() {
 		if ( !this.get('focus') ) {
 			this.set('focus', true);
 		} else {
@@ -26,7 +26,7 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 
 	// CLICK OUTSIDE -------------------------------------------------
 
-	clickoutside : function() {
+	clickoutside() {
 		if ( this.get('focus') ) {
 			this.set('focus', false);
 		}
@@ -36,7 +36,7 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 
 	actions : {
 
-		select : function(data) {
+		select(data) {
 			if ( data.get('id') !== this.get('value.id') ) {
 				this.set('input.focus', true);
 				this.set('value', data);
@@ -50,15 +50,15 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 
 	//
 
-	isValid : Ember.computed('input.isValid', function() {
-		return this.get('input.isValid');
-	}),
-
-	validate : function() {
+	validate() {
 
 		this.get('input').validate();
 
 	},
+
+	isValid : Ember.computed('input.isValid', function() {
+		return this.get('input.isValid');
+	}),
 
 	//
 
@@ -68,7 +68,7 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 
 	}),
 
-	// DEFAULT DISPLAY VALUE
+	//
 
 	display : Ember.computed('value', function() {
 		return this.get('value.name');

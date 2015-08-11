@@ -9,7 +9,7 @@ export default Ember.Component.extend({
 
 	actions : {
 
-		submit : function() {
+		submit() {
 
 			this.triggerValidation();
 			
@@ -23,7 +23,7 @@ export default Ember.Component.extend({
 
 	// METHODS ------------------------------------------------------------------
 
-	triggerValidation : function() {
+	triggerValidation() {
 
 		var inputs = this.get('inputs');
 

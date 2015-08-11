@@ -1,0 +1,20 @@
+.sq-file-droplet {
+
+	& {
+		width: inherit;
+		text-align: left;
+		height: 56px;
+		margin-bottom: 30px;
+		cursor: pointer;
+	}
+
+	input:disabled {
+		cursor: pointer;
+		pointer-events: all;
+	}
+
+	input, label {
+		transition: all 0s ease-out;
+	}
+
+}
