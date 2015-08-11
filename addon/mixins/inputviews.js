@@ -7,15 +7,11 @@ export default Ember.Mixin.create({
 	isValid : Ember.computed('inputs.@each.isValid', 'inputs.[]', function() {
 
 		var inputs = this.get('inputs');
-
 		for ( var i=0; i < inputs.length; i++) {
-
 			var view = inputs[i];
-			
 			if ( view.get('isValid') === false ) {
 				return false;
 			}
-
 		}
 		return true;
 		
@@ -24,15 +20,12 @@ export default Ember.Mixin.create({
 	// 
 
 	inputs : Ember.computed('childViews.[]', function() {
-		console.log('init');
 		var childs = this.get('childViews');
 		var inputs = [];
 		for ( var i=0; i < childs.length; i++) {
 			var view = childs[i];
-			console.log(view.get("type"));
 			if ( view.get("required") ) {
 				inputs.push(view);
-				//console.log(view);
 			}
 		}
 		return inputs;

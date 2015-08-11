@@ -44,6 +44,8 @@ export default Ember.Component.extend(Inputviews, {
 		event.stopPropagation();
   		event.preventDefault();
 
+  		if ( this.get('uploading') ) return;
+
   		var files = e.target.files || e.dataTransfer.files;
 
 		for (var i = 0, file; file = files[i]; i++) {
@@ -55,6 +57,8 @@ export default Ember.Component.extend(Inputviews, {
 	// CLICK -----------------------------------------------------------------------
 
 	click(event) {
+
+		if ( this.get('uploading') ) return;
 
 		var self = this;
 		Ember.run.later(function() {
@@ -82,8 +86,17 @@ export default Ember.Component.extend(Inputviews, {
 	// UPLOAD ----------------------------------------------------------------------
 
 	uploading: false,
+	processing: false,
 	failed: false,
+	//
 	percentage: '0%',
+
+	//
+
+	working: Ember.computed('uploading', 'processing', function() {
+		return ( this.get('uploading') || this.get('processing') );
+	}),
+	//
 
 	upload(file) {
 
@@ -102,13 +115,24 @@ export default Ember.Component.extend(Inputviews, {
     		current = this.get('value.id');
     	}
 
-		this.uploader.upload( this.get('type'), current, data, function(value) { self.set('percentage', value); } )
+    	self.set('percentage', '0%');
 
-		.then(function(model) {
+		this.uploader.upload( this.get('type'), current, data,
+
+		function(value) {
+			self.set('percentage', value);
+		},
+
+		function() {
+			self.set('uploading', false);
+			self.set('processing', true);
+		}
+
+		).then(function(model) {
 		
 			self.set('value', model);
 
-			self.set('uploading', false);
+			self.set('processing', false);
 
 			self.sendAction('change', model);
 
@@ -116,6 +140,7 @@ export default Ember.Component.extend(Inputviews, {
 
 		.catch(function(error) {
 
+			self.set('processing', false);
 			self.set('uploading', false);
 			self.set('failed', true);
 

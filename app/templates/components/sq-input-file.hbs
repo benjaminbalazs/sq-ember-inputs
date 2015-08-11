@@ -1,14 +1,16 @@
-{{#sq-file-droplet required=required type=type change='change' value=value as |dragging uploading|}}
+{{#sq-file-droplet required=required type=type change='change' value=value as |dragging uploading percentage processing working|}}
 	
-	{{#if uploading}}
-		{{sq-input-text disabled=true placeholder=percentage}}
+	{{#if working}}
+
+		{{#if uploading}}
+			{{sq-input-text disabled=true placeholder=percentage}}
+		{{else}}
+			{{sq-input-text disabled=true placeholder='Processing'}}
+		{{/if}}
+
 	{{else}}
+
 		{{sq-input-text disabled=true required=required placeholder=placeholder value=value.filename}}
-	{{/if}}
-
-	{{#if dragging}}
-
-		<!-- <p>Dragging</p> !-->
 
 	{{/if}}
 

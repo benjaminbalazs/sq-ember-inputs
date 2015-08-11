@@ -10,7 +10,7 @@ export default Ember.Service.extend({
 
 	// UPLOAD --------------------------------------------------------------------
 
-	upload(type, current, data, onProgress) {
+	upload(type, current, data, onProgress, onUploaded) {
 
 		var self = this;
 
@@ -32,13 +32,20 @@ export default Ember.Service.extend({
 				            if (evt.lengthComputable) {
 				                var percentComplete = (evt.loaded / evt.total)*100;
 				                percentComplete = Math.round(percentComplete) + '%';
-				                onProgress(percentComplete);
+				                if ( onProgress ) {
+				                	onProgress(percentComplete);
+				                };
 				            }
+				        }, false);
+				        xhr.upload.addEventListener("load", function (evt) {
+				        	if ( onUploaded ) {
+				        		onUploaded();
+				        	};
 				        }, false);
 				        return xhr;
 		    		},
 		    }).done(function(data) {
-	
+
 		    	// PUSH NEW TO STORE
 		    	var model = self.get('store').push(data);
 		    	
