@@ -2,5 +2,9 @@
 'use strict';
 
 module.exports = {
-  name: 'sq-ember-inputs'
+  name: 'sq-ember-inputs',
+  included: function(app) {
+    this._super.included(app);
+    app.import('vendor/assets/sq-dropdown-arrow.svg');
+  }
 };
