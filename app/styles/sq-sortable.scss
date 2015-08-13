@@ -1,0 +1,16 @@
+.sq-sortable-item {
+}
+
+.gu-mirror {
+	display: none;
+}
+
+.sq-sortable-list {
+
+	.gu-transit {
+		opacity: 1;
+		-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+		filter: alpha(opacity=100);
+	}
+
+}

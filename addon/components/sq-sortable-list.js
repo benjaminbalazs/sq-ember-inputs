@@ -23,6 +23,7 @@ export default Ember.Component.extend( {
 
 		let drag = dragula([myself], {
 			copy: false,
+			mirrorContainer: document.body
 		});
 
 		drag.on('drag', function(el, source) {
