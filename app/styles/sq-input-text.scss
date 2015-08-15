@@ -1,27 +1,24 @@
 .sq-input-text {
 
-	@extend .sq-input-animation;
-
 	& {
 		display: inline-block;
 		width: inherit;
-		height: 56px;
+		height: $sq-input-border-height + $sq-input-label-height + $sq-input-input-line-height + (( $sq-input-input-height - $sq-input-input-line-height));
 		font-weight: 300;
 		text-align: left;
-		border-bottom: solid 2px $sq-input-bar-default;
-		margin-bottom: 30px;
+		border-bottom: solid $sq-input-border-height $sq-input-bar-default;
+		margin-bottom: $sq-input-margin-bottom;
 	}
 
 	input, label {
-		@extend .sq-input-animation;
-		margin-top: 12px;
-		line-height: 42px;
-		min-height: 42px;
-		font-size: 22px;
+		margin-top: $sq-input-label-height;
+		line-height: $sq-input-input-line-height + ( $sq-input-input-height - $sq-input-input-line-height);
+		min-height: $sq-input-input-line-height + ( $sq-input-input-height - $sq-input-input-line-height);
+		font-size: $sq-input-input-font-size;
 		width: inherit;
 	}
 
-	input {
+	input, textarea {
 		display: inline-block;
 		outline: none;
 		position: absolute;
@@ -29,7 +26,25 @@
 		background: none;
 		color: $sq-input-input-default;
 		font-weight: 400;
+		margin-bottom: (( $sq-input-input-height - $sq-input-input-line-height)/2);
 	}
+
+	//
+
+	textarea {
+		margin-top: $sq-input-label-height + (( $sq-input-input-height - $sq-input-input-line-height)/2);
+		line-height: $sq-input-input-line-height;
+		min-height: $sq-input-input-line-height;
+		font-size: $sq-input-input-font-size;
+		width: inherit;
+	}
+
+	textarea {
+		overflow: hidden;
+    	resize: none;
+	}
+
+	//
 
 	label {
 		pointer-events: none;
@@ -39,15 +54,15 @@
 
 	&.filled {
 		label {
-			line-height: 12px;
-			font-size: 12px;
+			line-height: $sq-input-label-height;
+			font-size: $sq-input-label-height;
 			margin-top: 0px;
 		}
 	}
 
 	&.valid {
-		border-bottom: solid 2px $sq-input-bar-valid;
-		input {
+		border-bottom: solid $sq-input-border-height $sq-input-bar-valid;
+		input, textarea {
 			color: $sq-input-input-valid;
 		}
 		label {
@@ -56,20 +71,31 @@
 	}
 
 	&.invalid {
-		input, label {
+		input, label, textarea {
 			color: $sq-input-invalid;
 		}
 		border-bottom: solid 2px $sq-input-invalid;
 	}
 
 	&.focus {
-		border-bottom: solid 2px $sq-input-bar-focus;
+		border-bottom: solid $sq-input-border-height $sq-input-bar-focus;
 		label {
 			color: $sq-input-label-focus;
 		}
-		input:focus {
+		input:focus, textarea:focus {
 			color: $sq-input-input-focus;
 		}
 	}
 
+}
+
+.sq-input-rtl {
+	label {
+		text-align: right;
+	}
+	input, textarea {
+		text-align: right;
+		direction: rtl;
+		unicode-bidi: embed;
+	}
 }

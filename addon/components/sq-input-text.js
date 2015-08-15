@@ -8,11 +8,12 @@ export default Ember.Component.extend(Validators, {
 	criteria: null,
 	initialValidation: false,
 	disabled: false,
+	rtl: false,
 
 	// SETTINGS
-	classNames: ['sq-input-text'],
+	classNames: ['sq-input-animation', 'sq-input-text'],
 	//
-	classNameBindings: ['isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus'],
+	classNameBindings: ['isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'rtl:sq-input-rtl'],
 
 	// CLICK ---------------------------------------------------------
 	
@@ -38,15 +39,25 @@ export default Ember.Component.extend(Validators, {
 
 	//
 
+	dir : Ember.computed('rtl', function() {
+		if ( this.get('rtl') ) {
+			return 'rtl';
+		} else {
+			return 'ltr';
+		}
+	}),
+
 	// METHODS --------------------------------------------------------
 
-	initialize : Ember.on('init', function() {
+	init() {
+
+		this._super();
 
 		if ( this.get('initialValidation') ) {
 			this.validate();
 		}
 
-	}),
+	},
 
 	validate() {
 		
