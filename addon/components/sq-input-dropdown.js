@@ -5,12 +5,14 @@ import ClickOutside from '../mixins/clickoutside';
 export default Ember.Component.extend(Validators,ClickOutside, {
 
 	// PARAMETERS
+
 	required: false,
 	criteria: null,
 	initialValidation: false,
 	value: null,
 
 	// SETTINGS
+	
 	classNames: ['sq-input-dropdown'],
 	classNameBindings: ['focus'],
 
@@ -40,6 +42,7 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 			if ( data.get('id') !== this.get('value.id') ) {
 				this.set('input.focus', true);
 				this.set('value', data);
+				this.set('display', data.get('name'));
 				this.set('input.focus', false);
 				this.sendAction('change', data);
 			}
@@ -48,12 +51,10 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 
 	},
 
-	//
+	// VALIDATION ----------------------------------------------------
 
 	validate() {
-
 		this.get('input').validate();
-
 	},
 
 	isValid : Ember.computed('input.isValid', function() {
@@ -63,17 +64,15 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 	//
 
 	initialize : Ember.on('didInsertElement', function() {
-
 		this.set('input', this.get('childViews')[0] );
-
 	}),
 
-	//
+	// AUTO UPDATE DISPLAY ON DATA ----------------------------------
 
-	display : Ember.computed('value', function() {
-		return this.get('value.name');
+	display : Ember.computed('value.name', {
+		get() {
+			return this.get('value.name');
+		}
 	}),
-
-	//
 
 });
