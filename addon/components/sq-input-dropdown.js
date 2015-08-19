@@ -69,10 +69,14 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 
 	// AUTO UPDATE DISPLAY ON DATA ----------------------------------
 
-	display : Ember.computed('value.name', {
-		get() {
-			return this.get('value.name');
-		}
+	display : Ember.computed('value', 'value.name', function() {
+		return this.get('value.name');
+	}),
+
+	//
+
+	internals : Ember.computed('items', 'items.@each.id', function() {
+		return this.get('items');
 	}),
 
 });
