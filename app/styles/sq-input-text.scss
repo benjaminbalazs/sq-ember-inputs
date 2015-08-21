@@ -1,6 +1,8 @@
 .sq-input-text {
 
 	& {
+		position: relative;
+		float: left;
 		display: inline-block;
 		width: inherit;
 		height: $sq-input-border-height + $sq-input-label-height + $sq-input-input-line-height + (( $sq-input-input-height - $sq-input-input-line-height));
