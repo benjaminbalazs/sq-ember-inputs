@@ -1,6 +1,8 @@
 .sq-input-dropdown {
 
 	& {
+		position: relative;
+		display: inline-block;
 		width: inherit;
 		text-align: left;
 		height: 56px;
