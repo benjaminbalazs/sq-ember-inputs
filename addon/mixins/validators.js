@@ -4,6 +4,17 @@ export default Ember.Mixin.create({
 
 	//
 
+	number : function(text) {
+		if ( text ) {
+			var pattern = /^(0|[1-9][0-9]*)$/;
+			return pattern.test(text);
+		} else {
+			return false;
+		}
+	},
+
+	//
+
 	email : function(text) {
 		if ( text ) {
 			var pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$/;

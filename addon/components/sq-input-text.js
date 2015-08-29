@@ -136,4 +136,8 @@ export default Ember.Component.extend(Validators, {
 		return this.youtube(this.get('value'));
 	}),
 
+	isNumber : Ember.computed('value', function() {
+		return this.number(this.get('value'));
+	}),
+
 });
