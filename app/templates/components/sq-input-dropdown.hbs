@@ -8,6 +8,10 @@
 
 <ul>
 	{{#each internals as |model|}}
-		<li {{action 'select' model }}>{{model.name}}</li>
+		{{#if model.descriptior}}
+			<li {{action 'select' model }}>{{model.name}}&nbsp;<span>{{model.name_descriptior}}</span></li>
+		{{else}}
+			<li {{action 'select' model }}>{{model.name}}</li>
+		{{/if}}
 	{{/each}}
 </ul>
