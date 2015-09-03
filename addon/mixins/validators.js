@@ -30,7 +30,8 @@ export default Ember.Mixin.create({
 		if ( text ) {
 			return !/([^\s])/.test(text);
 		} else {
-			return true;
+			//console.log(typeof(text));
+			return !( typeof(text) === 'boolean' );
 		}
 	},
 
@@ -40,7 +41,7 @@ export default Ember.Mixin.create({
 		if ( text ) {
 			return text.length > 3;
 		} else {
-			return false;
+			return text;
 		}
 	},
 

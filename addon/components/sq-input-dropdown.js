@@ -9,7 +9,6 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 	required: false,
 	criteria: null,
 	initialValidation: false,
-	value: null,
 
 	// SETTINGS
 	
@@ -39,13 +38,25 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 	actions : {
 
 		select(data) {
-			if ( data.get('id') !== this.get('value.id') ) {
-				this.set('input.focus', true);
-				this.set('value', data);
-				this.set('display', data.get('name'));
-				this.set('input.focus', false);
-				this.sendAction('change', data);
+			
+			if ( typeof(data.get) !== 'undefined' ) {
+				if ( data.get('id') !== this.get('value.id') ) {
+					this.set('input.focus', true);
+					this.set('value', data);
+					this.set('display', data.get('name'));
+					this.set('input.focus', false);
+					this.sendAction('change', data);
+				}
+			} else {
+				if ( data.id !== this.get('value') ) {
+					this.set('input.focus', true);
+					this.set('value', data.id);
+					this.set('display', data.name);
+					this.set('input.focus', false);
+					this.sendAction('change', data);
+				}
 			}
+
 			return true;
 		},
 
@@ -70,7 +81,11 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 	// AUTO UPDATE DISPLAY ON DATA ----------------------------------
 
 	display : Ember.computed('value', 'value.name', function() {
-		return this.get('value.name');
+		if ( typeof(this.get('value')) !== 'object' ) {
+			return this.get('value');
+		} else {
+			return this.get('value.name');
+		}
 	}),
 
 	//
