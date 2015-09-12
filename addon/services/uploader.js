@@ -70,11 +70,11 @@ export default Ember.Service.extend({
 
 	// INIT ---------------------------------------------------------------------
 
-	initialize : Ember.on('init', function() {
+	init() {
 		
 		var config = this.container.lookupFactory('config:environment');
 		this.baseUrl =  "/" + config.APP.api_namespace + "/upload";
  
-	})
+	}
 
 });

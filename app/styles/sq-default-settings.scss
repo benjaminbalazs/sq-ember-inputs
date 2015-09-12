@@ -1,0 +1,33 @@
+// INPUT
+$sq-input-bar-focus: $purple;
+$sq-input-label-focus: $purple;
+$sq-input-input-focus: $dark_lighten_1;
+
+$sq-input-bar-valid: $dark_lighten_1;
+$sq-input-label-valid: $dark_lighten_1;
+$sq-input-input-valid: $dark_lighten_1;
+
+$sq-input-bar-default: $grey_darker_4;
+$sq-input-label-default: $grey_darker_4;
+$sq-input-input-default: $grey_darker_2;
+
+$sq-input-invalid: $red;
+
+//SIZES
+$sq-input-border-height: 2px;
+$sq-input-label-height: 12px; 
+$sq-input-input-font-size: 24px;
+$sq-input-input-height: 44px;
+$sq-input-input-line-height: 32px;
+$sq-input-margin-bottom: 30px;
+
+// DROPDOWN
+$sq-dropdown-padding: 15px;
+$sq-dropdown-item: $dark_lighten_2;
+$sq-dropdown-item-selected: $dark_lighten_3;
+$sq-dropdown-item-descriptior: $grey_darker_4;
+$sq-dropdown-item-hover: rgba(0,0,0,0.05);
+
+
+//
+$sq-input-font: "Roboto", sans-serif;
