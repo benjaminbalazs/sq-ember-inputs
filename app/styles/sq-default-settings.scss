@@ -3,8 +3,8 @@ $sq-input-bar-focus: $purple;
 $sq-input-label-focus: $purple;
 $sq-input-input-focus: $dark_lighten_1;
 
-$sq-input-bar-valid: $dark_lighten_1;
-$sq-input-label-valid: $dark_lighten_1;
+$sq-input-bar-valid: $grey_darker_4;
+$sq-input-label-valid: $grey_darker_4;
 $sq-input-input-valid: $dark_lighten_1;
 
 $sq-input-bar-default: $grey_darker_4;
@@ -20,6 +20,8 @@ $sq-input-input-font-size: 24px;
 $sq-input-input-height: 44px;
 $sq-input-input-line-height: 32px;
 $sq-input-margin-bottom: 30px;
+
+$sq-input-medium: 4px;
 
 // DROPDOWN
 $sq-dropdown-padding: 15px;

@@ -4,11 +4,6 @@ import Inputviews from '.././mixins/inputviews';
 export default Ember.Component.extend(Inputviews, {
 
 	classNames: "sq-input-form",
-
-	//
-	processing: false,
-
-	// ACTIONS
 	
 	actions : {
 

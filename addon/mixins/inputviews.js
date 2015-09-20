@@ -5,7 +5,6 @@ export default Ember.Mixin.create({
 	// IS VALID -----------------------------------------------------------------
 
 	isValid : Ember.computed('inputs.@each.isValid', 'inputs.[]', function() {
-
 		var inputs = this.get('inputs');
 		for ( var i=0; i < inputs.length; i++) {
 			var view = inputs[i];
@@ -14,7 +13,6 @@ export default Ember.Mixin.create({
 			}
 		}
 		return true;
-		
 	}),
 
 	// 
@@ -29,7 +27,6 @@ export default Ember.Mixin.create({
 			}
 		}
 		return inputs;
-
 	}),
 
 	// METHODS ------------------------------------------------------------------

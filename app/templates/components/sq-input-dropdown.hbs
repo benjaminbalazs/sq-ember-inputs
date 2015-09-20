@@ -4,14 +4,17 @@
 		value=display
 		required=required
 		criteria=criteria
+		medium=medium
 }}
+
+<span class="sq-right"></span>
 
 <ul>
 	{{#each internals as |model|}}
 		{{#if model.descriptior}}
-			<li {{action 'select' model }}>{{model.name}}&nbsp;<span>{{model.name_descriptior}}</span></li>
+			<li class="sq-align-left" {{action 'select' model }}>{{model.name}}&nbsp;<span>{{model.name_descriptior}}</span></li>
 		{{else}}
-			<li {{action 'select' model }}>{{model.name}}</li>
+			<li class="sq-align-left" {{action 'select' model }}>{{model.name}}</li>
 		{{/if}}
 	{{/each}}
 </ul>

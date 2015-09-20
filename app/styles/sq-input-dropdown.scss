@@ -1,6 +1,7 @@
 .sq-input-dropdown {
 
 	& {
+		direction: ltr !important;
 		position: relative;
 		display: inline-block;
 		width: inherit;
@@ -9,10 +10,10 @@
 		margin-bottom: 30px;
 	}
 
-	.sq-input-text:after {
+	span {
 		display: inline-block;
 		content: url(../assets/sq-dropdown-arrow.svg);
-		top: 18px;
+		top: 50%;
 		right: 0px;
 		position: absolute;
 		width: 10px;
@@ -89,7 +90,7 @@
 			}
 		}
 
-		.sq-input-text:after {
+		span {
 			@extend .sq-input-animation;
 			margin-top: 24px;
 		}

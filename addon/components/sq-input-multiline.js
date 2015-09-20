@@ -8,6 +8,8 @@ export default TextInput.extend( {
 
 	initiated: false,
 
+	maxlength: 512,
+
 	//
 
 	actions: {
