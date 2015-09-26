@@ -108,7 +108,9 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 
 			Ember.run.later(function() { // A LITTLE HACK FOR FIRST START
 				let item = self.get('childViews').findBy('model.id', data.get('id'));
-				item.set('selected', true);
+				if ( item ) {
+					item.set('selected', true);
+				}
 			});
 
 			this.set('selected', data);
