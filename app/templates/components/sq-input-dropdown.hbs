@@ -1,7 +1,7 @@
 {{sq-input-text
 		disabled=true
 		placeholder=placeholder
-		value=display
+		value=selected.name
 		required=required
 		criteria=criteria
 		medium=medium
@@ -11,10 +11,6 @@
 
 <ul>
 	{{#each internals as |model|}}
-		{{#if model.descriptior}}
-			<li class="sq-align-left" {{action 'select' model }}>{{model.name}}&nbsp;<span>{{model.name_descriptior}}</span></li>
-		{{else}}
-			<li class="sq-align-left" {{action 'select' model }}>{{model.name}}</li>
-		{{/if}}
+		{{sq-input-dropdown-item model=model select='select'}}
 	{{/each}}
 </ul>

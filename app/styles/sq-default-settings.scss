@@ -25,11 +25,10 @@ $sq-input-medium: 4px;
 
 // DROPDOWN
 $sq-dropdown-padding: 15px;
-$sq-dropdown-item: $dark_lighten_2;
-$sq-dropdown-item-selected: $dark_lighten_3;
+$sq-dropdown-item: $dark_lighten_1;
+$sq-dropdown-item-selected: $purple;
 $sq-dropdown-item-descriptior: $grey_darker_4;
-$sq-dropdown-item-hover: rgba(0,0,0,0.05);
-
+$sq-dropdown-item-hover: $grey_lighten_4;
 
 //
 $sq-input-font: "Roboto", sans-serif;

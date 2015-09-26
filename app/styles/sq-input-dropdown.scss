@@ -51,12 +51,14 @@
 		padding-bottom: 10px;
 
 		li {
+			@extend .sq-input-animation;
 			padding-top: $sq-dropdown-padding/2;
 			padding-bottom: $sq-dropdown-padding/2;
 			padding-left: $sq-dropdown-padding*2;
 			padding-right: $sq-dropdown-padding;
 			margin-right: -$sq-dropdown-padding*2;
 			color: $sq-dropdown-item;
+			cursor: pointer;
 			span {
 				color: $sq-dropdown-item-selected;
 			}
@@ -67,7 +69,7 @@
 			background: $sq-dropdown-item-hover;
 		}
 
-		li .selected {
+		li.selected {
 			color: $sq-dropdown-item-selected;
 		}
 

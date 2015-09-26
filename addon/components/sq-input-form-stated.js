@@ -18,19 +18,21 @@ export default SqForm.extend({
 			var self = this;
 
 			this.validate();
-			
+
 			if ( this.get('isValid') ) {
 
-				// UPDATE MODEL VALUES
-				var list = this.get('params').split(',');
-				for ( var i=0; i < list.length; i++) {
-					var value = this.get('internal.'+list[i] );
-					self.set('model.'+list[i], value);
-				}
-				
 				if ( typeof(this.get('submit')) === 'function' ) {
 
 					this.set('saving', true);
+
+					// UPDATE MODEL VALUES
+					var list = this.get('params').split(',');
+					for ( var i=0; i < list.length; i++) {
+						var value = this.get('internal.'+list[i] );
+						self.set('model.'+list[i], value);
+					}
+					//---
+
 					self.set('dirty', false);
 
 					var save = this.get('submit');
@@ -55,7 +57,7 @@ export default SqForm.extend({
 				}
 
 			}
-			
+
 		}
 
 	},
@@ -83,7 +85,7 @@ export default SqForm.extend({
 
 		var self = this;
 		var list = this.get('params').split(',');
-		
+
 		for ( var i=0; i < list.length; i++) {
 
 			// DEFAULTS
@@ -92,13 +94,12 @@ export default SqForm.extend({
 			this.get('internal').addObserver(list[i], null, function() {
 				self.changed();
 			});
-			
-			//this.get('model').addObserver(list[i], null, function(sender, key, value, rev) {
-			//	if ( !this.get('overriding') ) {
-			//		self.set('internal.'+key, value);
-			//		self.changed();
-			//	}
-			//});
+
+			this.get('model').addObserver(list[i], null, function(sender, key) {
+				if ( !self.get('saving') ) {
+					self.set('internal.'+key, self.get('model.'+key));
+				}
+			});
 
 		}
 

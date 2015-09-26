@@ -11,9 +11,24 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 	initialValidation: false,
 
 	// SETTINGS
-	
+
 	classNames: ['sq-input-dropdown'],
 	classNameBindings: ['focus'],
+
+	// INIT, DEFINE WHAT IS SELECTED  -------------------------------
+
+	init() {
+
+		this._super();
+		this.value_observer();
+
+	},
+
+	didInsertElement() {
+
+		this.set('input', this.get('childViews')[0] );
+
+	},
 
 	// CLICK ---------------------------------------------------------
 
@@ -25,7 +40,7 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 		}
 	},
 
-	// CLICK OUTSIDE -------------------------------------------------
+	// CLICK OUTSIDE
 
 	clickoutside() {
 		if ( this.get('focus') ) {
@@ -38,42 +53,67 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 	actions : {
 
 		select(data) {
-	
-			if ( typeof(data.store) !== 'undefined' ) {
 
-				if ( data.get('id') !== this.get('value.id') ) {
+			if ( data.get('id') !== this.get('value.id') ) {
 
-					this.set('input.focus', true);
+				this.set('input.focus', true);
+
+				if ( typeof(data.store) !== 'undefined' ) {
 					this.set('value', data);
-					this.set('display', data.get('name'));
-					this.set('input.focus', false);
-					this.sendAction('change', data);
-
+				} else {
+					this.set('value', data.get('id'));
 				}
 
-			} else {
+				this.set('input.focus', false);
+				this.sendAction('change', data);
 
-	//			if ( data.id !== this.get('value') ) {
-
-					this.set('input.focus', true);
-
-					if ( typeof(data.get) === 'undefined' ) {
-						this.set('value', data.id);
-						this.set('display', data.name);
-					} else {
-						this.set('value', data.get('id'));
-						this.set('display', data.get('name'));
-					}
-
-					this.set('input.focus', false);
-					this.sendAction('change', data);
-
-	//			}
+				return true;
 
 			}
 
-			return true;
 		},
+
+	},
+
+	//
+
+	value_observer: Ember.observer('value', 'items', function() {
+		if ( this.get('items') ) {
+			this.select(this.getSelectedModel());
+		}
+	}),
+
+	//
+
+	getSelectedModel() {
+		if ( typeof(this.get('value')) === 'object' ) {
+			return this.get('value');
+		} else {
+			return this.get('items').findBy('id', String(this.get('value')));
+		}
+	},
+
+	//
+
+	select(data) {
+
+		if ( this.get('selected') ) {
+			let item = this.get('childViews').findBy('model.id', this.get('selected.id'));
+			item.set('selected', false);
+		}
+
+		if ( data ) {
+
+			var self = this;
+
+			Ember.run.later(function() { // A LITTLE HACK FOR FIRST START
+				let item = self.get('childViews').findBy('model.id', data.get('id'));
+				item.set('selected', true);
+			});
+
+			this.set('selected', data);
+
+		}
 
 	},
 
@@ -85,35 +125,6 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 
 	isValid : Ember.computed('input.isValid', function() {
 		return this.get('input.isValid');
-	}),
-
-	//
-
-	didInsertElement() {
-
-		this.set('input', this.get('childViews')[0] );
-
-	},
-
-	// AUTO UPDATE DISPLAY ON DATA ----------------------------------
-
-	display : Ember.computed('value', 'value.name','items.@each.name', function() {
-		if ( typeof(this.get('value')) === 'object' ) {
-			return this.get('value.name');
-		} else {
-			if ( this.get('items') ) {
-				var self = this;
-				var name;
-				this.get('items').forEach(function(item) {
-					if ( String(item.get('id')) === String(self.get('value')) ) {
-						name = item.get('name');		
-					}
-				});
-				return name;
-			} else {
-				return this.get('value');
-			}
-		}
 	}),
 
 	//
