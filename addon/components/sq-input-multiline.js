@@ -1,5 +1,6 @@
 import TextInput from './sq-input-text';
 import TextArea from './../mixins/sq-textarea';
+import Ember from 'ember';
 
 export default TextInput.extend( {
 
@@ -10,27 +11,23 @@ export default TextInput.extend( {
 
 	maxlength: 512,
 
-	//
+	// ON RESIZE
 
-	actions: {
+	onresize(height) {
 
-		onresize(height) {
+		if ( !this.get('initiated') ) {
+			this.$().removeClass('sq-input-animation');
+		}
 
-			if ( !this.get('initiated') ) {
-				this.$().removeClass('sq-input-animation');
-			}
+		let newheight = height + parseFloat( this.$().css('border-bottom-width') );
+		this.$().css('height', newheight);
 
-			let newheight = height + parseFloat( this.$().css('border-bottom-width') );
-			this.$().css('height', newheight);
-
-			if ( !this.get('initiated') ) {
-				var self = this;
-				Ember.run.later(function() {
-					self.$().addClass('sq-input-animation');
-					self.set('initiated', true);
-				});
-			}
-
+		if ( !this.get('initiated') ) {
+			var self = this;
+			Ember.run.later(function() {
+				self.$().addClass('sq-input-animation');
+				self.set('initiated', true);
+			});
 		}
 
 	},
