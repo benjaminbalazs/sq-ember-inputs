@@ -22,6 +22,7 @@ export default TextInput.extend( {
 		let newheight = height + parseFloat( this.$().css('border-bottom-width') );
 		this.$().css('height', newheight);
 
+		// INITIATE
 		if ( !this.get('initiated') ) {
 			var self = this;
 			Ember.run.later(function() {
