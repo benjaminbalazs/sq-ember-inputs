@@ -17,7 +17,7 @@ export default Ember.Component.extend(Validators, {
 	classNameBindings: ['medium', 'isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'rtl:sq-input-rtl'],
 
 	// CLICK ---------------------------------------------------------
-	
+
 	click() {
 		return this.sendAction('focusIn');
 	},
@@ -61,7 +61,7 @@ export default Ember.Component.extend(Validators, {
 	},
 
 	validate() {
-		
+
 		this.set('focus', true);
 		this.set('focus', false);
 
@@ -98,18 +98,13 @@ export default Ember.Component.extend(Validators, {
 	}),
 
 	isValid : Ember.computed('value', function() {
-		// ONLY HANDLE THIS IS required IS ON
 		if ( this.get('required') !== false ) {
-
 			if ( this.get('criteria') !== null ) {
-
 				var method = "is" + Ember.String.capitalize(this.get('criteria'));
 				return this.get(method);
-
 			} else {
 				return !this.get('isEmpty');
 			}
-
 		} else { // OTHERWISE, JUST PASS TRUE
 			return true;
 		}
@@ -139,6 +134,10 @@ export default Ember.Component.extend(Validators, {
 
 	isNumber : Ember.computed('value', function() {
 		return this.number(this.get('value'));
+	}),
+
+	isPassword : Ember.computed('value', function() {
+		return this.password(this.get('value'));
 	}),
 
 });
