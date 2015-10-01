@@ -6,7 +6,6 @@ export default Ember.Service.extend({
 
 	store : Ember.inject.service(),
 	session: Ember.inject.service(),
-	logger: Ember.inject.service(),
 
 	// UPLOAD --------------------------------------------------------------------
 
@@ -15,7 +14,7 @@ export default Ember.Service.extend({
 		var self = this;
 
 		return new Ember.RSVP.Promise(function(resolve, reject) {
-			
+
 			$.ajax(
 				{
 			        url: self.baseUrl + "/" + type,
@@ -48,7 +47,7 @@ export default Ember.Service.extend({
 
 		    	// PUSH NEW TO STORE
 		    	var model = self.get('store').push(data);
-		    	
+
 		    	// REMOVE OLD ONE FROM STORE
 		    	if ( current ) {
 		    		var previous_model = self.get('store').peekRecord(type, current);
@@ -60,7 +59,6 @@ export default Ember.Service.extend({
 		    	resolve(model);
 
 		    }).fail(function(error) { // IF FAILED
-		    	self.get('logger').error(error);
 		  		reject(error);
 		  	});
 
@@ -71,10 +69,10 @@ export default Ember.Service.extend({
 	// INIT ---------------------------------------------------------------------
 
 	init() {
-		
+
 		var config = this.container.lookupFactory('config:environment');
 		this.baseUrl =  "/" + config.APP.api_namespace + "/upload";
- 
+
 	}
 
 });
