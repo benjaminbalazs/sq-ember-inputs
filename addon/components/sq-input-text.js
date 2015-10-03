@@ -99,7 +99,7 @@ export default Ember.Component.extend(Validators, {
 
 	isValid : Ember.computed('value', function() {
 		if ( this.get('required') !== false ) {
-			if ( this.get('criteria') !== null ) {
+			if ( this.get('criteria') ) {
 				var method = "is" + Ember.String.capitalize(this.get('criteria'));
 				return this.get(method);
 			} else {

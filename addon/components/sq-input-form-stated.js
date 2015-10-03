@@ -19,7 +19,7 @@ export default SqForm.extend({
 
 			this.validate();
 
-			if ( this.get('isValid') ) {
+			if ( this.isValid() ) {
 
 				if ( typeof(this.get('submit')) === 'function' ) {
 
@@ -31,6 +31,7 @@ export default SqForm.extend({
 						var value = this.get('internal.'+list[i] );
 						self.set('model.'+list[i], value);
 					}
+
 					//---
 
 					self.set('dirty', false);
@@ -68,7 +69,7 @@ export default SqForm.extend({
 		var list = this.get('params').split(',');
 		var isDifferent = false;
 		for ( var i=0; i < list.length; i++) {
-			if ( this.get('model.'+list[i]) !== this.get('internal.'+list[i]) ) {
+			if ( String(this.get('model.'+list[i])) !== String(this.get('internal.'+list[i])) ) {
 				isDifferent = true;
 			}
 		}
@@ -83,7 +84,6 @@ export default SqForm.extend({
 
 		this.set('internal', Ember.Object.create({}));
 
-		var self = this;
 		var list = this.get('params').split(',');
 
 		for ( var i=0; i < list.length; i++) {
@@ -91,13 +91,15 @@ export default SqForm.extend({
 			// DEFAULTS
 			this.set('internal.'+list[i], this.get('model.'+list[i]));
 
-			this.get('internal').addObserver(list[i], null, function() {
-				self.changed();
+			// LISTENER
+			this.get('internal').addObserver(list[i], this, function() {
+				this.changed();
 			});
 
-			this.get('model').addObserver(list[i], null, function(sender, key) {
-				if ( !self.get('saving') ) {
-					self.set('internal.'+key, self.get('model.'+key));
+			// APPLY OUTSIDE CHANGE
+			this.get('model').addObserver(list[i], this, function(sender, key) {
+				if ( !this.get('saving') ) {
+					this.set('internal.'+key, this.get('model.'+key));
 				}
 			});
 

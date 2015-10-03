@@ -1,11 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Mixin.create({
-	
-	// IS VALID -----------------------------------------------------------------
 
-	isValid : Ember.computed('inputs.@each.isValid', 'inputs.[]', function() {
-		var inputs = this.get('inputs');
+	isValid() {
+		var inputs = this.inputs();
 		for ( var i=0; i < inputs.length; i++) {
 			var view = inputs[i];
 			if ( view.get('isValid') === false ) {
@@ -13,11 +11,9 @@ export default Ember.Mixin.create({
 			}
 		}
 		return true;
-	}),
+	},
 
-	// 
-
-	inputs : Ember.computed('childViews.[]', function() {
+	inputs() {
 		var childs = this.get('childViews');
 		var inputs = [];
 		for ( var i=0; i < childs.length; i++) {
@@ -27,19 +23,17 @@ export default Ember.Mixin.create({
 			}
 		}
 		return inputs;
-	}),
+	},
 
 	// METHODS ------------------------------------------------------------------
 
 	validate() {
 
-		var inputs = this.get('inputs');
+		var inputs = this.inputs();
 
 		for (var i=0; i < inputs.length; i++) {
-
 			var view = inputs[i];
 			view.validate();
-
 		}
 
 	},
