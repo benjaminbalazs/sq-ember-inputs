@@ -90,6 +90,12 @@
 		}
 	}
 
+	&.disabled {
+		input {
+			color: $sq-input-input-default;
+		}
+	}
+
 }
 
 .sq-input-rtl {

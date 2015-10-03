@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import Uploader from 'sq-ember-inputs/services/uploader';
 import Inputviews from '.././mixins/inputviews';
 
 export default Ember.Component.extend(Inputviews, {
@@ -40,45 +39,51 @@ export default Ember.Component.extend(Inputviews, {
 	// DROP EVENT ------------------------------------------------------------------
 
 	drop(event) {
-	
+
 		event.stopPropagation();
   		event.preventDefault();
 
-  		if ( this.get('uploading') ) return;
+  		if ( this.get('uploading') === false ) {
 
-  		var files = e.target.files || e.dataTransfer.files;
+	  		var files = event.target.files || event.dataTransfer.files;
 
-		for (var i = 0, file; file = files[i]; i++) {
-	
+			for (var i = 0, file; file = files[i]; i++) {
+		
+			}
+
 		}
 
 	},
 
 	// CLICK -----------------------------------------------------------------------
 
-	click(event) {
+	click() {
 
-		if ( this.get('uploading') ) return;
+		if ( this.get('uploading') === false ) {
 
-		var self = this;
-		Ember.run.later(function() {
+			var self = this;
+			Ember.run.later(function() {
 
-			var input = $('<input>').attr({ type: 'file'});
-			input.on('change', function(event) { self.handleInputField(event) });
+				var input = Ember.$('<input>').attr({ type: 'file'});
+				input.on('change', function(event) {
+					self.handleInputField(event);
+				});
 
-			self.set('input', input );
-			self.get('input').click();
+				self.set('input', input );
+				self.get('input').click();
 
-		});
+			});
+
+		}
 
 	},
 
 	// HANDLE ----------------------------------------------------------------------
 
-	handleInputField(event) {
+	handleInputField() {
 
 		var file = this.input[0].files[0];
-		
+
 		this.upload(file);
 
 	},
@@ -129,7 +134,7 @@ export default Ember.Component.extend(Inputviews, {
 		}
 
 		).then(function(model) {
-		
+
 			self.set('value', model);
 
 			self.set('processing', false);
@@ -138,7 +143,7 @@ export default Ember.Component.extend(Inputviews, {
 
 		})
 
-		.catch(function(error) {
+		.catch(function() {
 
 			self.set('processing', false);
 			self.set('uploading', false);
@@ -154,7 +159,7 @@ export default Ember.Component.extend(Inputviews, {
 
 		var config = this.container.lookupFactory('config:environment');
 		this.baseUrl =  "/" + config.APP.api_namespace + "/upload";
- 
+
 	})
 
 });

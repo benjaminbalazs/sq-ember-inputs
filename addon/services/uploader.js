@@ -15,7 +15,7 @@ export default Ember.Service.extend({
 
 		return new Ember.RSVP.Promise(function(resolve, reject) {
 
-			$.ajax(
+			Ember.$.ajax(
 				{
 			        url: self.baseUrl + "/" + type,
 			        type: 'POST',
@@ -33,13 +33,13 @@ export default Ember.Service.extend({
 				                percentComplete = Math.round(percentComplete) + '%';
 				                if ( onProgress ) {
 				                	onProgress(percentComplete);
-				                };
+				                }
 				            }
 				        }, false);
-				        xhr.upload.addEventListener("load", function (evt) {
+				        xhr.upload.addEventListener("load", function () {
 				        	if ( onUploaded ) {
 				        		onUploaded();
-				        	};
+				        	}
 				        }, false);
 				        return xhr;
 		    		},

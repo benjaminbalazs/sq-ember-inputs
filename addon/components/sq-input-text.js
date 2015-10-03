@@ -14,7 +14,7 @@ export default Ember.Component.extend(Validators, {
 	// SETTINGS
 	classNames: ['sq-input-animation', 'sq-input-text'],
 	//
-	classNameBindings: ['medium', 'isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'rtl:sq-input-rtl'],
+	classNameBindings: ['medium', 'isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'disabled', 'rtl:sq-input-rtl'],
 
 	// CLICK ---------------------------------------------------------
 
