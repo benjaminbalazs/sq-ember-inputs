@@ -27,10 +27,13 @@
 		input, label {
 			transition: all 0s ease-out;
 		}
+		input {
+			pointer-events: none;
+		}
 	}
 
 	.sq-input-text input:disabled {
-		pointer-events: none;
+		//pointer-events: none;
 	}
 
 	ul {
