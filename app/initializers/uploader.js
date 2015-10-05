@@ -1,6 +1,6 @@
 import UploaderService from 'sq-ember-inputs/services/uploader';
 
-export function initialize (container, app) {
+export function initialize (app) {
 
 	app.register('uploader:main', UploaderService);
 

@@ -98,7 +98,7 @@ export default SqForm.extend({
 
 			// APPLY OUTSIDE CHANGE
 			this.get('model').addObserver(list[i], this, function(sender, key) {
-				if ( !this.get('saving') ) {
+				if ( this.get('saving') === false ) {
 					this.set('internal.'+key, this.get('model.'+key));
 				}
 			});
