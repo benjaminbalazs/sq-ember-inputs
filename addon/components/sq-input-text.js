@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import TextInput from './../mixins/sq-input';
 import Validators from '../mixins/validators';
 
 export default Ember.Component.extend(Validators, {
@@ -38,9 +39,21 @@ export default Ember.Component.extend(Validators, {
 
 	},
 
+	// ON RESIZE
+
+	valueDidChange() {
+
+		var input = this.get('childViews')[0];
+		var width = input.width(this.get('value'))
+
+		var after = this.get('childViews')[1];
+		after.$().css('left', width + 'px');
+
+	},
+
 	//
 
-	dir : Ember.computed('rtl', function() {
+	dir: Ember.computed('rtl', function() {
 		if ( this.get('rtl') ) {
 			return 'rtl';
 		} else {
@@ -56,6 +69,10 @@ export default Ember.Component.extend(Validators, {
 
 		if ( this.get('initialValidation') ) {
 			this.validate();
+		}
+
+		if ( this.get('after') ) {
+			this.addObserver('value', this, this.valueDidChange);
 		}
 
 	},
@@ -113,31 +130,31 @@ export default Ember.Component.extend(Validators, {
 	// VALIDATORS --------------------------------------------------
 
 	isEmpty : Ember.computed('value', function() {
-		return this.empty(this.get('value'));
+		return this.validator_empty(this.get('value'));
 	}),
 
 	isEmail : Ember.computed('value', function() {
-		return this.email(this.get('value'));
+		return this.validator_email(this.get('value'));
 	}),
 
 	isAnything : Ember.computed('value', function() {
-		return this.anything(this.get('value'));
+		return this.validator_anything(this.get('value'));
 	}),
 
 	isPhone : Ember.computed('value', function() {
-		return this.anything(this.get('value'));
+		return this.validator_anything(this.get('value'));
 	}),
 
 	isYoutube : Ember.computed('value', function() {
-		return this.youtube(this.get('value'));
+		return this.validator_youtube(this.get('value'));
 	}),
 
 	isNumber : Ember.computed('value', function() {
-		return this.number(this.get('value'));
+		return this.validator_number(this.get('value'));
 	}),
 
 	isPassword : Ember.computed('value', function() {
-		return this.password(this.get('value'));
+		return this.validator_password(this.get('value'));
 	}),
 
 });

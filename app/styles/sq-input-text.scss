@@ -32,6 +32,12 @@
 		margin-bottom: (( $sq-input-input-height - $sq-input-input-line-height)/2);
 	}
 
+	.after {
+		pointer-events: none;
+		visibility: hidden;
+		transition: left 0s;
+	}
+
 	//
 
 	textarea {
@@ -60,6 +66,9 @@
 			line-height: $sq-input-label-height;
 			font-size: $sq-input-label-height;
 			margin-top: 0px;
+		}
+		.after {
+			visibility: visible;
 		}
 	}
 

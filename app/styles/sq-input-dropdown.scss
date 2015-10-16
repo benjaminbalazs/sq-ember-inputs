@@ -38,20 +38,20 @@
 
 	ul {
 
-		@extend .sq-input-animation;
+		@extend  .sq-input-dropdown-scale-hidden;
 
-		opacity: 0;
-		visibility: hidden;
+		transform-origin: 50% top;
+
 		position: absolute;
 		width: inherit;
 		background: white;
 
 		margin-top: -$sq-dropdown-padding;
 		margin-left: -$sq-dropdown-padding;
-
 		padding-right: $sq-dropdown-padding*2;
-		padding-top: 0px;
-		padding-bottom: 10px;
+
+		padding-top: $sq-dropdown-padding;
+		padding-bottom: $sq-dropdown-padding;
 
 		li {
 			@extend .sq-input-animation;
@@ -69,7 +69,6 @@
 		}
 
 		li:hover {
-			@extend .sq-input-animation;
 			background: $sq-dropdown-item-hover;
 		}
 
@@ -87,10 +86,7 @@
 	&.focus {
 
 		ul {
-			@extend .sq-input-animation;
-			opacity: 1;
-			padding-top: $sq-dropdown-padding;
-			visibility: visible;
+			@extend  .sq-input-dropdown-scale-visible;
 			z-index: 999;
 		}
 
@@ -101,9 +97,23 @@
 
 		span {
 			@extend .sq-input-animation;
-			margin-top: 24px;
+			margin-top: 10px;
 		}
 
 	}
 
+}
+
+.sq-input-dropdown-scale-hidden {
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s ease-out 0.1s, opacity 0.1s ease-out, transform 0.1s ease-out;
+	transform: scale(0.95, 0.95);
+}
+
+.sq-input-dropdown-scale-visible {
+	visibility: visible;
+	opacity: 1;
+	transition-delay: 0s;
+	transform: scale(1, 1);
 }

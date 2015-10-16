@@ -8,6 +8,18 @@
 		maxlength=maxlength
 		dir=dir
 		classNames='sq-align-left'
+		dasherize=dasherize
+		subdomain=subdomain
+		domain=domain
+		email=email
+		number=number
+		format=format
 }}
 
 <label class="sq-align-left">{{placeholder}}</label>
+
+{{#if after}}
+
+	{{input disabled=true value=after classNames='after' }}
+
+{{/if}}
