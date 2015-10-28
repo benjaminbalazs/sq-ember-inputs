@@ -20,13 +20,13 @@ export default Ember.Component.extend({
 
 	label: Ember.computed('saving', 'dirty', 'saved', 'errored', function() {
 		if ( this.get('saving') ) {
-			return this.get('Saving');
+			return 'Saving';
 		} else if ( this.get('saved') ) {
-			return this.get('Saved');
+			return 'Saved';
 		} else if ( this.get('errored') ) {
-			return this.get('Errored');
+			return 'Errored';
 		} else {
-			return this.get('Save changes');
+			return 'Save changes';
 		}
 	}),
 

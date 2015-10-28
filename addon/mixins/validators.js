@@ -4,8 +4,39 @@ export default Ember.Mixin.create({
 
 	//
 
+	validator_card(text) {
+		if ( text ) {
+			text = text.split(' ').join('');
+			return ( text.length === 16 );
+		} else {
+			return false;
+		}
+	},
+
+	//
+
+	validator_expiry(text) {
+		if ( text ) {
+			text = text.split('/').join('');
+			return ( text.length === 4 );
+		} else {
+			return false;
+		}
+	},
+
+	validator_cvv(text) {
+		if ( text ) {
+			text = text.split('/').join('');
+			return ( text.length === 3 );
+		} else {
+			return false;
+		}
+	},
+
+	//
+
 	validator_password(text) {
-		return this.anything(text);
+		return this.validator_anything(text);
 	},
 
 	//

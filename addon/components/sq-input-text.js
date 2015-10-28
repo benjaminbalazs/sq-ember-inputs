@@ -44,7 +44,7 @@ export default Ember.Component.extend(Validators, {
 	valueDidChange() {
 
 		var input = this.get('childViews')[0];
-		var width = input.width(this.get('value'))
+		var width = input.width(this.get('value'));
 
 		var after = this.get('childViews')[1];
 		after.$().css('left', width + 'px');
@@ -128,6 +128,18 @@ export default Ember.Component.extend(Validators, {
 	}),
 
 	// VALIDATORS --------------------------------------------------
+
+	isCard : Ember.computed('value', function() {
+		return this.validator_card(this.get('value'));
+	}),
+
+	isExpiry : Ember.computed('value', function() {
+		return this.validator_expiry(this.get('value'));
+	}),
+
+	isCvv : Ember.computed('value', function() {
+		return this.validator_cvv(this.get('value'));
+	}),
 
 	isEmpty : Ember.computed('value', function() {
 		return this.validator_empty(this.get('value'));

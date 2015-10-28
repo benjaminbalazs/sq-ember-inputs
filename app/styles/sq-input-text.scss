@@ -1,6 +1,7 @@
 .sq-input-text {
 
 	& {
+		overflow: hidden;
 		direction: ltr !important;
 		position: relative;
 		float: left;
@@ -36,6 +37,7 @@
 		pointer-events: none;
 		visibility: hidden;
 		transition: left 0s;
+		color: $sq-input-input-valid;
 	}
 
 	//

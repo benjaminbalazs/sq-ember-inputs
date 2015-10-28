@@ -88,6 +88,8 @@ export default Ember.Component.extend(Validators,ClickOutside, {
 	getSelectedModel() {
 		if ( typeof(this.get('value')) === 'object' ) {
 			return this.get('value');
+		} else if ( typeof(this.get('value')) === 'boolean' ) {
+			return this.get('items').findBy('id', this.get('value'));
 		} else {
 			return this.get('items').findBy('id', String(this.get('value')));
 		}

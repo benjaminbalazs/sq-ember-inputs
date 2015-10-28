@@ -14,4 +14,4 @@ export function initialize (app) {
 export default {
     name: 'uploader',
     initialize: initialize
-}
+};
