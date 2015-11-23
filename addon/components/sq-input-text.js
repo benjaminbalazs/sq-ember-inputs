@@ -29,13 +29,17 @@ export default Ember.Component.extend(Validators, {
 
 		focusIn() {
 			this.toggleProperty('focus');
-			return true;
+			this.sendAction('focusIn');
 		},
 
 		focusOut() {
 			this.toggleProperty('focus');
-			return true;
+			this.sendAction('focusOut');
 		},
+
+		enterPressed() {
+			this.sendAction('enterPressed');
+		}
 
 	},
 

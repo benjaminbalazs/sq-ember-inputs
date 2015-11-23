@@ -42,6 +42,9 @@ export default Ember.TextArea.reopen({
 				event.preventDefault();
 			}
 		}
+		if ( event.which === 13 ) {
+			this.sendAction('enterPressed');
+		}
     },
 
 });

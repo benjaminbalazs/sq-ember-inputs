@@ -95,6 +95,10 @@ export default Ember.TextField.reopen({
 
 		this._super(event);
 
+		if ( event.which === 13 ) {
+			this.sendAction('enterPressed');
+		}
+
 		if ( event.keyCode !== 13 && event.keyCode !== 39 && event.keyCode !== 37 && event.keyCode !== 35 && event.keyCode !== 8 && event.keyCode !== 16 && event.keyCode !== 17 && event.keyCode !== 18 && event.keyCode !== 32 && event.keyCode !== 35 ) {
 
 			//if ( this.get('subdomain') ) {
