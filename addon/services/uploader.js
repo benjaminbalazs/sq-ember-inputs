@@ -2,29 +2,33 @@ import Ember from 'ember';
 
 export default Ember.Service.extend({
 
-	// SERVICES
-
 	store : Ember.inject.service(),
 	session: Ember.inject.service(),
 
-	// UPLOAD --------------------------------------------------------------------
+	upload(type, data, onProgress, onUploaded, authenticate) {
 
-	upload(type, current, data, onProgress, onUploaded) {
+		var config = this.container.lookupFactory('config:environment');
+		var url =  "/" + config.APP.api_namespace + "/upload/" + type;
 
-		var self = this;
+		var headers = { 'Access-Control-Allow-Origin': '*' };
+
+		if ( authenticate ) {
+			headers.id = this.get('session.headers.id');
+			headers.token = this.get('session.headers.token');
+		}
 
 		return new Ember.RSVP.Promise(function(resolve, reject) {
 
-			Ember.$.ajax(
-				{
-			        url: self.baseUrl + "/" + type,
+			Ember.$.ajax({
+
+			        url: url,
 			        type: 'POST',
 			        contentType: false,
 			        data: data,
 			        dataType: 'json',
 			        processData: false,
 			        crossDomain: true,
-			        headers: self.get('session.headers'),
+			        headers: headers,
 			        xhr: function(){
 				        var xhr = new window.XMLHttpRequest();
 				        xhr.upload.addEventListener("progress", function (evt) {
@@ -43,21 +47,9 @@ export default Ember.Service.extend({
 				        }, false);
 				        return xhr;
 		    		},
+
 		    }).done(function(data) {
-
-		    	// PUSH NEW TO STORE
-		    	var model = self.get('store').push(data);
-
-		    	// REMOVE OLD ONE FROM STORE
-		    	if ( current ) {
-		    		var previous_model = self.get('store').peekRecord(type, current);
-		    		if ( previous_model ) {
-		    			self.get('store').deleteRecord(previous_model);
-		    		}
-		    	}
-
-		    	resolve(model);
-
+				resolve(data);
 		    }).fail(function(error) { // IF FAILED
 		  		reject(error);
 		  	});
@@ -65,14 +57,5 @@ export default Ember.Service.extend({
 		});
 
 	},
-
-	// INIT ---------------------------------------------------------------------
-
-	init() {
-
-		var config = this.container.lookupFactory('config:environment');
-		this.baseUrl =  "/" + config.APP.api_namespace + "/upload";
-
-	}
 
 });

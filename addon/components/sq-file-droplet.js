@@ -5,12 +5,7 @@ export default Ember.Component.extend(Inputviews, {
 
 	classNames: ['sq-file-droplet'],
 
-	value: null,
-
-	// SETTINGS
 	multiple: false,
-	type: 'file',
-	autoremove: true,
 
 	// DRAG EVENTS -----------------------------------------------------------------
 
@@ -48,7 +43,7 @@ export default Ember.Component.extend(Inputviews, {
 	  		var files = event.target.files || event.dataTransfer.files;
 
 			for (var i = 0, file; file = files[i]; i++) {
-		
+
 			}
 
 		}
@@ -105,61 +100,59 @@ export default Ember.Component.extend(Inputviews, {
 
 	upload(file) {
 
-		var self = this;
-
 		//
+		this.set('failed', false);
 		this.set('uploading', true);
+		this.set('percentage', '0%');
 
 		//
 		var data = new FormData();
     	data.append('file', file);
 
-    	//
-    	var current = null;
-    	if ( this.get('autoremove') ) {
-    		current = this.get('value.id');
-    	}
+    	var self = this;
 
-    	self.set('percentage', '0%');
+		this.get('uploader').upload( this.get('namespace'), data, function(value) { self.onProgress(value); }, function() { self.onUploaded(); }, self.get('authenticate')).then(function(data) {
 
-		this.uploader.upload( this.get('type'), current, data,
+			self.onComplete(data);
 
-		function(value) {
-			self.set('percentage', value);
-		},
+		}).catch(function() {
 
-		function() {
+			self.onFail();
+
+		}).finally(function() {
+
 			self.set('uploading', false);
-			self.set('processing', true);
-		}
-
-		).then(function(model) {
-
-			self.set('value', model);
-
 			self.set('processing', false);
-
-			self.sendAction('change', model);
-
-		})
-
-		.catch(function() {
-
-			self.set('processing', false);
-			self.set('uploading', false);
-			self.set('failed', true);
 
 		});
 
 	},
 
-	// INITIALIZE ------------------------------------------------------------------
+	//
 
-	initialize : Ember.on('init', function() {
+	onUploaded() {
 
-		var config = this.container.lookupFactory('config:environment');
-		this.baseUrl =  "/" + config.APP.api_namespace + "/upload";
+		this.set('uploading', false);
 
-	})
+	},
+
+	onComplete(data) {
+
+		this.set('processing', false);
+		this.sendAction('complete', data);
+
+	},
+
+	onProgress(value) {
+
+		this.set('percentage', value);
+
+	},
+
+	onFail() {
+
+		this.set('failed', true);
+
+	},
 
 });
