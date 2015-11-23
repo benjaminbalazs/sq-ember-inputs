@@ -91,7 +91,7 @@ export default Ember.TextField.reopen({
 
 	},
 
-	keyDown(event) {
+	keyPress(event) {
 
 		this._super(event);
 
@@ -99,22 +99,15 @@ export default Ember.TextField.reopen({
 			this.sendAction('enterPressed');
 		}
 
+	},
+
+	keyDown(event) {
+
+		this._super(event);
+
 		if ( event.keyCode !== 13 && event.keyCode !== 39 && event.keyCode !== 37 && event.keyCode !== 35 && event.keyCode !== 8 && event.keyCode !== 16 && event.keyCode !== 17 && event.keyCode !== 18 && event.keyCode !== 32 && event.keyCode !== 35 ) {
 
-			//if ( this.get('subdomain') ) {
-
-				//var msg = String.fromCharCode(event.keyCode);
-				//console.log(msg)
-				//if ( msg.length !== 0 ) {
-				//console.log(msg.replace(/[^a-z0-9,-]+/ig, ""));
-				//if ( msg.replace(/[^a-z0-9,-]+/ig, "").length === 0 ) {
-				//	event.preventDefault();
-				//}
-
-			//}
-
 		}
-
 
 	},
 
