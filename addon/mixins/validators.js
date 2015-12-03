@@ -89,14 +89,22 @@ export default Ember.Mixin.create({
 	},
 
 	//
-
+	/*
 	validator_phone(text) {
-		var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3})$/;
-  		if ( text.value.match(phoneno) ) {
-      		return true;
+		if ( text ) {
+			if ( text) {
+				var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3})$/;
+		  		if ( text.value.match(phoneno) ) {
+		      		return true;
+		        } else {
+		        	return false;
+				}
+			} else {
+				return false;
+			}
         } else {
-        	return false;
-        }
+			return false;
+		}
 	},
-
+	*/
 });
