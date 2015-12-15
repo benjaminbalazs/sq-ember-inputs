@@ -11,6 +11,7 @@ export default Ember.Component.extend(Validators, {
 	disabled: false,
 	rtl: false,
 	maxlength: 40,
+	whitespace: true,
 
 	// SETTINGS
 	classNames: ['sq-input-animation', 'sq-input-text'],
@@ -28,17 +29,23 @@ export default Ember.Component.extend(Validators, {
 	actions: {
 
 		focusIn() {
-			this.toggleProperty('focus');
+			this.set('focus', true);
 			this.sendAction('focusIn');
 		},
 
 		focusOut() {
-			this.toggleProperty('focus');
+			this.set('focus', false);
 			this.sendAction('focusOut');
 		},
 
 		enterPressed() {
-			this.sendAction('enterPressed');
+			if ( this.get('isValid') ) {
+				this.sendAction('enterPressed');
+			} else {
+				//this.set('isInvalidProxy', true);
+				//this.set('isInvalidProxy', true);
+			}
+
 		}
 
 	},
@@ -90,20 +97,24 @@ export default Ember.Component.extend(Validators, {
 
 	// PROXIES -------------------------------------------------------
 
-	isInvalidProxy : Ember.computed('focus', 'isFilled', function() {
+	isInvalidProxy : Ember.computed('focus','value', function() {
 
 		// INVALIDATE ONLY IF IT HAS NO FOCUS
 		if ( this.get('focus') === false ) {
 			return !this.get('isValid');
+		} else {
+			//return false;
 		}
 
 	}),
 
-	isValidProxy : Ember.computed('focus','isFilled', function() {
+	isValidProxy : Ember.computed('isFilled', 'value', function() {
 
 		// VALIDATE ONLY IF IT IS FILLED, OTHERWISE THERE IS NO POINT
 		if ( this.get('isFilled') ) {
 			return this.get('isValid');
+		} else {
+			//return true;
 		}
 
 	}),

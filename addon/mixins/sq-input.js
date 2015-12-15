@@ -87,6 +87,15 @@ export default Ember.TextField.reopen({
 
 		}
 
+		// LINE BREAK REMOVER
+		if ( !this.get('whitespace') ) {
+			let current = this.$().val();
+			let converted = this.$().val().replace(/\s+/g, '');
+			if ( current !== converted ) {
+				this.$().val(converted);
+			}
+		}
+
 		this._super();
 
 	},
@@ -95,9 +104,9 @@ export default Ember.TextField.reopen({
 
 		this._super(event);
 
-		if ( event.which === 13 ) {
-			this.sendAction('enterPressed');
-		}
+		//if ( event.which === 13 ) {
+			//this.sendAction('enterPressed');
+		//}
 
 	},
 
@@ -109,8 +118,11 @@ export default Ember.TextField.reopen({
 
 		}
 
-	},
+		if ( event.which === 13 ) {
+			this.sendAction('enterPressed');
+		}
 
+	},
 
 	getInputSelection() {
 		var el = this.get('element');
