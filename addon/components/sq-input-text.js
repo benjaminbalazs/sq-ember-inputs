@@ -10,7 +10,7 @@ export default Ember.Component.extend(Validators, {
 	initialValidation: false,
 	disabled: false,
 	rtl: false,
-	maxlength: 40,
+	maxlength: 60,
 	whitespace: true,
 
 	// SETTINGS
