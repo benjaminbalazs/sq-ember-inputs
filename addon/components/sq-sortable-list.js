@@ -26,18 +26,18 @@ export default Ember.Component.extend( {
 			mirrorContainer: document.body
 		});
 
-		drag.on('drag', function(el, source) {
-			this.currentIndex = $(el).index();
+		drag.on('drag', function(el) {
+			this.currentIndex = Ember.$(el).index();
 		});
 
-		drag.on('drop', function(el, source) {
+		drag.on('drop', function(el) {
 
-			let newIndex = $(el).index();
+			let newIndex = Ember.$(el).index();
 
-			if ( newIndex != this.currentIndex ) {
+			if ( newIndex !== this.currentIndex ) {
 
 				self.update();
-				
+
 			}
 
 		});
@@ -56,7 +56,7 @@ export default Ember.Component.extend( {
 
 		var positions = [];
 		this.$().children().each(function(index) {
-    		positions[$(this).attr('reference')] = index;
+    		positions[Ember.$(this).attr('reference')] = index;
 		});
 
 		var childs = this.get('childViews');
@@ -70,13 +70,13 @@ export default Ember.Component.extend( {
 
 		if ( this.get('autosave') ) {
 			var list = [];
-			for ( var i=0; i < childs.length; i++) {
-				let view = childs[i];
+			for ( var n=0; n < childs.length; n++) {
+				let view = childs[n];
 				let model = view.get('model');
 				if ( model.get('hasDirtyAttributes') ) {
 					let promise = model.save();
 					list.push(promise);
-				}	
+				}
 			}
 			Ember.RSVP.Promise.all(list).then(function() {
 				self.sendAction('completed');
