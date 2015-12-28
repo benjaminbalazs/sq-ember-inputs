@@ -62,6 +62,19 @@ export default Ember.Component.extend(Validators, {
 
 	},
 
+	// BEFORE
+
+	beforeDidChange() {
+
+		var input = this.get('childViews')[0];
+		var before = this.get('childViews')[1];
+
+		var width = before.width(this.get('before'));
+
+		input.$().css('padding-left', width + 'px');
+
+	},
+
 	//
 
 	dir: Ember.computed('rtl', function() {
@@ -86,12 +99,23 @@ export default Ember.Component.extend(Validators, {
 			this.addObserver('value', this, this.valueDidChange);
 		}
 
+
+
 	},
 
 	validate() {
 
 		this.set('focus', true);
 		this.set('focus', false);
+
+	},
+
+	didInsertElement() {
+
+		if ( this.get('before') ) {
+			this.addObserver('before', this, this.beforeDidChange);
+			this.beforeDidChange();
+		}
 
 	},
 
@@ -182,6 +206,10 @@ export default Ember.Component.extend(Validators, {
 
 	isPassword : Ember.computed('value', function() {
 		return this.validator_password(this.get('value'));
+	}),
+
+	isDomain : Ember.computed('value', function() {
+		return this.validator_domain(this.get('value'));
 	}),
 
 });

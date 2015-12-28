@@ -33,7 +33,7 @@
 		margin-bottom: (( $sq-input-input-height - $sq-input-input-line-height)/2);
 	}
 
-	.after {
+	.after, .before {
 		pointer-events: none;
 		visibility: hidden;
 		transition: left 0s;
@@ -69,7 +69,7 @@
 			font-size: $sq-input-label-height;
 			margin-top: 0px;
 		}
-		.after {
+		.after, .before {
 			visibility: visible;
 		}
 	}

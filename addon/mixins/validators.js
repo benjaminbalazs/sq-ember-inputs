@@ -77,7 +77,7 @@ export default Ember.Mixin.create({
 		if ( text ) {
 			return text.length > 2;
 		} else {
-			return text;
+			return false;
 		}
 	},
 
@@ -86,6 +86,32 @@ export default Ember.Mixin.create({
 	validator_youtube(text) {
 		var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
   		return (text.match(p)) ? RegExp.$1 : false;
+	},
+
+	//
+
+	validator_domain(text) {
+		if ( text ) {
+			if ( text.length > 2 ) {
+				if ( text.substring(0,4) === 'www.' ) {
+					return false;
+				} else if ( text.split('.').length === 1 || text.split('.').length > 3 ) {
+					return false;
+				} else if ( text.indexOf('..') !== -1 ) {
+					return false;
+				} else {
+					if ( (text.length - text.indexOf('.')) >= 3 ) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	},
 
 	//
