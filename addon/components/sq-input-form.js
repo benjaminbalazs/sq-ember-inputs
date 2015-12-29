@@ -5,6 +5,7 @@ export default Ember.Component.extend(Inputviews, {
 
 	classNames: "sq-input-form",
 	classNameBindings: ['disabled'],
+	tagName: 'form',
 
 	actions : {
 
