@@ -14,7 +14,7 @@ export default Ember.TextField.reopen({
 			format = format.split(')').join('}}');
 
 			this.$().formatter({
-			  'pattern': format
+				'pattern': format
 			});
 
 		}
@@ -44,32 +44,32 @@ export default Ember.TextField.reopen({
 
 		if ( this.get('lastvalue') !== this.$().val() ) {
 
-			if ( this.get('number') || this.get('dasherize') || this.get('domain') || this.get('subdomain') || this.get('email') ) {
+			if ( this.get('number') === true || this.get('dasherize') === true || this.get('domain') === true || this.get('subdomain') === true || this.get('email') === true ) {
 
 				var selection = this.getInputSelection();
 
 				var msg = this.$().val();
 
-				if ( this.get('dasherize') || this.get('email') ) {
+				if ( this.get('dasherize') === true || this.get('email') === true ) {
 					msg = msg.toLowerCase();
 					msg = String(msg).dasherize();
 					msg = msg.replace(/--+/g,"-");
 					msg = msg.replace(/^[^a-zA-Z]+/,"");
 				}
 
-				if ( this.get('subdomain') ) {
+				if ( this.get('subdomain') === true ) {
 					msg = msg.replace(/[^a-z0-9-]+/ig, "");
 				}
 
-				if ( this.get('domain') ) {
+				if ( this.get('domain') === true ) {
 					msg = msg.replace(/[^a-z0-9.-]+/ig, "");
 				}
 
-				if ( this.get('email') ) {
+				if ( this.get('email') === true ) {
 					msg = msg.replace(/[^a-z0-9.@-]+/ig, "");
 				}
 
-				if ( this.get('number') ) {
+				if ( this.get('number') === true ) {
 					msg = msg.replace(/[^0-9]+/ig, "");
 				}
 
@@ -88,7 +88,7 @@ export default Ember.TextField.reopen({
 		}
 
 		// LINE BREAK REMOVER
-		if ( !this.get('whitespace') ) {
+		if ( this.get('whitespace') === false ) {
 			let current = this.$().val();
 			let converted = this.$().val().replace(/\s+/g, '');
 			if ( current !== converted ) {
