@@ -107,6 +107,12 @@
 		}
 	}
 
+	&.keep-left {
+		input, label {
+			text-align: left !important;
+		}
+	}
+
 }
 
 .sq-input-rtl {

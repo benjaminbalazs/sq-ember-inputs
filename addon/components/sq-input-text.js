@@ -12,17 +12,22 @@ export default Ember.Component.extend(Validators, {
 	rtl: false,
 	maxlength: 60,
 	whitespace: true,
+	ignoreDirection: false,
 
 	// SETTINGS
 	classNames: ['sq-input-animation', 'sq-input-text'],
 	//
-	classNameBindings: ['medium', 'isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'disabled', 'rtl:sq-input-rtl'],
+	classNameBindings: ['ignoreDirection:keep-left', 'medium', 'isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'disabled', 'rtl:sq-input-rtl'],
 
 	// CLICK ---------------------------------------------------------
 
 	click() {
 		return this.sendAction('focusIn');
 	},
+
+	//
+
+
 
 	// ACTIONS -------------------------------------------------------
 
@@ -62,23 +67,10 @@ export default Ember.Component.extend(Validators, {
 
 	},
 
-	// BEFORE
-
-	beforeDidChange() {
-
-		var input = this.get('childViews')[0];
-		var before = this.get('childViews')[1];
-
-		var width = before.width(this.get('before'));
-
-		input.$().css('padding-left', width + 'px');
-
-	},
-
 	//
 
 	dir: Ember.computed('rtl', function() {
-		if ( this.get('rtl') ) {
+		if ( this.get('rtl') && this.get('ignoreDirection') === false ) {
 			return 'rtl';
 		} else {
 			return 'ltr';
@@ -99,7 +91,9 @@ export default Ember.Component.extend(Validators, {
 			this.addObserver('value', this, this.valueDidChange);
 		}
 
-
+		if ( this.get('criteria') === 'domain' || this.get('after') ) {
+			this.set('ignoreDirection', true);
+		}
 
 	},
 
@@ -111,11 +105,6 @@ export default Ember.Component.extend(Validators, {
 	},
 
 	didInsertElement() {
-
-		if ( this.get('before') ) {
-			this.addObserver('before', this, this.beforeDidChange);
-			this.beforeDidChange();
-		}
 
 	},
 
