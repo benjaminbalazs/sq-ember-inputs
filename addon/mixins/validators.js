@@ -100,7 +100,7 @@ export default Ember.Mixin.create({
 				} else if ( text.indexOf('..') !== -1 ) {
 					return false;
 				} else {
-					if ( (text.length - text.indexOf('.')) >= 3 ) {
+					if ( (text.length - text.indexOf('.')) >= 3 && text.indexOf('.') >= 2 ) {
 						return true;
 					} else {
 						return false;
