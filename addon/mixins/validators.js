@@ -75,7 +75,7 @@ export default Ember.Mixin.create({
 
 	validator_anything(text) {
 		if ( text ) {
-			return text.length > 2;
+			return text.length >= 2;
 		} else {
 			return false;
 		}
