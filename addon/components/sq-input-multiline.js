@@ -2,7 +2,7 @@ import TextInput from './sq-input-text';
 import TextArea from './../mixins/sq-textarea';
 import Ember from 'ember';
 
-export default TextInput.extend( {
+export default TextInput.extend({
 
 	classNames: ['sq-input-multiline'],
 	linebreak: false,

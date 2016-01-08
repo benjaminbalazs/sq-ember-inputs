@@ -1,10 +1,4 @@
-.sq-input-animation {
-	transition: all 0.1s ease-out;
-	label, input, textarea {
-		transition: all 0.1s ease-out;
-	}
-}
-
+@import 'sq-input-animations';
 @import 'sq-input-text';
 @import 'sq-input-dropdown';
 @import 'sq-file';

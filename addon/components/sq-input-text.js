@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import TextInput from './../mixins/sq-input';
 import Validators from '../mixins/validators';
+import Visuals from '../mixins/visuals';
 
-export default Ember.Component.extend(Validators, {
+export default Ember.Component.extend(Visuals,Validators, {
 
 	// PARAMETERS
 	required: false,
@@ -24,10 +25,6 @@ export default Ember.Component.extend(Validators, {
 	click() {
 		return this.sendAction('focusIn');
 	},
-
-	//
-
-
 
 	// ACTIONS -------------------------------------------------------
 
