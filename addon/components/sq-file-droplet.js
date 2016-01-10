@@ -52,8 +52,8 @@ export default Ember.Component.extend(Inputviews, {
 
 	// CLICK -----------------------------------------------------------------------
 
-	click() {
-
+	open() {
+		
 		if ( this.get('uploading') === false ) {
 
 			var self = this;

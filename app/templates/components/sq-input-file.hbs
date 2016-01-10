@@ -1,4 +1,4 @@
-{{#sq-file-droplet required=required authentication=authentication namespace=namespace change='change' value=value as |dragging uploading percentage processing working|}}
+{{#sq-file-droplet required=required authentication=authentication namespace=namespace change='change' value=value as |open dragging uploading percentage processing working|}}
 
 	{{#if working}}
 
@@ -10,7 +10,7 @@
 
 	{{else}}
 
-		{{sq-input-text disabled=true required=required placeholder=placeholder value=value.filename}}
+		{{sq-input-text click=(action open) required=required placeholder=placeholder value=value.filename}}
 
 	{{/if}}
 

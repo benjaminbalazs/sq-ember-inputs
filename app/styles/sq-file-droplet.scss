@@ -5,6 +5,15 @@
 	height: 56px;
 	margin-bottom: 30px;
 	cursor: pointer;
+	position: relative;
+	float: left;
+
+	.delete {
+		top: 0px !important;
+		margin-top: 0px;
+		padding-right: 0px;
+		z-index: 10;
+	}
 
 	input {
 		cursor: pointer;

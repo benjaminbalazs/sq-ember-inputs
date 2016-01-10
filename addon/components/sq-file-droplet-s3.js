@@ -7,10 +7,11 @@ export default Droplet.extend({
 
     store: Ember.inject.service(),
     saving: false,
+
     //
 
-    working: Ember.computed('uploading', 'processing', 'saving', function() {
-        return ( this.get('uploading') || this.get('processing') || this.get('saving') );
+    working: Ember.computed('uploading', 'processing', 'saving', 'deleting', function() {
+        return ( this.get('uploading') || this.get('processing') || this.get('saving') || this.get('deleting') );
     }),
 
     //
@@ -57,6 +58,29 @@ export default Droplet.extend({
 
             self.set('saving', false);
             self.sendAction('complete');
+
+        });
+
+    },
+
+    //
+
+    deleting: false,
+
+    delete() {
+
+        this.set('deleting', true);
+
+        var current = this.get('model.'+this.get('parameter'));
+
+        var self = this;
+        current.destroyRecord().then(function() {
+
+            self.get('model').save().then(function() {
+
+                self.set('deleting', false);
+
+            });
 
         });
 

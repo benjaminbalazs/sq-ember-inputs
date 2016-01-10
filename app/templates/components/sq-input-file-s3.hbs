@@ -1,4 +1,17 @@
-{{#sq-file-droplet-s3 model=model parameter=parameter saveremove=saveremove quired=required authentication=authentication namespace=namespace change='change' value=value as |failed dragging uploading percentage processing working saving|}}
+{{#sq-file-droplet-s3
+
+	model=model
+	parameter=parameter
+	saveremove=saveremove
+	required=required
+	authentication=authentication
+	namespace=namespace
+	change='change'
+	value=value
+
+	as |open failed dragging uploading percentage processing working saving deleting delete|
+
+	}}
 
 	{{#if working}}
 
@@ -8,12 +21,18 @@
 			{{sq-input-text disabled=true placeholder='Processing'}}
 		{{else if saving}}
 			{{sq-input-text disabled=true placeholder='Saving'}}
+		{{else if deleting}}
+			{{sq-input-text disabled=true placeholder='Deleting'}}
 		{{/if}}
 
 	{{else}}
 
-		{{sq-input-text required=required placeholder=placeholder value=value.filename}}
+		{{sq-input-text click=(action open) required=required placeholder=placeholder value=value.filename}}
 
+	{{/if}}
+
+	{{#if value}}
+		<button class="delete" {{action (action delete)}}>Delete</button>
 	{{/if}}
 
 {{/sq-file-droplet-s3}}

@@ -1,17 +1,12 @@
 import Ember from 'ember';
+import Sortable from './../mixins/sortable';
 
-export default Ember.Component.extend( {
+export default Ember.Component.extend(Sortable,{
 
 	classNames: ['sq-sortable-list'],
 	tagName: 'ul',
 	model: null,
 	autosave: true,
-
-	// LIST -----------------------------------------------------------------
-
-	list: Ember.computed('model.@each.position', function() {
-		return this.get('model').sortBy('position');
-	}),
 
 	// INIT -----------------------------------------------------------------
 
