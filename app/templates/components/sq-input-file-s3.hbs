@@ -1,0 +1,19 @@
+{{#sq-file-droplet-s3 model=model parameter=parameter saveremove=saveremove quired=required authentication=authentication namespace=namespace change='change' value=value as |failed dragging uploading percentage processing working saving|}}
+
+	{{#if working}}
+
+		{{#if uploading}}
+			{{sq-input-text disabled=true placeholder=percentage}}
+		{{else if processing}}
+			{{sq-input-text disabled=true placeholder='Processing'}}
+		{{else if saving}}
+			{{sq-input-text disabled=true placeholder='Saving'}}
+		{{/if}}
+
+	{{else}}
+
+		{{sq-input-text required=required placeholder=placeholder value=value.filename}}
+
+	{{/if}}
+
+{{/sq-file-droplet-s3}}

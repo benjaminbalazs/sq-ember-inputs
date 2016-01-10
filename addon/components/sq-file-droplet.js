@@ -96,6 +96,7 @@ export default Ember.Component.extend(Inputviews, {
 	working: Ember.computed('uploading', 'processing', function() {
 		return ( this.get('uploading') || this.get('processing') );
 	}),
+
 	//
 
 	upload(file) {
@@ -111,18 +112,19 @@ export default Ember.Component.extend(Inputviews, {
 
     	var self = this;
 
-		this.get('uploader').upload( this.get('namespace'), data, function(value) { self.onProgress(value); }, function() { self.onUploaded(); }, self.get('authenticate')).then(function(data) {
-
-			self.onComplete(data);
-
-		}).catch(function() {
-
-			self.onFail();
-
-		}).finally(function() {
+		this.get('uploader').upload( this.get('namespace'), data, function(value) { self.onProgress(value); }, function() { self.onUploaded(); }, self.get('authentication')).then(function(data) {
 
 			self.set('uploading', false);
 			self.set('processing', false);
+
+			self.onComplete(data);
+
+		}).catch(function(error) {
+
+			self.set('uploading', false);
+			self.set('processing', false);
+
+			self.onFail(error);
 
 		});
 
@@ -132,13 +134,13 @@ export default Ember.Component.extend(Inputviews, {
 
 	onUploaded() {
 
+		this.set('processing', true);
 		this.set('uploading', false);
 
 	},
 
 	onComplete(data) {
 
-		this.set('processing', false);
 		this.sendAction('complete', data);
 
 	},
@@ -149,7 +151,7 @@ export default Ember.Component.extend(Inputviews, {
 
 	},
 
-	onFail() {
+	onFail(error) {
 
 		this.set('failed', true);
 

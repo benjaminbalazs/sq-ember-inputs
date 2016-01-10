@@ -1,5 +1,5 @@
-{{#sq-file-droplet required=required type=type change='change' value=value as |dragging uploading percentage processing working|}}
-	
+{{#sq-file-droplet required=required authentication=authentication namespace=namespace change='change' value=value as |dragging uploading percentage processing working|}}
+
 	{{#if working}}
 
 		{{#if uploading}}
@@ -15,4 +15,3 @@
 	{{/if}}
 
 {{/sq-file-droplet}}
-

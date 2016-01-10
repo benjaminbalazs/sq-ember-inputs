@@ -4,19 +4,19 @@ import Inputviews from '.././mixins/inputviews';
 export default Ember.Component.extend(Inputviews, {
 
 	//
+
 	tagName: '',
+	namespace: 'file',
+	authentication: true,
 
 	//
-	value: null,
-	type: 'file',
-	required: false,
 
 	actions: {
 
 		change(model) {
 
 			this.set('value', model);
-			
+
 		}
 
 	},

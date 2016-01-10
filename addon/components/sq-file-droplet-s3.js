@@ -1,60 +1,66 @@
-/*
-upload(file) {
+import Ember from 'ember';
+import Droplet from './sq-file-droplet';
 
-    var self = this;
-
-    //
-    this.set('uploading', true);
+export default Droplet.extend({
 
     //
-    var data = new FormData();
-    data.append('file', file);
+
+    store: Ember.inject.service(),
+    saving: false,
+    //
+
+    working: Ember.computed('uploading', 'processing', 'saving', function() {
+        return ( this.get('uploading') || this.get('processing') || this.get('saving') );
+    }),
 
     //
-    var current = null;
-    if ( this.get('autoremove') ) {
-        current = this.get('value.id');
-    }
 
-    self.set('percentage', '0%');
+	onComplete(data) {
 
-    this.get('uploader').upload( this.get('type'), current, data, this.onProgress, this.onUploaded).then(function(data) {
+        this.set('saving', true);
 
-        self.onComplete(data);
+        // IF RESPONSE IT OKAY
+        if ( data.id ) {
 
-    }).catch(function() {
+            var model = this.get('store').push(data);
 
-        self.onFail();
+            // UNLOAD OLD ONE
+            var current = this.get('model.'+this.get('parameter'));
 
-    }).finally(function() {
+            if ( current.content ) {
 
-        self.set('uploading', false);
-        self.set('processing', false);
+                var self = this;
 
-    });
+                if ( this.get('saveremove') === true ) {
+                    current.content.destroyRecord().then(function() {
+                        self.save(model);
+                    });
+                } else {
+                    this.save(model);
+                }
 
-},
+            } else {
+                this.save(model);
+            }
 
-// PUSH NEW TO STORE
-if ( data.push ) {
-
-    var model = self.get('store').push(data.data);
-
-    // REMOVE OLD ONE FROM STORE
-    if ( current ) {
-        var previous_model = self.get('store').peekRecord(type, current);
-        if ( previous_model ) {
-            self.get('store').deleteRecord(previous_model);
         }
+
+	},
+
+    save(model) {
+
+        var self = this;
+
+        this.set('model.'+this.get('parameter'), model);
+
+        this.get('model').save().then(function() {
+
+            self.set('saving', false);
+            self.sendAction('complete');
+
+        });
+
     }
 
-    resolve(model);
 
-} else {
-
-    resolve(data.data);
-
-}
-
-
-*/
+});
