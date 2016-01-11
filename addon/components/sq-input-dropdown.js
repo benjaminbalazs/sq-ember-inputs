@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import Validators from '../mixins/validators';
 import ClickOutside from '../mixins/clickoutside';
+import Visuals from '../mixins/visuals';
 
-export default Ember.Component.extend(Validators,ClickOutside, {
+export default Ember.Component.extend(Visuals,Validators,ClickOutside, {
 
 	// PARAMETERS
 

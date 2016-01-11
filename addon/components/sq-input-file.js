@@ -21,4 +21,10 @@ export default Ember.Component.extend(Inputviews, {
 
 	},
 
+	//
+
+	shake() {
+
+	},
+
 });
