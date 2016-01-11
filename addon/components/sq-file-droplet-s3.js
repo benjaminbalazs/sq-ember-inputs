@@ -25,24 +25,33 @@ export default Droplet.extend({
 
             var model = this.get('store').push(data);
 
+            this.save(model);
+
+            /*
+            //console.log(model);
             // UNLOAD OLD ONE
             var current = this.get('model.'+this.get('parameter'));
+            if ( current ) {
+                if ( current.content ) {
 
-            if ( current.content ) {
+                    var self = this;
 
-                var self = this;
+                    if ( this.get('autoremove') === true ) {
+                        current.content.destroyRecord().then(function() {
+                            self.save(model);
+                        });
+                    } else {
+                        this.save(model);
+                    }
 
-                if ( this.get('saveremove') === true ) {
-                    current.content.destroyRecord().then(function() {
-                        self.save(model);
-                    });
                 } else {
+                    console.log('tosave');
                     this.save(model);
                 }
-
             } else {
                 this.save(model);
             }
+            */
 
         }
 
@@ -72,11 +81,12 @@ export default Droplet.extend({
         this.set('deleting', true);
 
         var current = this.get('model.'+this.get('parameter'));
+        this.set('model.'+this.get('parameter'), null);
 
         var self = this;
         current.destroyRecord().then(function() {
 
-            self.get('model').save().then(function() {
+            self.get('model').reload().then(function() {
 
                 self.set('deleting', false);
 
