@@ -56,11 +56,17 @@ export default Ember.Component.extend(Visuals,Validators, {
 
 	valueDidChange() {
 
-		var input = this.get('childViews')[0];
-		var width = input.width(this.get('value'));
+		this.sendAction('change');
 
-		var after = this.get('childViews')[1];
-		after.$().css('left', width + 'px');
+		if ( this.get('after') ) {
+
+			var input = this.get('childViews')[0];
+			var width = input.width(this.get('value'));
+
+			var after = this.get('childViews')[1];
+			after.$().css('left', width + 'px');
+
+		}
 
 	},
 
@@ -84,9 +90,7 @@ export default Ember.Component.extend(Visuals,Validators, {
 			this.validate();
 		}
 
-		if ( this.get('after') ) {
-			this.addObserver('value', this, this.valueDidChange);
-		}
+		this.addObserver('value', this, this.valueDidChange);
 
 		if ( this.get('criteria') === 'domain' || this.get('after') ) {
 			this.set('ignoreDirection', true);
@@ -98,10 +102,6 @@ export default Ember.Component.extend(Visuals,Validators, {
 
 		this.set('focus', true);
 		this.set('focus', false);
-
-	},
-
-	didInsertElement() {
 
 	},
 
