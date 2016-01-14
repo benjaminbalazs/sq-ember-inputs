@@ -10,14 +10,10 @@
 		margin-bottom: 30px;
 	}
 
-	span {
-		display: inline-block;
-		content: url(../assets/images/sq-dropdown-arrow.svg);
+	.arrow {
 		top: 50%;
-		right: 0px;
 		position: absolute;
-		width: 10px;
-		height: 6px;
+		pointer-events: none;
 	}
 
 	.sq-input-text {
@@ -95,7 +91,7 @@
 			}
 		}
 
-		span {
+		.arrow {
 			@extend .sq-input-animation;
 			margin-top: 10px;
 		}

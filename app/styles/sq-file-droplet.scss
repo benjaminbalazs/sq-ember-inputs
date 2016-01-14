@@ -11,8 +11,12 @@
 	.delete {
 		top: 0px !important;
 		margin-top: 0px;
-		padding-right: 0px;
+		padding-right: 6px;
+		padding-left: 6px;
 		z-index: 10;
+		line-height: 10px !important;
+		right: 0px !important;
+		font-size: 8px !important;
 	}
 
 	input {
