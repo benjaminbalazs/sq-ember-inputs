@@ -158,3 +158,36 @@
 	}
 
 }
+
+.sq-input-text {
+
+	&.large {
+
+		& {
+			height: $sq-input-border-height + $sq-input-label-height + $sq-input-input-line-height + (( $sq-input-input-height - $sq-input-input-line-height)) + $sq-input-medium;
+		}
+
+		input, label {
+			margin-top: $sq-input-label-height;
+			line-height: $sq-input-input-line-height + ( $sq-input-input-height - $sq-input-input-line-height) + $sq-input-medium;
+			min-height: $sq-input-input-line-height + ( $sq-input-input-height - $sq-input-input-line-height) + $sq-input-medium;
+			font-size: $sq-input-input-font-size + $sq-input-medium;
+		}
+
+		textarea {
+			line-height: $sq-input-input-line-height + $sq-input-medium;
+			min-height: $sq-input-input-line-height + $sq-input-medium;
+			font-size: $sq-input-input-font-size + $sq-input-medium;
+		}
+
+		&.filled {
+			label {
+				line-height: $sq-input-label-height;
+				font-size: $sq-input-label-height;
+				margin-top: 0px;
+			}
+		}
+
+	}
+
+}
