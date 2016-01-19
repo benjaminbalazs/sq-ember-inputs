@@ -20,6 +20,12 @@
 
 <label class="sq-align-left">{{placeholder}}</label>
 
+{{#if maxdisplay}}
+
+	<p>{{maxcount}}</p>
+
+{{/if}}
+
 {{#if after}}
 
 	{{input value=after classNames='after' dir=dir }}

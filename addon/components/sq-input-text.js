@@ -2,8 +2,9 @@ import Ember from 'ember';
 import TextInput from './../mixins/sq-input';
 import Validators from '../mixins/validators';
 import Visuals from '../mixins/visuals';
+import MaxDisplay from '../mixins/maxdisplay';
 
-export default Ember.Component.extend(Visuals,Validators, {
+export default Ember.Component.extend(Visuals,Validators,MaxDisplay, {
 
 	// PARAMETERS
 	required: false,

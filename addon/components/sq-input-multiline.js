@@ -1,8 +1,9 @@
 import TextInput from './sq-input-text';
 import TextArea from './../mixins/sq-textarea';
 import Ember from 'ember';
+import MaxDisplay from '../mixins/maxdisplay';
 
-export default TextInput.extend({
+export default TextInput.extend(MaxDisplay,{
 
 	classNames: ['sq-input-multiline'],
 	linebreak: false,
@@ -21,6 +22,11 @@ export default TextInput.extend({
 
 		let newheight = height + parseFloat( this.$().css('border-bottom-width') );
 		this.$().css('height', newheight);
+
+		//
+		if ( this.get('maxdisplay') ) {
+			this.$('p').css('top', newheight);
+		}
 
 		// INITIATE
 		if ( !this.get('initiated') ) {
