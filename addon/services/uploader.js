@@ -13,8 +13,7 @@ export default Ember.Service.extend({
 		var headers = { 'Access-Control-Allow-Origin': '*' };
 
 		if ( authenticate ) {
-			headers.id = this.get('session.headers.id');
-			headers.token = this.get('session.headers.token');
+			headers = this.get('session.headers');
 		}
 
 		return new Ember.RSVP.Promise(function(resolve, reject) {

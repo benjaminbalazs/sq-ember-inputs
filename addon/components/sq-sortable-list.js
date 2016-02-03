@@ -8,7 +8,7 @@ export default Ember.Component.extend(Sortable,{
 	model: null,
 	autosave: true,
 
-	// INIT -----------------------------------------------------------------
+	// INIT --------------------------------------------------------------------
 
 	didInsertElement() {
 
@@ -31,7 +31,7 @@ export default Ember.Component.extend(Sortable,{
 
 			if ( newIndex !== this.currentIndex ) {
 
-				self.update();
+				self.update(newIndex);
 
 			}
 
@@ -39,13 +39,15 @@ export default Ember.Component.extend(Sortable,{
 
 	},
 
-	// UPDATE --------------------------------------------------------------
+	// UPDATE ------------------------------------------------------------------
 
 	currentIndex: null,
 
-	update(currentIndex, newIndex) {
+	update(newIndex) {
 
 		this.sendAction('change', this.currentIndex, newIndex);
+
+		// NEW POSITIONS -------------------------------------------------------
 
 		var self = this;
 
@@ -58,10 +60,10 @@ export default Ember.Component.extend(Sortable,{
 		for ( var i=0; i < childs.length; i++) {
 			let view = childs[i];
 			let newposition = positions[view.get('model.id')];
-			view.set('model.position', newposition );
+			view.set('model.position', newposition);
 		}
 
-		// AUTOSAVE
+		// AUTOSAVE ------------------------------------------------------------
 
 		if ( this.get('autosave') ) {
 			var list = [];
@@ -74,7 +76,7 @@ export default Ember.Component.extend(Sortable,{
 				}
 			}
 			Ember.RSVP.Promise.all(list).then(function() {
-				self.sendAction('completed');
+				self.sendAction('complete');
 			});
 		}
 
