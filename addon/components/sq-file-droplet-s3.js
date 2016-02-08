@@ -16,6 +16,22 @@ export default Droplet.extend({
 
     //
 
+    init() {
+
+        this._super();
+
+        this.set('model.droplet', this);
+
+    },
+
+    willDestroy() {
+
+        this.set('model.droplet', null);
+
+    },
+
+    //
+
 	onComplete(data) {
 
         this.set('saving', true);

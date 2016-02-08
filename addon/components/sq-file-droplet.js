@@ -4,6 +4,7 @@ import Inputviews from '.././mixins/inputviews';
 export default Ember.Component.extend(Inputviews, {
 
 	classNames: ['sq-file-droplet'],
+	classNameBindings: ['dragging'],
 
 	multiple: false,
 
@@ -13,19 +14,15 @@ export default Ember.Component.extend(Inputviews, {
 
 	//
 
-	dragOver(event) {
-		this.set('dragging', true);
-    	event.preventDefault();
-    	event.stopPropagation();
-  	},
-
 	dragEnter(event) {
+		return;
 		this.set('dragging', true);
 		event.stopPropagation();
   		event.preventDefault();
 	},
 
 	dragLeave(event) {
+		return;
 		this.set('dragging', false);
 		event.stopPropagation();
   		event.preventDefault();
@@ -34,7 +31,7 @@ export default Ember.Component.extend(Inputviews, {
 	// DROP EVENT ------------------------------------------------------------------
 
 	drop(event) {
-
+		
 		event.stopPropagation();
   		event.preventDefault();
 
@@ -42,8 +39,12 @@ export default Ember.Component.extend(Inputviews, {
 
 	  		var files = event.target.files || event.dataTransfer.files;
 
-			for (var i = 0, file; file = files[i]; i++) {
+			if ( this.get('multiple') === true ) {
+				for (var i = 0, file; file = files[i]; i++) {
 
+				}
+			} else {
+				console.log(files[0]);
 			}
 
 		}
@@ -53,7 +54,7 @@ export default Ember.Component.extend(Inputviews, {
 	// CLICK -----------------------------------------------------------------------
 
 	open() {
-		
+
 		if ( this.get('uploading') === false ) {
 
 			var self = this;
