@@ -7,7 +7,7 @@ export default Ember.Service.extend({
 
 	upload(type, data, onProgress, onUploaded, authenticate) {
 
-		var config = this.container.lookupFactory('config:environment');
+		var config = Ember.getOwner(this)._lookupFactory('config:environment');
 		var url =  "/" + config.APP.api_namespace + "/upload/" + type;
 
 		var headers = { 'Access-Control-Allow-Origin': '*' };
