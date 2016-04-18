@@ -39,7 +39,7 @@ export default Droplet.extend({
         // IF RESPONSE IT OKAY
         if ( data.id ) {
 
-            var model = this.get('store').push(data);
+            var model = this.get('store').push({data:data});
 
             this.save(model);
 
