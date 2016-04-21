@@ -2,12 +2,82 @@ import Ember from 'ember';
 
 export default Ember.Mixin.create({
 
+	getCardType(number) {
+
+	    // visa
+	    var re = new RegExp("^4");
+		if ( number.match(re) != null ) {
+			return "visa";
+		}
+	    // Mastercard
+	    re = new RegExp("^5[1-5]");
+	    if (number.match(re) != null) {
+			return "mastercard";
+		}
+
+	    // AMEX
+	    re = new RegExp("^3[47]");
+	    if (number.match(re) != null) {
+			return "amex";
+		}
+
+	    // Discover
+	    re = new RegExp("^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5]|64[4-9])|65)");
+	    if (number.match(re) != null) {
+			return "discover";
+		}
+
+	    // Diners
+	    re = new RegExp("^36");
+	    if (number.match(/^5018|5020|5038|5893|6304|67(59|61|62|63)|0604/) != null) {
+			return "diners";
+		}
+
+	    // JCB
+	    re = new RegExp("^35(2[89]|[3-8][0-9])");
+	    if (number.match(re) != null) {
+			return "jcb";
+		}
+
+	    // Visa Electron
+	    re = new RegExp("^(4026|417500|4508|4844|491(3|7))");
+	    if (number.match(re) != null) {
+			return "visa-electron";
+		}
+		
+	    return "unknown";
+
+	},
+
+	//
+
+	getCardLength(number) {
+
+		var type = this.getCardType(number);
+
+		if ( type === 'diners' ) {
+			return 14;
+		}
+
+		if ( type === 'amex' ) {
+			return 15;
+		}
+
+		if ( type === "unknown" ) {
+			return 14;
+		}
+
+		return 16;
+
+	},
+
 	//
 
 	validator_card(text) {
+
 		if ( text ) {
 			text = text.split(' ').join('');
-			return ( text.length === 16 );
+			return ( text.length >= this.getCardLength(text) );
 		} else {
 			return false;
 		}
@@ -27,7 +97,7 @@ export default Ember.Mixin.create({
 	validator_cvv(text) {
 		if ( text ) {
 			text = text.split('/').join('');
-			return ( text.length === 3 );
+			return ( text.length >= 3 );
 		} else {
 			return false;
 		}
