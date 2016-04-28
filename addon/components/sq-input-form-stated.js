@@ -92,12 +92,24 @@ export default SqForm.extend({
 			this.set('internal.'+list[i], this.get('model.'+list[i]));
 
 			// LISTENER
-			this.get('internal').addObserver(list[i], this, function() {
-				this.changed();
-			});
+			this.get('internal').addObserver(list[i], this, this.changed);
 
 			// APPLY OUTSIDE CHANGE
 			this.get('model').addObserver(list[i], this, this.outside);
+
+		}
+
+	},
+
+	willDestroy() {
+
+		var list = this.get('params').split(',');
+
+		for ( var i=0; i < list.length; i++) {
+
+			this.get('internal').removeObserver(list[i], this, this.changed);
+
+			this.get('model').removeObserver(list[i], this, this.outside);
 
 		}
 
