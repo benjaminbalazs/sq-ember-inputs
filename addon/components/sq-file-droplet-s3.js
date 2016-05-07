@@ -20,15 +20,15 @@ export default Droplet.extend({
 
         this._super();
 
-        this.set('model.droplet', this);
+        //this.set('value.droplet', this);
 
     },
 
-    willDestroy() {
+//    willDestroy() {
 
-        this.set('model.droplet', null);
+//        this.set('value.droplet', null);
 
-    },
+//    },
 
     //
 
