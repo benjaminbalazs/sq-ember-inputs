@@ -14,7 +14,7 @@ export default Ember.Mixin.create({
 			if (!container.is(e.target) && container.has(e.target).length === 0) {
 				self.clickoutside();
 			} else {
-				return false;
+				//return false;
 			}
 
 		});

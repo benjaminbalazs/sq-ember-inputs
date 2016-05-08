@@ -145,6 +145,43 @@
 
 .sq-input-text {
 
+	&.tiny {
+
+		& {
+			height: $sq-input-border-height + $sq-input-label-height + $sq-input-input-line-height + (( $sq-input-input-height - $sq-input-input-line-height)) - $sq-input-tiny;
+		}
+
+		input, label {
+			margin-top: $sq-input-label-height;
+			line-height: $sq-input-input-line-height + ( $sq-input-input-height - $sq-input-input-line-height) - $sq-input-tiny;
+			min-height: $sq-input-input-line-height + ( $sq-input-input-height - $sq-input-input-line-height) - $sq-input-tiny;
+			font-size: $sq-input-input-font-size - $sq-input-tiny;
+		}
+
+		p {
+			top: $sq-input-border-height + $sq-input-label-height + $sq-input-input-line-height + (( $sq-input-input-height - $sq-input-input-line-height)) - $sq-input-tiny;
+		}
+
+		textarea {
+			line-height: $sq-input-input-line-height - $sq-input-tiny;
+			min-height: $sq-input-input-line-height - $sq-input-tiny;
+			font-size: $sq-input-input-font-size - $sq-input-tiny;
+		}
+
+		&.filled {
+			label {
+				line-height: $sq-input-label-height;
+				font-size: $sq-input-label-height;
+				margin-top: 0px;
+			}
+		}
+
+	}
+
+}
+
+.sq-input-text {
+
 	&.medium {
 
 		& {
