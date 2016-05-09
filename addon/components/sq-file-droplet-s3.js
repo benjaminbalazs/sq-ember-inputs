@@ -16,58 +16,22 @@ export default Droplet.extend({
 
     //
 
-    init() {
-
-        this._super();
-
-        //this.set('value.droplet', this);
-
-    },
-
-//    willDestroy() {
-
-//        this.set('value.droplet', null);
-
-//    },
-
-    //
-
 	onComplete(data) {
+
+        var self = this;
 
         this.set('saving', true);
 
-        // IF RESPONSE IT OKAY
         if ( data.id ) {
 
-            var model = this.get('store').push({data:data});
+            var model = this.get('store').push({ data:data });
+            model.reload().then(function(data) {
+                console.log(data);
 
-            this.save(model);
+                self.save(model);
 
-            /*
-            //console.log(model);
-            // UNLOAD OLD ONE
-            var current = this.get('model.'+this.get('parameter'));
-            if ( current ) {
-                if ( current.content ) {
+            });
 
-                    var self = this;
-
-                    if ( this.get('autoremove') === true ) {
-                        current.content.destroyRecord().then(function() {
-                            self.save(model);
-                        });
-                    } else {
-                        this.save(model);
-                    }
-
-                } else {
-                    console.log('tosave');
-                    this.save(model);
-                }
-            } else {
-                this.save(model);
-            }
-            */
 
         }
 
@@ -77,13 +41,17 @@ export default Droplet.extend({
 
         var self = this;
 
-        this.set('model.'+this.get('parameter'), model);
+        var holder = this.get('model');
 
-        this.get('model').save().then(function() {
+        holder.set(this.get('parameter'), model);
+
+        holder.save().then(function() {
 
             self.set('saving', false);
             self.sendAction('complete');
 
+        }).catch(function(error) {
+            console.log(error);
         });
 
     },
@@ -94,19 +62,16 @@ export default Droplet.extend({
 
     delete() {
 
+        var self = this;
+
         this.set('deleting', true);
 
-        var current = this.get('model.'+this.get('parameter'));
-        this.set('model.'+this.get('parameter'), null);
+        var holder = this.get('model');
+        holder.set(this.get('parameter'), null);
 
-        var self = this;
-        current.destroyRecord().then(function() {
+        holder.save().then(function() {
 
-            self.get('model').reload().then(function() {
-
-                self.set('deleting', false);
-
-            });
+            self.set('deleting', false);
 
         });
 
