@@ -25,13 +25,11 @@ export default Droplet.extend({
         if ( data.id ) {
 
             var model = this.get('store').push({ data:data });
-            model.reload().then(function(data) {
-                console.log(data);
+            model.reload().then(function() {
 
                 self.save(model);
 
             });
-
 
         }
 
