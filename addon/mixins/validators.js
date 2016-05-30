@@ -44,7 +44,7 @@ export default Ember.Mixin.create({
 	    if (number.match(re) != null) {
 			return "visa-electron";
 		}
-		
+
 	    return "unknown";
 
 	},
@@ -101,6 +101,12 @@ export default Ember.Mixin.create({
 		} else {
 			return false;
 		}
+	},
+
+	//
+
+	validator_analytics(text) {
+		return (/^ua-\d{4,9}-\d{1,4}$/i).test(text.toString());
 	},
 
 	//
