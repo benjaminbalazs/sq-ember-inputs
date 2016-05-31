@@ -5,6 +5,7 @@ export default Ember.Component.extend(Inputviews, {
 
 	classNames: ['sq-file-droplet'],
 	classNameBindings: ['dragging'],
+	accept: '',
 
 	multiple: false,
 
@@ -13,6 +14,10 @@ export default Ember.Component.extend(Inputviews, {
 	dragging: false,
 
 	//
+
+	dragOver(event){
+    	//event.preventDefault();
+  	},
 
 	dragEnter(event) {
 		return;
@@ -30,8 +35,8 @@ export default Ember.Component.extend(Inputviews, {
 
 	// DROP EVENT ------------------------------------------------------------------
 
-	drop(event) {
-		
+	change(event) {
+
 		event.stopPropagation();
   		event.preventDefault();
 
@@ -60,7 +65,7 @@ export default Ember.Component.extend(Inputviews, {
 			var self = this;
 			Ember.run.later(function() {
 
-				var input = Ember.$('<input>').attr({ type: 'file'});
+				var input = Ember.$('<input>').attr({ type: 'file', accept: self.get('accept') } );
 				input.on('change', function(event) {
 					self.handleInputField(event);
 				});

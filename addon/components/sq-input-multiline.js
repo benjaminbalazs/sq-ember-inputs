@@ -5,8 +5,9 @@ import MaxDisplay from '../mixins/maxdisplay';
 
 export default TextInput.extend(MaxDisplay,{
 
-	classNames: ['sq-input-multiline'],
+	classNameBindings: ['defaultClass:sq-input-multiline'],
 	linebreak: false,
+	defaultClass: true,
 
 	initiated: false,
 

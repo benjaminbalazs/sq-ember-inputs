@@ -15,11 +15,12 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay, {
 	maxlength: 60,
 	whitespace: true,
 	ignoreDirection: false,
+	defaultClass: true,
 
 	// SETTINGS
-	classNames: ['sq-input-animation', 'sq-input-text'],
+	classNames: ['sq-input-animation'],
 	//
-	classNameBindings: ['ignoreDirection:keep-left', 'medium', 'large', 'tiny', 'isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'disabled', 'rtl:sq-input-rtl'],
+	classNameBindings: ['defaultClass:sq-input-text', 'ignoreDirection:keep-left', 'medium', 'large', 'tiny', 'isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'disabled', 'rtl:sq-input-rtl'],
 
 	// CLICK ---------------------------------------------------------
 
