@@ -44,7 +44,7 @@ export default Ember.TextField.reopen({
 
 		if ( this.get('lastvalue') !== this.$().val() ) {
 
-			if ( this.get('number') === true || this.get('dasherize') === true || this.get('domain') === true || this.get('subdomain') === true || this.get('email') === true ) {
+			if ( this.get('capital') === false || this.get('number') === true || this.get('dasherize') === true || this.get('domain') === true || this.get('subdomain') === true || this.get('email') === true ) {
 
 				var selection = this.getInputSelection();
 
@@ -71,6 +71,10 @@ export default Ember.TextField.reopen({
 
 				if ( this.get('number') === true ) {
 					msg = msg.replace(/[^0-9]+/ig, "");
+				}
+
+				if ( this.get('capital') === false ) {
+					msg = msg.toLowerCase();
 				}
 
 				if ( this.$().val() !== msg ) {

@@ -16,6 +16,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay, {
 	whitespace: true,
 	ignoreDirection: false,
 	defaultClass: true,
+	capital:true,
 
 	// SETTINGS
 	classNames: ['sq-input-animation'],
