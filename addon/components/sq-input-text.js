@@ -17,11 +17,12 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay, {
 	ignoreDirection: false,
 	defaultClass: true,
 	capital:true,
+	type: 'text',
 
 	// SETTINGS
 	classNames: ['sq-input-animation'],
 	//
-	classNameBindings: ['defaultClass:sq-input-text', 'ignoreDirection:keep-left', 'medium', 'large', 'tiny', 'isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'disabled', 'rtl:sq-input-rtl'],
+	classNameBindings: ['defaultClass:sq-input-text', 'ignoreDirection:keep-ltr', 'medium', 'large', 'tiny', 'isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'disabled', 'rtl:sq-input-rtl'],
 
 	// CLICK ---------------------------------------------------------
 
@@ -97,6 +98,10 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay, {
 
 		if ( this.get('criteria') === 'domain' || this.get('after') ) {
 			this.set('ignoreDirection', true);
+		}
+
+		if ( this.get('email') === true ) {
+			this.set('type', 'email');
 		}
 
 	},

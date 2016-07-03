@@ -121,9 +121,10 @@
 		}
 	}
 
-	&.keep-left {
+	&.keep-ltr {
 		input, label {
 			text-align: left !important;
+			direction: ltr !important;
 		}
 	}
 
