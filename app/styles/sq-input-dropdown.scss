@@ -109,6 +109,20 @@
 
 	}
 
+	&[lang=ar] {
+		.arrow {
+			left: 0 !important;
+			right: auto !important;
+		}
+	}
+
+	&[lang=en] {
+		.arrow {
+			right: 0 !important;
+			left: auto !important;
+		}
+	}
+
 }
 
 .sq-input-dropdown-scale-hidden {

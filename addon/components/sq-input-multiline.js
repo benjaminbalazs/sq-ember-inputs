@@ -2,12 +2,14 @@ import TextInput from './sq-input-text';
 import TextArea from './../mixins/sq-textarea';
 import Ember from 'ember';
 import MaxDisplay from '../mixins/maxdisplay';
+import Lang from '../mixins/lang';
 
-export default TextInput.extend(MaxDisplay,{
+export default TextInput.extend(MaxDisplay,Lang,{
 
 	classNameBindings: ['defaultClass:sq-input-multiline'],
 	linebreak: false,
 	defaultClass: true,
+	ignoreLang: false,
 
 	initiated: false,
 

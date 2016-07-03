@@ -121,26 +121,19 @@
 		}
 	}
 
-	&.keep-ltr {
-		input, label {
-			text-align: left !important;
-			direction: ltr !important;
-		}
-	}
-
 }
 
-.sq-input-rtl {
-	label {
-		text-align: right;
-	}
-	input, textarea, p {
-		text-align: right;
+&[lang=ar] {
+	input, textarea {
+		font-family: "El Messiri", sans-serif;
 		direction: rtl;
-		unicode-bidi: embed;
 	}
-	p {
-		text-align: left;
+}
+
+&[lang=en] {
+	input, textarea {
+		font-family: "Roboto", sans-serif;
+		direction: ltr;
 	}
 }
 

@@ -3,8 +3,9 @@ import TextInput from './../mixins/sq-input';
 import Validators from '../mixins/validators';
 import Visuals from '../mixins/visuals';
 import MaxDisplay from '../mixins/maxdisplay';
+import Lang from '../mixins/lang';
 
-export default Ember.Component.extend(Visuals,Validators,MaxDisplay, {
+export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 	// PARAMETERS
 	required: false,
@@ -17,12 +18,15 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay, {
 	ignoreDirection: false,
 	defaultClass: true,
 	capital:true,
+	ignoreLang: false,
+
 	type: 'text',
 
 	// SETTINGS
 	classNames: ['sq-input-animation'],
-	//
-	classNameBindings: ['defaultClass:sq-input-text', 'ignoreDirection:keep-ltr', 'medium', 'large', 'tiny', 'isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'disabled', 'rtl:sq-input-rtl'],
+
+	classNameBindings: ['defaultClass:sq-input-text', 'ignoreDirection:keep-ltr', 'medium', 'large', 'tiny', 'isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'disabled'],
+	attributeBindings: ['dir', 'lang'],
 
 	// CLICK ---------------------------------------------------------
 
@@ -72,15 +76,25 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay, {
 
 		}
 
+		this.setLang(this.get('value'));
+
 	},
 
-	//
+	// DIRECTION ------------------------------------------------------
 
-	dir: Ember.computed('rtl', function() {
-		if ( this.get('rtl') && this.get('ignoreDirection') === false ) {
-			return 'rtl';
-		} else {
+	dictionary: Ember.inject.service(),
+
+	serviceName: 'dictionary',
+
+	service: Ember.computed('serviceName', function() {
+		return this.get(this.get('serviceName'));
+	}),
+
+	dir: Ember.computed('service.previous_direction','ignoreDirection', function() {
+		if ( this.get('ignoreDirection') === true ) {
 			return 'ltr';
+		} else {
+			return this.get('service.previous_direction');
 		}
 	}),
 
@@ -95,13 +109,14 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay, {
 		}
 
 		this.addObserver('value', this, this.valueDidChange);
+		this.valueDidChange();
 
 		if ( this.get('criteria') === 'domain' || this.get('after') ) {
 			this.set('ignoreDirection', true);
 		}
 
 		if ( this.get('email') === true ) {
-			this.set('type', 'email');
+			//this.set('type', 'email');
 		}
 
 	},
