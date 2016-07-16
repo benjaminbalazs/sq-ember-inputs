@@ -4,7 +4,9 @@ export default Ember.Mixin.create({
 
 	isTouch() {
 
-		return ('ontouchstart' in window);
+		//return ('ontouchstart' in window);
+
+		return Ember.$.browser.mobile;
 
     },
 
