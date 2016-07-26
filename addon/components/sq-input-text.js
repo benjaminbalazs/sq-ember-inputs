@@ -69,7 +69,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 		if ( this.get('after') ) {
 
 			var input = this.get('childViews')[0];
-			
+
 			if ( input ) {
 				var width = input.width(this.get('value'));
 				var after = this.get('childViews')[1];
@@ -167,8 +167,13 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 	isValid : Ember.computed('value', function() {
 		if ( this.get('required') !== false ) {
 			if ( this.get('criteria') ) {
-				var method = "is" + Ember.String.capitalize(this.get('criteria'));
-				return this.get(method);
+				if ( typeof(this.get('criteria')) === 'string' ) {
+					let method = "is" + Ember.String.capitalize(this.get('criteria'));
+					return this.get(method);
+				} else if ( typeof(this.get('criteria')) === 'function' ) {
+					let method = this.get('criteria');
+					return method(this.get('value'));
+				}
 			} else {
 				return !this.get('isEmpty');
 			}
@@ -178,6 +183,10 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 	}),
 
 	// VALIDATORS --------------------------------------------------
+
+	isPhone : Ember.computed('value', function() {
+		return this.validator_phone(this.get('value'));
+	}),
 
 	isCard : Ember.computed('value', function() {
 		return this.validator_card(this.get('value'));

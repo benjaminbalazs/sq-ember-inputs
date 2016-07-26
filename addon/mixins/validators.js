@@ -190,6 +190,14 @@ export default Ember.Mixin.create({
 		}
 	},
 
+	validator_phone(string) {
+		if ( string ) {
+			return ( string.length > 8 );
+		} else {
+			return false;
+		}
+	},
+
 	//
 	/*
 	validator_phone(text) {
