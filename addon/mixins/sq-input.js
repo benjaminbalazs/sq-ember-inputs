@@ -50,7 +50,7 @@ export default Ember.TextField.reopen({
 
 				var msg = this.$().val();
 
-				if ( this.get('dasherize') === true || this.get('email') === true ) {
+				if ( this.get('dasherize') === true ) {
 					msg = msg.toLowerCase();
 					msg = String(msg).dasherize();
 					msg = msg.replace(/--+/g,"-");
@@ -66,7 +66,7 @@ export default Ember.TextField.reopen({
 				}
 
 				if ( this.get('email') === true ) {
-					msg = msg.replace(/[^a-z0-9.@-]+/ig, "");
+					msg = msg.replace(/[^a-z0-9.@-_]+/ig, "");
 				}
 
 				if ( this.get('number') === true ) {
