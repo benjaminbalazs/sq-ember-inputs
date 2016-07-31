@@ -25,7 +25,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 	// SETTINGS
 	classNames: ['sq-input-animation'],
 
-	classNameBindings: ['defaultClass:sq-input-text', 'ignoreDirection:keep-ltr', 'medium', 'large', 'tiny', 'isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'disabled'],
+	classNameBindings: ['defaultClass:sq-input-text', 'medium', 'large', 'tiny', 'isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'disabled'],
 	attributeBindings: ['dir', 'lang'],
 
 	// CLICK ---------------------------------------------------------
@@ -209,10 +209,6 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 	}),
 
 	isAnything : Ember.computed('value', function() {
-		return this.validator_anything(this.get('value'));
-	}),
-
-	isPhone : Ember.computed('value', function() {
 		return this.validator_anything(this.get('value'));
 	}),
 
