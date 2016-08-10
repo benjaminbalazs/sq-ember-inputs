@@ -8,12 +8,12 @@ export default Ember.Component.extend(Inputviews, {
 
 	actions : {
 
-		submit() {
+		submit(status) {
 
 			this.validate();
 
 			if ( this.isValid() ) {
-				this.sendAction('submit');
+				this.sendAction('submit', status);
 			} else {
 				this.shake();
 			}
