@@ -72,7 +72,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 			if ( input ) {
 				var width = input.width(this.get('value'));
-				var after = this.get('childViews')[1];
+				var after = this.get('childViews')[2];
 				after.$().css('left', width + 'px');
 			}
 
