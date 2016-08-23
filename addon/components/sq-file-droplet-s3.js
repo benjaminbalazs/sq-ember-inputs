@@ -39,18 +39,24 @@ export default Droplet.extend({
 
         var self = this;
 
-        var holder = this.get('model');
+        if ( self ) {
 
-        holder.set(this.get('parameter'), model);
+            var holder = this.get('model');
 
-        holder.save().then(function() {
+            holder.set(this.get('parameter'), model);
 
-            self.set('saving', false);
-            self.sendAction('complete');
+            holder.save().then(function() {
 
-        }).catch(function(error) {
-            console.log(error);
-        });
+                if ( self.get('isDestroyed') === false && self.get('isDestroying') === false ) {
+
+                    self.set('saving', false);
+                    self.sendAction('complete');
+
+                }
+
+            });
+
+        }
 
     },
 
