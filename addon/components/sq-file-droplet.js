@@ -13,10 +13,10 @@ export default Ember.Component.extend(Inputviews, {
 
 	dragging: false,
 
-	//
+	/*
 
 	dragOver(event){
-    	//event.preventDefault();
+    	event.preventDefault();
   	},
 
 	dragEnter(event) {
@@ -32,6 +32,7 @@ export default Ember.Component.extend(Inputviews, {
 		event.stopPropagation();
   		event.preventDefault();
 	},
+
 
 	// DROP EVENT ------------------------------------------------------------------
 
@@ -55,11 +56,11 @@ export default Ember.Component.extend(Inputviews, {
 		}
 
 	},
-
+	*/
 	// CLICK -----------------------------------------------------------------------
 
 	open() {
-
+		
 		if ( this.get('uploading') === false ) {
 
 			var self = this;
@@ -157,7 +158,7 @@ export default Ember.Component.extend(Inputviews, {
 
 	},
 
-	onFail(error) {
+	onFail() {
 
 		this.set('failed', true);
 
