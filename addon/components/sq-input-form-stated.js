@@ -44,12 +44,16 @@ export default SqForm.extend({
 						self.set('saved', true);
 
 						setTimeout(function() {
-							self.set('saved', false);
-						}, 1000);
+							if ( self.get('isDestroyed') === false && self.get('isDestroying') === false ) {
+								self.set('saved', false);
+							}
+						}, 800);
 
 					}).catch(function() {
-						self.set('errored', true);
-						self.set('saving', false);
+						if ( self.get('isDestroyed') === false && self.get('isDestroying') === false ) {
+							self.set('errored', true);
+							self.set('saving', false);
+						}
 					});
 
 				} else {
