@@ -95,6 +95,7 @@
 		ul {
 			@extend  .sq-input-dropdown-scale-visible;
 			z-index: 999;
+			position: relative;
 		}
 
 		.sq-input-text {
