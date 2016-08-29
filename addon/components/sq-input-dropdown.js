@@ -71,8 +71,6 @@ export default Ember.Component.extend(Visuals,Validators,ClickOutside,Lang, {
 				this.set('input.focus', false);
 				this.sendAction('change', data);
 
-				return true;
-
 			}
 
 		},
