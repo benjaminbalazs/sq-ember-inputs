@@ -118,6 +118,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 		}
 
 		if ( this.get('email') === true ) {
+			this.set('capital', false);
 			//this.set('type', 'email');
 		}
 

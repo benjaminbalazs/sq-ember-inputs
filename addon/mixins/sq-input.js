@@ -66,7 +66,7 @@ export default Ember.TextField.reopen({
 				}
 
 				if ( this.get('email') === true ) {
-					msg = msg.replace(/[^a-z0-9.@-_]+/ig, "");
+					msg = msg.replace(/[^a-z0-9.@_-]+/ig, "");
 				}
 
 				if ( this.get('number') === true ) {
