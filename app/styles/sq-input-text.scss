@@ -19,6 +19,7 @@
 		min-height: $sq-input-input-line-height + ( $sq-input-input-height - $sq-input-input-line-height);
 		font-size: $sq-input-input-font-size;
 		width: inherit;
+        //transition: padding-left 0s ease, all 0.09s ease-in-out;
 	}
 
 	input, textarea {
@@ -33,12 +34,20 @@
 		margin-bottom: (( $sq-input-input-height - $sq-input-input-line-height)/2);
 	}
 
+    input {
+        box-sizing: border-box;
+    }
+
 	.after, .before {
 		pointer-events: none;
-		visibility: hidden;
+		opacity: 0;
 		transition: left 0s;
 		color: $sq-input-input-valid;
 	}
+
+    .before {
+        color: $sq-input-label-default !important;
+    }
 
 	p {
 		font-size: $sq-input-label-height;
@@ -82,7 +91,7 @@
 			margin-top: 0px;
 		}
 		.after, .before {
-			visibility: visible;
+			opacity: 1;
 		}
 	}
 

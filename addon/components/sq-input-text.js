@@ -113,13 +113,12 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 		this.addObserver('value', this, this.valueDidChange);
 		this.valueDidChange();
 
-		if ( this.get('criteria') === 'domain' || this.get('after') ) {
+		if ( this.get('criteria') === 'domain' || this.get('after') || this.get('before') ) {
 			this.set('ignoreDirection', true);
 		}
 
 		if ( this.get('email') === true ) {
 			this.set('capital', false);
-			//this.set('type', 'email');
 		}
 
 	},
@@ -128,6 +127,35 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 		this.set('focus', true);
 		this.set('focus', false);
+
+	},
+
+	//
+
+	didInsertElement() {
+
+		this.alignBefore();
+
+	},
+
+	//
+
+	alignBefore() {
+
+		if ( this.get('before') ) {
+
+			var input = this.get('childViews')[0];
+
+			if ( input ) {
+
+				var before = this.get('childViews')[2];
+				var width = before.width(this.get('before'));
+
+				input.$().css('padding-left', width + 'px');
+
+			}
+
+		}
 
 	},
 

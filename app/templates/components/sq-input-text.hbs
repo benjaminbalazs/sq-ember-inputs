@@ -20,15 +20,21 @@
 
 {{sq-ui-adaptive-label classNames="sq-align-left" value=placeholder tagName='label'}}
 
-{{#if maxdisplay}}
+{{#if before}}
 
-	<p>{{maxcount}}</p>
+	{{input value=before classNames='before' autoresize=true}}
 
 {{/if}}
 
 {{#if after}}
 
 	{{input value=after classNames='after'}}
+
+{{/if}}
+
+{{#if maxdisplay}}
+
+	<p>{{maxcount}}</p>
 
 {{/if}}
 
