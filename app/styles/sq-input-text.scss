@@ -50,13 +50,14 @@
     }
 
 	p {
-		font-size: $sq-input-label-height;
+		font-size: $sq-input-label-height !important;
 		text-align: right;
-		color: $sq-input-label-default;
+		color: $sq-input-label-default !important;
 		position: absolute;
-		padding-top: 4px;
+		padding-top: 4px !important;
 		width: 100%;
 		opacity: 0;
+		margin-top: 0px !important;
 		top: $sq-input-border-height + $sq-input-label-height + $sq-input-input-line-height + (( $sq-input-input-height - $sq-input-input-line-height));
 	}
 
