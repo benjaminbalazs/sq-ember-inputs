@@ -66,6 +66,14 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 		this.sendAction('change');
 
+		this.alignAfter();
+
+		this.setLang(this.get('value'));
+
+	},
+
+	alignAfter() {
+
 		if ( this.get('after') ) {
 
 			var input = this.get('childViews')[0];
@@ -77,8 +85,6 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 			}
 
 		}
-
-		this.setLang(this.get('value'));
 
 	},
 
@@ -135,6 +141,8 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 	didInsertElement() {
 
 		this.alignBefore();
+
+		this.alignAfter();
 
 	},
 

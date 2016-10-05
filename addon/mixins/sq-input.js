@@ -14,7 +14,8 @@ export default Ember.TextField.reopen({
 			format = format.split(')').join('}}');
 
 			this.$().formatter({
-				'pattern': format
+				'pattern': format,
+				'persistent': true
 			});
 
 		}
