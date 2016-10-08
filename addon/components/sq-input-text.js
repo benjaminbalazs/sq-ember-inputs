@@ -233,6 +233,14 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 		return this.validator_expiry(this.get('value'));
 	}),
 
+	isExpiry_year : Ember.computed('value', function() {
+		return this.validator_expiry_year(this.get('value'));
+	}),
+
+	isExpiry_month : Ember.computed('value', function() {
+		return this.validator_expiry_month(this.get('value'));
+	}),
+
 	isCvv : Ember.computed('value', function() {
 		return this.validator_cvv(this.get('value'));
 	}),

@@ -85,6 +85,24 @@ export default Ember.Mixin.create({
 
 	//
 
+	validator_expiry_month(text) {
+		if ( text ) {
+			var array = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30','31'];
+			return ( array.indexOf(text) !== -1 );
+		} else {
+			return false;
+		}
+	},
+
+	validator_expiry_year(text) {
+		if ( text ) {
+			var array = ['15', '16', '17', '18', '19', '20', '21', '22', '23', '24'];
+			return ( array.indexOf(text) !== -1 );
+		} else {
+			return false;
+		}
+	},
+
 	validator_expiry(text) {
 		if ( text ) {
 			text = text.split('/').join('');
@@ -93,6 +111,8 @@ export default Ember.Mixin.create({
 			return false;
 		}
 	},
+
+	//
 
 	validator_cvv(text) {
 		if ( text ) {

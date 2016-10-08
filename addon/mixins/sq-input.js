@@ -4,7 +4,11 @@ export default Ember.TextField.reopen({
 
 	//
 
+	persistent: true,
+
 	didInsertElement() {
+		
+		var self = this;
 
 		this._super();
 
@@ -15,7 +19,7 @@ export default Ember.TextField.reopen({
 
 			this.$().formatter({
 				'pattern': format,
-				'persistent': true
+				'persistent': self.get('persistent'),
 			});
 
 		}
@@ -112,10 +116,6 @@ export default Ember.TextField.reopen({
 	keyPress(event) {
 
 		this._super(event);
-
-		//if ( event.which === 13 ) {
-			//this.sendAction('enterPressed');
-		//}
 
 	},
 
