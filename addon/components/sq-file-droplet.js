@@ -60,7 +60,7 @@ export default Ember.Component.extend(Inputviews, {
 	// CLICK -----------------------------------------------------------------------
 
 	open() {
-		
+
 		if ( this.get('uploading') === false ) {
 
 			var self = this;
@@ -112,6 +112,8 @@ export default Ember.Component.extend(Inputviews, {
 		this.set('failed', false);
 		this.set('uploading', true);
 		this.set('percentage', '0%');
+
+		this.sendAction('start');
 
 		//
 		var data = new FormData();
