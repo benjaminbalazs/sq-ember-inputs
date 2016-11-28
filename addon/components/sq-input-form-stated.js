@@ -34,13 +34,12 @@ export default SqForm.extend({
 
 					//---
 
-					self.set('dirty', false);
-
 					var save = this.get('submit');
 
 					save().then(function() {
 
 						self.set('saving', false);
+						self.set('dirty', false);
 						self.set('saved', true);
 
 						setTimeout(function() {
