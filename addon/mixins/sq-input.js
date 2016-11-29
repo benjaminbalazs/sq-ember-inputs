@@ -7,7 +7,7 @@ export default Ember.TextField.reopen({
 	persistent: true,
 
 	didInsertElement() {
-		
+
 		var self = this;
 
 		this._super();
@@ -49,7 +49,7 @@ export default Ember.TextField.reopen({
 
 		if ( this.get('lastvalue') !== this.$().val() ) {
 
-			if ( this.get('transform') || this.get('capital') === false || this.get('number') === true || this.get('dasherize') === true || this.get('domain') === true || this.get('subdomain') === true || this.get('email') === true ) {
+			if ( this.get('transform') || this.get('capital') === false || this.get('number') === true || this.get('price') === true || this.get('dasherize') === true || this.get('domain') === true || this.get('subdomain') === true || this.get('email') === true ) {
 
 				var selection = this.getInputSelection();
 
@@ -76,6 +76,10 @@ export default Ember.TextField.reopen({
 
 				if ( this.get('number') === true ) {
 					msg = msg.replace(/[^0-9]+/ig, "");
+				}
+			
+				if ( this.get('price') === true ) {
+					msg = msg.replace(/[^0-9.]+/ig, "");
 				}
 
 				if ( this.get('capital') === false ) {

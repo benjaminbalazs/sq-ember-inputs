@@ -19,6 +19,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 	defaultClass: true,
 	capital:true,
 	ignoreLang: false,
+	price:false,
 
 	type: 'text',
 
