@@ -137,6 +137,15 @@ export default Ember.Mixin.create({
 
 	//
 
+	validator_price(text) {
+		if ( text ) {
+			var pattern = /^(0|.[1-9][0-9]*)$/;
+			return pattern.test(text);
+		} else {
+			return false;
+		}
+	},
+
 	validator_number(text) {
 		if ( text ) {
 			var pattern = /^(0|[1-9][0-9]*)$/;

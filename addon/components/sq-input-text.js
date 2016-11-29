@@ -221,6 +221,10 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 	// VALIDATORS --------------------------------------------------
 
+	isPrice : Ember.computed('value', function() {
+		return this.validator_price(this.get('value'));
+	}),
+
 	isPhone : Ember.computed('value', function() {
 		return this.validator_phone(this.get('value'));
 	}),
