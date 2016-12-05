@@ -41,6 +41,9 @@ export default Ember.TextArea.reopen({
 		 	if ( event.which === 13 && event.shiftKey ) {
 				event.preventDefault();
 			}
+			if ( event.which === 13 ) {
+				this.sendAction('enterPressed');
+			}
 		}
 		if ( event.which === 13 ) {
 			this.sendAction('enterPressed');
