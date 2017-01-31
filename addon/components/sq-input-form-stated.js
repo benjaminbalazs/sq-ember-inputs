@@ -77,6 +77,7 @@ export default SqForm.extend({
 			}
 		}
 		this.set('dirty', isDifferent);
+		this.sendAction('change', this.get('internal'));
 	},
 
 	// LISTENERS
@@ -101,6 +102,8 @@ export default SqForm.extend({
 			this.get('model').addObserver(list[i], this, this.outside);
 
 		}
+
+		this.sendAction('change', this.get('internal'));
 
 	},
 
