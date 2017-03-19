@@ -26,7 +26,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 	// SETTINGS
 	classNames: ['sq-input-animation'],
 
-	classNameBindings: ['defaultClass:sq-input-text', 'medium', 'large', 'tiny', 'isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'disabled'],
+	classNameBindings: ['defaultClass:sq-input-text', 'persistent', 'medium', 'large', 'tiny', 'isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'disabled'],
 	attributeBindings: ['dir', 'lang'],
 
 	// CLICK ---------------------------------------------------------
@@ -95,7 +95,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 				let width = input.width(this.get('value'));
 
-				if ( this.get('after') ) {
+				if ( this.get('after') || this.get('before') ) {
 					let after = this.get('childViews')[2];
 					width = width + after.width(this.get('after'));
 				}
@@ -126,6 +126,10 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 		}
 	}),
 
+	persistent: Ember.computed('placeholder', function() {
+		return ( !this.get('placeholder') );
+	}),
+
 	// METHODS --------------------------------------------------------
 
 	init() {
@@ -134,6 +138,12 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 		if ( this.get('initialValidation') ) {
 			this.validate();
+		}
+
+		if ( this.get('whitespace') === false ) {
+			if ( this.get('value') ) {
+				this.set('value', this.get('value').replace(/\s+/, ""));
+			}
 		}
 
 		this.addObserver('value', this, this.valueDidChange);

@@ -8,6 +8,7 @@ export default Ember.Component.extend(Inputviews, {
 	accept: '',
 
 	multiple: false,
+	showPreview: false,
 
 	// DRAG EVENTS -----------------------------------------------------------------
 
@@ -86,6 +87,20 @@ export default Ember.Component.extend(Inputviews, {
 
 		var file = this.input[0].files[0];
 
+		if ( this.get('showPreview') ) {
+
+			var reader = new FileReader();
+
+			var self = this;
+
+			reader.onload = function(e) {
+				self.set('preview', e.target.result);
+			};
+
+			reader.readAsDataURL(file);
+
+		}
+
 		this.upload(file);
 
 	},
@@ -95,7 +110,7 @@ export default Ember.Component.extend(Inputviews, {
 	uploading: false,
 	processing: false,
 	failed: false,
-	//
+
 	percentage: '0%',
 
 	//
@@ -103,6 +118,14 @@ export default Ember.Component.extend(Inputviews, {
 	working: Ember.computed('uploading', 'processing', function() {
 		return ( this.get('uploading') || this.get('processing') );
 	}),
+
+	//
+
+	init() {
+
+		this._super();
+
+	},
 
 	//
 
@@ -123,15 +146,21 @@ export default Ember.Component.extend(Inputviews, {
 
 		this.get('uploader').upload( this.get('namespace'), data, function(value) { self.onProgress(value); }, function() { self.onUploaded(); }, self.get('authentication')).then(function(data) {
 
-			self.set('uploading', false);
-			self.set('processing', false);
+			if ( self.get('isDestroyed') !== true ) {
+				self.set('preview', null);
+				self.set('uploading', false);
+				self.set('processing', false);
+			}
 
-			self.onComplete(data);
+			self.onComplete(data,self);
 
 		}).catch(function(error) {
 
-			self.set('uploading', false);
-			self.set('processing', false);
+			if ( self.get('isDestroyed') !== true ) {
+				self.set('preview', null);
+				self.set('uploading', false);
+				self.set('processing', false);
+			}
 
 			self.onFail(error);
 
@@ -143,8 +172,10 @@ export default Ember.Component.extend(Inputviews, {
 
 	onUploaded() {
 
-		this.set('processing', true);
-		this.set('uploading', false);
+		if ( this.get('isDestroyed') !== true ) {
+			this.set('processing', true);
+			this.set('uploading', false);
+		}
 
 	},
 
@@ -156,13 +187,17 @@ export default Ember.Component.extend(Inputviews, {
 
 	onProgress(value) {
 
-		this.set('percentage', value);
+		if ( this.get('isDestroyed') !== true ) {
+			this.set('percentage', value);
+		}
 
 	},
 
 	onFail() {
 
-		this.set('failed', true);
+		if ( this.get('isDestroyed') !== true ) {
+			this.set('failed', true);
+		}
 
 	},
 

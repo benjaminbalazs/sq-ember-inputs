@@ -1,12 +1,8 @@
 import Ember from 'ember';
 import Droplet from './sq-file-droplet';
+import FileSaver from './../mixins/filesaver';
 
-export default Droplet.extend({
-
-    //
-
-    store: Ember.inject.service(),
-    saving: false,
+export default Droplet.extend(FileSaver, {
 
     //
 
@@ -16,49 +12,15 @@ export default Droplet.extend({
 
     //
 
-	onComplete(data) {
+	onComplete(data, self) {
 
-        var self = this;
+        self.save(data, self).then(function() {
 
-        this.set('saving', true);
+            self.sendAction('complete');
 
-        if ( data.id ) {
-
-            var model = this.get('store').push({ data:data });
-            model.reload().then(function() {
-
-                self.save(model);
-
-            });
-
-        }
+        });
 
 	},
-
-    save(model) {
-
-        var self = this;
-
-        if ( self ) {
-
-            var holder = this.get('model');
-
-            holder.set(this.get('parameter'), model);
-
-            holder.save().then(function() {
-
-                if ( self.get('isDestroyed') === false && self.get('isDestroying') === false ) {
-
-                    self.set('saving', false);
-                    self.sendAction('complete');
-
-                }
-
-            });
-
-        }
-
-    },
 
     //
 
