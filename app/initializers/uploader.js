@@ -8,9 +8,6 @@ export function initialize () {
 
     app.inject('component', 'uploader', 'uploader:service');
 
-	$.fn.formatter.addInptType('D', /[a-z0-9]/);
-	$.fn.formatter.addInptType('U', /[a-z0-9.-]/);
-
 }
 
 export default {
