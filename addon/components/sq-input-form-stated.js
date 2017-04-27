@@ -103,7 +103,10 @@ export default SqForm.extend({
 
 		}
 
-		this.sendAction('change', this.get('internal'));
+		var self = this;
+		Ember.run.later(function() {
+			self.sendAction('change', self.get('internal'));
+		});
 
 	},
 
