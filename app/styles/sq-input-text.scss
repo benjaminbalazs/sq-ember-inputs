@@ -143,14 +143,14 @@
 
 }
 
-&[lang=ar] {
+[lang=ar] {
 	input, textarea {
 		font-family: "El Messiri", sans-serif;
 		direction: rtl;
 	}
 }
 
-&[lang=en] {
+[lang=en] {
 	input, textarea {
 		font-family: "Roboto", sans-serif;
 		direction: ltr;
