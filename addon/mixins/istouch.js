@@ -8,7 +8,11 @@ export default Ember.Mixin.create({
 
 		if ( this.get('fastboot.isFastBoot') !== true ) {
 
-			return Ember.$.browser.mobile;
+			if ( Ember.$.browser.mobile === true ) {
+				return true;
+			} else {
+				return false;
+			}
 
 		} else {
 
