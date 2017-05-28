@@ -191,9 +191,10 @@ export default Ember.Mixin.create({
 	//
 
 	validator_domain(text) {
+		text = text.split(' ').join('');
 		if ( text ) {
 			if ( text.length > 2 ) {
-				if ( text.substring(0,4) === 'www.' ) {
+				if ( text.substring(0,4) === 'www.' && text.length <= 4 ) {
 					return false;
 				} else if ( text.split('.').length === 1 || text.split('.').length > 3 ) {
 					return false;
