@@ -6,7 +6,7 @@ export default Ember.Component.extend({
 
 	//
 
-	classNames: ['small', 'green'],
+	classNames: ['small', 'green', 'mobile'],
 	classNameBindings: ['unchanged', 'inactive'],
 	attributeBindings: ['spinner'],
 
