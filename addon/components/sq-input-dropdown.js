@@ -15,7 +15,7 @@ export default Ember.Component.extend(Visuals,Validators,ClickOutside,Lang, {
 	// SETTINGS
 
 	classNames: ['sq-input-dropdown'],
-	classNameBindings: ['focus', 'tiny', 'medium'],
+	classNameBindings: ['focus', 'tiny', 'medium', 'small'],
 
 	attributeBindings: ['lang'],
 

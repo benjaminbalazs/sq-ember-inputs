@@ -26,7 +26,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 	// SETTINGS
 	classNames: ['sq-input-animation'],
 
-	classNameBindings: ['defaultClass:sq-input-text', 'persistent', 'medium', 'large', 'tiny', 'isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'disabled'],
+	classNameBindings: ['defaultClass:sq-input-text', 'persistent', 'medium', 'large', 'small', 'tiny', 'isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'disabled'],
 	attributeBindings: ['dir', 'lang'],
 
 	// CLICK ---------------------------------------------------------
