@@ -9,7 +9,7 @@ module.exports = {
     if ( !process.env.EMBER_CLI_FASTBOOT ) {
         app.import(app.bowerDirectory + '/dragula.js/dist/dragula.min.js');
 	    app.import(app.bowerDirectory + '/dragula.js/dist/dragula.min.css');
-        app.import('vendor/formatter.js/dist/jquery.formatter.min.js');
+        app.import(app.bowerDirectory + '/formatter.js/dist/jquery.formatter.min.js');
     }
   },
   isDevelopingAddon: function() {
