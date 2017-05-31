@@ -34,7 +34,7 @@ export default Ember.TextField.reopen({
 		if ( value === '' ) {
 			return 0;
 		} else {
-			var calc = '<div style="clear:both;display:block;visibility:hidden;"><span style="width;inherit;margin:0;font-family:'  + this.$().css('font-family') + ';font-size:'  + this.$().css('font-size') + ';font-weight:' + this.$().css('font-weight') + '">' + value + '</span></div>';
+			var calc = '<div style="clear:both;display:block;visibility:hidden;"><span style="width;inherit;margin:0;font-family:'  + this.$().css('font-family') + ';font-size:'  + this.$().css('font-size') + ';font-weight:' + this.$().css('font-weight') + ';padding-right:' + this.$().css('padding-right') +'">' + value + '</span></div>';
 			Ember.$('body').append(calc);
 			var width = Ember.$('body').find('span:last').width();
 			Ember.$('body').find('span:last').parent().remove();
@@ -77,7 +77,7 @@ export default Ember.TextField.reopen({
 				if ( this.get('number') === true ) {
 					msg = msg.replace(/[^0-9]+/ig, "");
 				}
-			
+
 				if ( this.get('price') === true ) {
 					msg = msg.replace(/[^0-9.]+/ig, "");
 				}
