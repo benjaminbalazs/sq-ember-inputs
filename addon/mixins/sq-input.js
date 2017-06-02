@@ -24,6 +24,8 @@ export default Ember.TextField.reopen({
 
 		}
 
+		this.sendAction('register', this);
+
 	},
 
 	//

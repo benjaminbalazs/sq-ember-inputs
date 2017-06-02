@@ -57,7 +57,24 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 				//this.set('isInvalidProxy', true);
 			}
 
-		}
+		},
+
+		//
+
+		registerBeforeChild(child) {
+			this.set('beforeChild', child);
+			this.align();
+		},
+
+		registerAfterChild(child) {
+			this.set('afterChild', child);
+			this.align();
+		},
+
+		registerInputChild(child) {
+			this.set('inputChild', child);
+			this.align();
+		},
 
 	},
 
@@ -75,34 +92,54 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 	align() {
 
-		if ( this.get('after') ) {
+		this.alignBefore();
+		this.alignAfter();
 
-			let input = this.get('childViews')[0];
+		if ( this.get('autoSize') === true && this.get('inputChild') ) {
 
-			if ( input ) {
-				let width = input.width(this.get('value'));
-				let after = this.get('childViews')[2];
-				after.$().css('left', width + 'px');
-			}
-
-		}
-
-		if ( this.get('autoSize') === true ) {
-
-			let input = this.get('childViews')[0];
+			let input = this.get('inputChild');
 
 			if ( input ) {
 
 				let width = input.width(this.get('value'));
 
-				if ( this.get('after') || this.get('before') ) {
-					let after = this.get('childViews')[2];
-					width = width + after.width(this.get('after'));
+				if ( this.get('afterChild') ) {
+					width = width + this.get('afterChild').width(this.get('after'));
+				}
+
+				if ( this.get('beforeChild') ) {
+					width = width + this.get('beforeChild').width(this.get('before'));
 				}
 
 				Ember.$(this.get('element')).css('width', width + 'px');
 
 			}
+
+		}
+
+	},
+
+	alignBefore() {
+
+		if ( this.get('beforeChild') && this.get('inputChild') ) {
+
+			var width = this.get('beforeChild').width(this.get('before'));
+			this.get('inputChild').$().css('padding-left', width + 'px');
+
+			if ( this.get('afterChild') ) {
+				this.get('afterChild').$().css('padding-left', width + 'px');
+			}
+
+		}
+
+	},
+
+	alignAfter() {
+
+		if ( this.get('afterChild') && this.get('inputChild') ) {
+
+			let width = this.get('inputChild').width(this.get('value'));
+			this.get('afterChild').$().css('left', width + 'px');
 
 		}
 
@@ -159,6 +196,14 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 	},
 
+	willDestroy() {
+
+		this._super();
+
+		this.removeObserver('value', this, this.valueDidChange);
+
+	},
+
 	validate() {
 
 		this.set('focus', true);
@@ -170,30 +215,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 	didInsertElement() {
 
-		this.alignBefore();
-
 		this.align();
-
-	},
-
-	//
-
-	alignBefore() {
-
-		if ( this.get('before') ) {
-
-			var input = this.get('childViews')[0];
-
-			if ( input ) {
-
-				var before = this.get('childViews')[2];
-				var width = before.width(this.get('before'));
-
-				input.$().css('padding-left', width + 'px');
-
-			}
-
-		}
 
 	},
 

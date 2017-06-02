@@ -19,19 +19,20 @@
 		transform=transform
 		persistent=persistent
 		price=price
+		register='registerInputChild'
 }}
 
 {{sq-ui-adaptive-label classNames="sq-align-left" value=placeholder tagName='label'}}
 
 {{#if before}}
 
-	{{input value=before classNames='before' autoresize=true}}
+	{{input value=before classNames='before' autoresize=true register='registerBeforeChild'}}
 
 {{/if}}
 
 {{#if after}}
 
-	{{input value=after classNames='after'}}
+	{{input value=after classNames='after' register='registerAfterChild'}}
 
 {{/if}}
 
