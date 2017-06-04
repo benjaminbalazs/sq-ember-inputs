@@ -24,6 +24,7 @@ export default Ember.Component.extend(Visuals,Validators,ClickOutside,Lang, {
 	init() {
 
 		this._super();
+
 		this.value_observer();
 
 	},
@@ -104,7 +105,9 @@ export default Ember.Component.extend(Visuals,Validators,ClickOutside,Lang, {
 
 		if ( this.get('selected') ) {
 			let item = this.get('childViews').findBy('model.id', this.get('selected.id'));
-			item.set('selected', false);
+			if ( item.get('isDestroyed') === false ) {
+				item.set('selected', false);
+			}
 		}
 
 		if ( data ) {
@@ -114,7 +117,9 @@ export default Ember.Component.extend(Visuals,Validators,ClickOutside,Lang, {
 			Ember.run.later(function() { // A LITTLE HACK FOR FIRST START
 				let item = self.get('childViews').findBy('model.id', data.get('id'));
 				if ( item ) {
-					item.set('selected', true);
+					if ( item.get('isDestroyed') === false ) {
+						item.set('selected', true);
+					}
 				}
 			});
 
@@ -132,12 +137,6 @@ export default Ember.Component.extend(Visuals,Validators,ClickOutside,Lang, {
 
 	isValid : Ember.computed('input.isValid', function() {
 		return this.get('input.isValid');
-	}),
-
-	//
-
-	internals : Ember.computed('items', 'items.@each.id', 'items.@each.name', function() {
-		return this.get('items');
 	}),
 
 });
