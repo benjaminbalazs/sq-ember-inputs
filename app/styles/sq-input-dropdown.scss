@@ -85,6 +85,10 @@
 			}
 		}
 
+		li[dir=ltr] {
+			text-align: left;
+		}
+
 		li:hover {
 			background: $sq-dropdown-item-hover;
 		}
