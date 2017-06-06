@@ -66,10 +66,12 @@ export default Ember.TextField.reopen({
 
 				if ( this.get('subdomain') === true ) {
 					msg = msg.replace(/[^a-z0-9-]+/ig, "");
+					msg = msg.replace(/--+/g,"-");
 				}
 
 				if ( this.get('domain') === true ) {
 					msg = msg.replace(/[^a-z0-9.-]+/ig, "");
+					msg = msg.replace(/--+/g,"-");
 				}
 
 				if ( this.get('email') === true ) {

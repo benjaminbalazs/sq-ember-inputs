@@ -191,28 +191,12 @@ export default Ember.Mixin.create({
 	//
 
 	validator_domain(text) {
+
 		text = text.split(' ').join('');
-		if ( text ) {
-			if ( text.length > 2 ) {
-				if ( text.substring(0,4) === 'www.' && text.length <= 4 ) {
-					return false;
-				} else if ( text.split('.').length === 1 || text.split('.').length > 3 ) {
-					return false;
-				} else if ( text.indexOf('..') !== -1 ) {
-					return false;
-				} else {
-					if ( (text.length - text.indexOf('.')) >= 3 && text.indexOf('.') >= 2 ) {
-						return true;
-					} else {
-						return false;
-					}
-				}
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
+		text = text.split('-').join('');
+
+		return this.validator_anything(text);
+
 	},
 
 	validator_phone(string) {
