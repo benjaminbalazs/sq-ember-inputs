@@ -67,15 +67,18 @@ export default Ember.TextField.reopen({
 				if ( this.get('subdomain') === true ) {
 					msg = msg.replace(/[^a-z0-9-]+/ig, "");
 					msg = msg.replace(/--+/g,"-");
+					msg = msg.toLowerCase();
 				}
 
 				if ( this.get('domain') === true ) {
 					msg = msg.replace(/[^a-z0-9.-]+/ig, "");
 					msg = msg.replace(/--+/g,"-");
+					msg = msg.toLowerCase();
 				}
 
 				if ( this.get('email') === true ) {
 					msg = msg.replace(/[^a-z0-9.@_-]+/ig, "");
+					msg = msg.toLowerCase();
 				}
 
 				if ( this.get('number') === true ) {
