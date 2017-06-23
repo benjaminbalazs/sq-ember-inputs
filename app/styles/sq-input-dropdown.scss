@@ -7,13 +7,14 @@
 		width: inherit;
 		text-align: left;
 		height: 56px;
-		margin-bottom: 30px;
+		margin-bottom: 2em;
 	}
 
 	&.tiny, &.medium {
+		font-size: 0.875em;
 		ul {
 			li {
-				font-size: 14px;
+
 			}
 		}
 	}
@@ -57,28 +58,31 @@
 		border-radius: 4px;
 
 		position: absolute;
-		width: inherit;
+		width: calc(100% + 2em);
 		background: white;
+		display: inline-block;
 
 		margin-top: -$sq-dropdown-padding;
-		margin-left: -$sq-dropdown-padding;
-		padding-right: $sq-dropdown-padding*2;
+		margin-left: -$sq-dropdown-padding*1;
 
 		padding-top: $sq-dropdown-padding;
 		padding-bottom: $sq-dropdown-padding;
 
-		box-shadow: 0px 3px 4px 2px rgba(0,0,0,0.07);
+		box-shadow: 0 10px 40px rgba(0,0,0,0.075);
 
 		li {
 			@extend .sq-input-animation;
-			font-size: 16px;
+			font-size: 1em;
 			padding-top: $sq-dropdown-padding/2;
 			padding-bottom: $sq-dropdown-padding/2;
 			padding-left: $sq-dropdown-padding*2;
-			padding-right: $sq-dropdown-padding;
-			margin-right: -$sq-dropdown-padding*2;
+			padding-right: $sq-dropdown-padding*2;
 			color: $sq-dropdown-item;
 			cursor: pointer;
+			float: left;
+			width: 100%;
+			clear: both;
+			box-sizing: border-box;
 			strong {
 				color: $sq-dropdown-item-descriptior;
 				font-weight: normal;
