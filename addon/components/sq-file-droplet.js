@@ -121,20 +121,12 @@ export default Ember.Component.extend(Inputviews, {
 
 	//
 
-	init() {
-
-		this._super();
-
-	},
-
-	//
-
 	upload(file) {
 
 		//
 		this.set('failed', false);
 		this.set('uploading', true);
-		this.set('percentage', '0%');
+	//	this.set('percentage', '0%');
 
 		this.sendAction('start');
 
@@ -144,25 +136,26 @@ export default Ember.Component.extend(Inputviews, {
 
     	var self = this;
 
-		this.get('uploader').upload( this.get('namespace'), data, function(value) { self.onProgress(value); }, function() { self.onUploaded(); }, self.get('authentication')).then(function(data) {
+		this.get('uploader').upload( this.get('namespace'), data).then(function(data) {
 
 			if ( self.get('isDestroyed') !== true ) {
 				self.set('preview', null);
 				self.set('uploading', false);
-				self.set('processing', false);
+		//		self.set('processing', false);
 			}
 
 			self.onComplete(data,self);
 
 		}).catch(function(error) {
 
+			console.log(error);
+
 			if ( self.get('isDestroyed') !== true ) {
 				self.set('preview', null);
 				self.set('uploading', false);
-				self.set('processing', false);
+				self.set('failed', true);
+		//		self.set('processing', false);
 			}
-
-			self.onFail(error);
 
 		});
 
@@ -170,14 +163,14 @@ export default Ember.Component.extend(Inputviews, {
 
 	//
 
-	onUploaded() {
+	//onUploaded() {
 
-		if ( this.get('isDestroyed') !== true ) {
-			this.set('processing', true);
-			this.set('uploading', false);
-		}
+	//	if ( this.get('isDestroyed') !== true ) {
+	//		this.set('processing', true);
+	//		this.set('uploading', false);
+	//	}
 
-	},
+	//},
 
 	onComplete(data) {
 
@@ -185,20 +178,13 @@ export default Ember.Component.extend(Inputviews, {
 
 	},
 
-	onProgress(value) {
+	//onProgress(value) {
 
-		if ( this.get('isDestroyed') !== true ) {
-			this.set('percentage', value);
-		}
+	//	if ( this.get('isDestroyed') !== true ) {
+	//		this.set('percentage', value);
+	//	}
 
-	},
+	//},
 
-	onFail() {
-
-		if ( this.get('isDestroyed') !== true ) {
-			this.set('failed', true);
-		}
-
-	},
 
 });
