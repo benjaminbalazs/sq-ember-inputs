@@ -184,18 +184,30 @@ export default Ember.Mixin.create({
 	//
 
 	validator_youtube(text) {
-		var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-  		return (text.match(p)) ? RegExp.$1 : false;
+		if ( text ) {
+			var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+	  		return (text.match(p)) ? RegExp.$1 : false;
+		} else {
+			return false;
+		}
 	},
 
 	//
 
 	validator_domain(text) {
 
-		text = text.split(' ').join('');
-		text = text.split('-').join('');
+		if ( text ) {
 
-		return this.validator_anything(text);
+			text = text.split(' ').join('');
+			text = text.split('-').join('');
+
+			return this.validator_anything(text);
+
+		} else {
+
+			return false;
+
+		}
 
 	},
 
@@ -207,23 +219,4 @@ export default Ember.Mixin.create({
 		}
 	},
 
-	//
-	/*
-	validator_phone(text) {
-		if ( text ) {
-			if ( text) {
-				var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3})$/;
-		  		if ( text.value.match(phoneno) ) {
-		      		return true;
-		        } else {
-		        	return false;
-				}
-			} else {
-				return false;
-			}
-        } else {
-			return false;
-		}
-	},
-	*/
 });
