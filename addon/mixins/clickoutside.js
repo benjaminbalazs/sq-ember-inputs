@@ -11,14 +11,14 @@ export default Ember.Mixin.create({
 
 		var eventNamespace = 'mousedown.' + Ember.guidFor(this) + ' touchstart.' + Ember.guidFor(this);
 
-		Ember.$(document).bindFirst(eventNamespace, function(e) {
+		Ember.$(document).bindFirst(eventNamespace, function(event) {
 
-			if ( !element.is(e.target) && element.has(e.target).length === 0 ) {
+			if ( !element.is(event.target) && element.has(event.target).length === 0 ) {
 
 				self.execute(event, element);
 
 
-			} else if (  Ember.$(e.target).hasClass('clickthrough') ) {
+			} else if ( Ember.$(event.target).hasClass('clickthrough') ) {
 
 				self.execute(event, element);
 
