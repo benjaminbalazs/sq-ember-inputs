@@ -14,6 +14,8 @@ module.exports = {
 
         this._super.included.apply(this, arguments);
 
+        app.import('vendor/bind-first.js');
+
         app.import(this.treePaths.vendor + '/dragula/dist/dragula.min.js');
         app.import(this.treePaths.vendor + '/dragula/dist/dragula.min.css');
 
