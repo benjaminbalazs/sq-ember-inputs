@@ -9,7 +9,7 @@ export default Ember.Mixin.create({
 		var self = this;
 		var element = this.$();
 
-		var eventNamespace = 'mousedown.' + Ember.guidFor(this) + ' touchstart.' + Ember.guidFor(this);
+		var eventNamespace = 'mousedown.' + Ember.guidFor(this) + ' touchend.' + Ember.guidFor(this);
 
 		Ember.$(document).bindFirst(eventNamespace, function(event) {
 
@@ -46,7 +46,7 @@ export default Ember.Mixin.create({
 
 	_willDestroyElement: Ember.on('willDestroyElement', function() {
 
-		var eventNamespace = 'mousedown.' + Ember.guidFor(this) + ' touchstart.' + Ember.guidFor(this);
+		var eventNamespace = 'mousedown.' + Ember.guidFor(this) + ' touchend.' + Ember.guidFor(this);
 
     	Ember.$(document).off(eventNamespace);
 
