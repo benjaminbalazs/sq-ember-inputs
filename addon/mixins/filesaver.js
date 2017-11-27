@@ -13,10 +13,10 @@ export default Ember.Mixin.create({
             self = this;
         }
 
-        if ( data.id ) {
+        if ( data.data.id ) {
 
-            var model = self.get('store').push({ data:data });
-
+            var model = self.get('store').push(data);
+        
             return model.reload().then(function() {
 
                 var holder = self.get('model');
