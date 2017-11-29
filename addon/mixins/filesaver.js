@@ -5,18 +5,16 @@ export default Ember.Mixin.create({
     saving: false,
     store: Ember.inject.service(),
 
-    save(data, self) {
+    save(data) {
 
         this.set('saving', true);
 
-        if ( !self ) {
-            self = this;
-        }
+        const self = this;
 
         if ( data.data.id ) {
 
             var model = self.get('store').push(data);
-        
+
             return model.reload().then(function() {
 
                 var holder = self.get('model');
