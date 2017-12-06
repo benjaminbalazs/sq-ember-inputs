@@ -5,39 +5,33 @@ export default Ember.Mixin.create({
     saving: false,
     store: Ember.inject.service(),
 
-    save(data) {
+    async save(data) {
 
         this.set('saving', true);
 
-        const self = this;
+        try {
 
-        if ( data.data.id ) {
+            var model = this.get('store').push(data);
 
-            var model = self.get('store').push(data);
+            await model.reload();
 
-            return model.reload().then(function() {
+            var holder = this.get('model');
 
-                var holder = self.get('model');
+            holder.set(this.get('parameter'), model);
 
-                holder.set(self.get('parameter'), model);
+            await holder.save();
 
-                return holder.save().then(function() {
+            if ( this.get('isDestroyed') === false && this.get('isDestroying') === false ) {
 
-                    if ( self.get('isDestroyed') === false && self.get('isDestroying') === false ) {
+                this.set('saving', false);
 
-                        self.set('saving', false);
+            }
 
-                        return Ember.RSVP.Promise.resolve();
+            return Ember.RSVP.Promise.resolve();
 
-                    }
+        } catch ( error ) {
 
-                });
-
-            });
-
-        } else {
-
-            return Ember.RSVP.Promise.reject();
+            return Ember.RSVP.Promise.reject(error);
 
         }
 
