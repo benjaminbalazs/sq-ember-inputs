@@ -3,13 +3,19 @@ import Ember from 'ember';
 export default Ember.Mixin.create({
 
     setLang(value) {
-        
+
         if ( value && this.get('ignoreLang') !== true ) {
+
 			if ( this.isArabic(value) ) {
+                    
 				this.set('lang', 'ar');
+
 			} else {
+
 				this.set('lang', 'en');
+
 			}
+
 		} else {
 			this.set('lang', null);
 		}
