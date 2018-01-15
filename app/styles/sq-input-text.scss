@@ -143,7 +143,14 @@
 
 [lang=ar] {
 	input, textarea {
-		font-family: "El Messiri", sans-serif;
+		font-family: "JF Flat", sans-serif;
+		direction: rtl;
+	}
+}
+
+[lang=ur] {
+	input, textarea {
+		font-family: "Changa", sans-serif;
 		direction: rtl;
 	}
 }
