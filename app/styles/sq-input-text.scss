@@ -17,8 +17,8 @@
 		line-height: $sq-input-input-line-height + ( $sq-input-input-height - $sq-input-input-line-height);
 		min-height: $sq-input-input-line-height + ( $sq-input-input-height - $sq-input-input-line-height);
 		font-size: $sq-input-input-font-size;
-		width: inherit;
-		max-width: inherit;
+		width: 100%;
+		max-width: 100%;
 	}
 
 	input, textarea {
