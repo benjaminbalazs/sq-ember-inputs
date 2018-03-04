@@ -221,7 +221,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 	// PROXIES -------------------------------------------------------
 
-	isInvalidProxy : Ember.computed('focus','value', function() {
+	isInvalidProxy: Ember.computed('focus','value', function() {
 
 		// INVALIDATE ONLY IF IT HAS NO FOCUS
 		if ( this.get('focus') === false ) {
@@ -253,7 +253,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 		}
 	}),
 
-	isValid : Ember.computed('value', function() {
+	isValid: Ember.computed('value', function() {
 		if ( this.get('required') !== false ) {
 			if ( this.get('criteria') ) {
 				if ( typeof(this.get('criteria')) === 'string' ) {
