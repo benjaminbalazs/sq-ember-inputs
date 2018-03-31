@@ -80,7 +80,6 @@ export default Ember.Component.extend(Visuals,Validators,ClickOutside, {
 	value_observer: Ember.observer('value', 'items', function() {
 		if ( this.get('items') ) {
 			this.select(this.getSelectedModel());
-			this.setLang(this.get('selected.name'));
 		}
 	}),
 
