@@ -2,9 +2,8 @@ import Ember from 'ember';
 import Validators from '../mixins/validators';
 import ClickOutside from '../mixins/clickoutside';
 import Visuals from '../mixins/visuals';
-import Lang from '../mixins/lang';
 
-export default Ember.Component.extend(Visuals,Validators,ClickOutside,Lang, {
+export default Ember.Component.extend(Visuals,Validators,ClickOutside, {
 
 	// PARAMETERS
 
@@ -16,8 +15,6 @@ export default Ember.Component.extend(Visuals,Validators,ClickOutside,Lang, {
 
 	classNames: ['sq-input-dropdown'],
 	classNameBindings: ['focus', 'tiny', 'medium', 'small'],
-
-	attributeBindings: ['lang'],
 
 	// INIT, DEFINE WHAT IS SELECTED  -------------------------------
 

@@ -1,7 +1,6 @@
 .sq-input-dropdown {
 
 	& {
-		direction: ltr !important;
 		position: relative;
 		display: inline-block;
 		width: inherit;
@@ -12,11 +11,6 @@
 
 	&.tiny, &.medium {
 		font-size: 0.875em;
-		ul {
-			li {
-
-			}
-		}
 	}
 
 	&.medium {
@@ -44,10 +38,6 @@
 		input {
 			pointer-events: none;
 		}
-	}
-
-	.sq-input-text input:disabled {
-		//pointer-events: none;
 	}
 
 	ul {
@@ -126,20 +116,6 @@
 			margin-top: 10px;
 		}
 
-	}
-
-	&[lang=ar] {
-		.arrow {
-			left: 0 !important;
-			right: auto !important;
-		}
-	}
-
-	&[lang=en] {
-		.arrow {
-			right: 0 !important;
-			left: auto !important;
-		}
 	}
 
 }
