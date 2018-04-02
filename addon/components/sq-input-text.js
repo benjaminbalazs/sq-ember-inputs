@@ -32,7 +32,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 	// CLICK ---------------------------------------------------------
 
 	click() {
-		return this.sendAction('focusIn');
+		return this.sendAction('focusIn', this.get('value'));
 	},
 
 	// ACTIONS -------------------------------------------------------
@@ -41,12 +41,12 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 		focusIn() {
 			this.set('focus', true);
-			this.sendAction('focusIn');
+			this.sendAction('focusIn', this.get('value'));
 		},
 
 		focusOut() {
 			this.set('focus', false);
-			this.sendAction('focusOut');
+			this.sendAction('focusOut', this.get('value'));
 		},
 
 		enterPressed() {
@@ -82,7 +82,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 	valueDidChange() {
 
-		this.sendAction('change');
+		this.sendAction('change', this.get('value'));
 
 		this.align();
 

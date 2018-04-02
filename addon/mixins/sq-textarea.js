@@ -23,7 +23,6 @@ export default Ember.TextArea.reopen({
 
 	_elementValueDidChange() {
 
-		// LINE BREAK REMOVER
 		if ( !this.get('linebreak') ) {
 			var msg = this.$().val().replace("\n", "");
 			this.$().val(msg);
