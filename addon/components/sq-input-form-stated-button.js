@@ -6,9 +6,10 @@ export default Ember.Component.extend({
 
 	//
 
-	classNames: ['small', 'green', 'mobile'],
-	classNameBindings: ['unchanged', 'inactive'],
+	classNames: ['green', 'mobile'],
+	classNameBindings: ['unchanged', 'inactive', 'small'],
 	attributeBindings: ['spinner'],
+	small: true,
 
 	green: Ember.computed('dirty', function() {
 		return this.get('dirty');
