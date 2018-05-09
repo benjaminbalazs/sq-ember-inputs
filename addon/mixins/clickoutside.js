@@ -1,24 +1,27 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import { guidFor } from '@ember/object/internals';
+import { on } from '@ember/object/evented';
+import Mixin from '@ember/object/mixin';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
 
 	ignoreTag: null,
 
-	_didInsertElement: Ember.on('didInsertElement', function() {
+	_didInsertElement: on('didInsertElement', function() {
 
 		var self = this;
 		var element = this.$();
 
-		var eventNamespace = 'mouseup.' + Ember.guidFor(this) + ' touchend.' + Ember.guidFor(this);
+		var eventNamespace = 'mouseup.' + guidFor(this) + ' touchend.' + guidFor(this);
 
-		Ember.$(document).bindFirst(eventNamespace, function(event) {
+		$(document).bindFirst(eventNamespace, function(event) {
 
 			if ( !element.is(event.target) && element.has(event.target).length === 0 ) {
 
 				self.execute(event, element);
 
 
-			} else if ( Ember.$(event.target).hasClass('clickthrough') ) {
+			} else if ( $(event.target).hasClass('clickthrough') ) {
 
 				self.execute(event, element);
 
@@ -44,11 +47,11 @@ export default Ember.Mixin.create({
 
 	},
 
-	_willDestroyElement: Ember.on('willDestroyElement', function() {
+	_willDestroyElement: on('willDestroyElement', function() {
 
-		var eventNamespace = 'mouseup.' + Ember.guidFor(this) + ' touchend.' + Ember.guidFor(this);
+		var eventNamespace = 'mouseup.' + guidFor(this) + ' touchend.' + guidFor(this);
 
-    	Ember.$(document).off(eventNamespace);
+    	$(document).off(eventNamespace);
 
 	}),
 

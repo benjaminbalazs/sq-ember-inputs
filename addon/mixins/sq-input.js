@@ -1,6 +1,7 @@
-import Ember from "ember";
+import $ from 'jquery';
+import TextField from '@ember/component/text-field';
 
-export default Ember.TextField.reopen({
+export default TextField.reopen({
 
 	//
 
@@ -37,9 +38,9 @@ export default Ember.TextField.reopen({
 			return 0;
 		} else {
 			var calc = '<div style="clear:both;display:block;visibility:hidden;"><span style="width;inherit;margin:0;font-family:'  + this.$().css('font-family') + ';font-size:'  + this.$().css('font-size') + ';font-weight:' + this.$().css('font-weight') + ';padding-right:' + this.$().css('padding-right') +'">' + value + '</span></div>';
-			Ember.$('body').append(calc);
-			var width = Ember.$('body').find('span:last').width();
-			Ember.$('body').find('span:last').parent().remove();
+			$('body').append(calc);
+			var width = $('body').find('span:last').width();
+			$('body').find('span:last').parent().remove();
 			return width;
 		}
 

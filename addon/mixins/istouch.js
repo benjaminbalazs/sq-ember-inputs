@@ -1,14 +1,16 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import { inject as service } from '@ember/service';
+import Mixin from '@ember/object/mixin';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
 
-	fastboot: Ember.inject.service(),
+	fastboot: service(),
 
 	isTouch() {
 
 		if ( this.get('fastboot.isFastBoot') !== true ) {
 
-			if ( Ember.$.browser.mobile === true ) {
+			if ( $.browser.mobile === true ) {
 				return true;
 			} else {
 				return false;

@@ -1,11 +1,15 @@
-import Ember from 'ember';
+import { capitalize } from '@ember/string';
+import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
+import $ from 'jquery';
+import Component from '@ember/component';
 import TextInput from './../mixins/sq-input';
 import Validators from '../mixins/validators';
 import Visuals from '../mixins/visuals';
 import MaxDisplay from '../mixins/maxdisplay';
 import Lang from '../mixins/lang';
 
-export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
+export default Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 	// PARAMETERS
 	required: false,
@@ -111,7 +115,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 					width = width + this.get('beforeChild').width(this.get('before'));
 				}
 
-				Ember.$(this.get('element')).css('width', width + 'px');
+				$(this.get('element')).css('width', width + 'px');
 
 			}
 
@@ -147,15 +151,15 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 	// DIRECTION ------------------------------------------------------
 
-	dictionary: Ember.inject.service(),
+	dictionary: service(),
 
 	serviceName: 'dictionary',
 
-	service: Ember.computed('serviceName', function() {
+	service: computed('serviceName', function() {
 		return this.get(this.get('serviceName'));
 	}),
 
-	dir: Ember.computed('service.previous_direction','ignoreDirection', function() {
+	dir: computed('service.previous_direction','ignoreDirection', function() {
 		if ( this.get('ignoreDirection') === true ) {
 			return 'ltr';
 		} else {
@@ -163,7 +167,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 		}
 	}),
 
-	persistent: Ember.computed('placeholder', function() {
+	persistent: computed('placeholder', function() {
 		return ( !this.get('placeholder') );
 	}),
 
@@ -221,7 +225,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 	// PROXIES -------------------------------------------------------
 
-	isInvalidProxy: Ember.computed('focus','value', function() {
+	isInvalidProxy: computed('focus','value', function() {
 
 		// INVALIDATE ONLY IF IT HAS NO FOCUS
 		if ( this.get('focus') === false ) {
@@ -232,7 +236,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 	}),
 
-	isValidProxy : Ember.computed('isFilled', 'value', function() {
+	isValidProxy : computed('isFilled', 'value', function() {
 
 		// VALIDATE ONLY IF IT IS FILLED, OTHERWISE THERE IS NO POINT
 		if ( this.get('isFilled') ) {
@@ -245,7 +249,7 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 	// COMPUTED -------------------------------------------------------
 
-	isFilled : Ember.computed('focus', 'value', function() {
+	isFilled : computed('focus', 'value', function() {
 		if ( this.get('focus') ) {
 			return true;
 		} else {
@@ -253,11 +257,11 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 		}
 	}),
 
-	isValid: Ember.computed('value', function() {
+	isValid: computed('value', function() {
 		if ( this.get('required') !== false ) {
 			if ( this.get('criteria') ) {
 				if ( typeof(this.get('criteria')) === 'string' ) {
-					let method = "is" + Ember.String.capitalize(this.get('criteria'));
+					let method = "is" + capitalize(this.get('criteria'));
 					return this.get(method);
 				} else if ( typeof(this.get('criteria')) === 'function' ) {
 					let method = this.get('criteria');
@@ -273,59 +277,59 @@ export default Ember.Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 	// VALIDATORS --------------------------------------------------
 
-	isPrice : Ember.computed('value', function() {
+	isPrice : computed('value', function() {
 		return this.validator_price(this.get('value'));
 	}),
 
-	isPhone : Ember.computed('value', function() {
+	isPhone : computed('value', function() {
 		return this.validator_phone(this.get('value'));
 	}),
 
-	isCard : Ember.computed('value', function() {
+	isCard : computed('value', function() {
 		return this.validator_card(this.get('value'));
 	}),
 
-	isExpiry : Ember.computed('value', function() {
+	isExpiry : computed('value', function() {
 		return this.validator_expiry(this.get('value'));
 	}),
 
-	isExpiry_year : Ember.computed('value', function() {
+	isExpiry_year : computed('value', function() {
 		return this.validator_expiry_year(this.get('value'));
 	}),
 
-	isExpiry_month : Ember.computed('value', function() {
+	isExpiry_month : computed('value', function() {
 		return this.validator_expiry_month(this.get('value'));
 	}),
 
-	isCvv : Ember.computed('value', function() {
+	isCvv : computed('value', function() {
 		return this.validator_cvv(this.get('value'));
 	}),
 
-	isEmpty : Ember.computed('value', function() {
+	isEmpty : computed('value', function() {
 		return this.validator_empty(this.get('value'));
 	}),
 
-	isEmail : Ember.computed('value', function() {
+	isEmail : computed('value', function() {
 		return this.validator_email(this.get('value'));
 	}),
 
-	isAnything : Ember.computed('value', function() {
+	isAnything : computed('value', function() {
 		return this.validator_anything(this.get('value'));
 	}),
 
-	isYoutube : Ember.computed('value', function() {
+	isYoutube : computed('value', function() {
 		return this.validator_youtube(this.get('value'));
 	}),
 
-	isNumber : Ember.computed('value', function() {
+	isNumber : computed('value', function() {
 		return this.validator_number(this.get('value'));
 	}),
 
-	isPassword : Ember.computed('value', function() {
+	isPassword : computed('value', function() {
 		return this.validator_password(this.get('value'));
 	}),
 
-	isDomain : Ember.computed('value', function() {
+	isDomain : computed('value', function() {
 		return this.validator_domain(this.get('value'));
 	}),
 

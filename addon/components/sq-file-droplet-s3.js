@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
 import Droplet from './sq-file-droplet';
 import FileSaver from './../mixins/filesaver';
 
@@ -6,7 +6,7 @@ export default Droplet.extend(FileSaver, {
 
     //
 
-    working: Ember.computed('uploading', 'processing', 'saving', 'deleting', function() {
+    working: computed('uploading', 'processing', 'saving', 'deleting', function() {
         return ( this.get('uploading') || this.get('processing') || this.get('saving') || this.get('deleting') );
     }),
 

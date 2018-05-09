@@ -1,8 +1,9 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Mixin from '@ember/object/mixin';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
 
-	maxcount: Ember.computed('value',function() {
+	maxcount: computed('value',function() {
 
         if ( this.get('value') ) {
             return this.get('value').length + '/' + this.get('maxlength');

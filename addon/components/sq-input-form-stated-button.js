@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
 	tagName: 'button',
 
@@ -11,19 +12,19 @@ export default Ember.Component.extend({
 	attributeBindings: ['spinner'],
 	small: true,
 
-	green: Ember.computed('dirty', function() {
+	green: computed('dirty', function() {
 		return this.get('dirty');
 	}),
 
-	unchanged: Ember.computed('dirty', function() {
+	unchanged: computed('dirty', function() {
 		return !this.get('dirty');
 	}),
 
-	inactive: Ember.computed('dirty', function() {
+	inactive: computed('dirty', function() {
 		return !this.get('dirty');
 	}),
 
-	spinner: Ember.computed('saving', function() {
+	spinner: computed('saving', function() {
 		return this.get('saving');
 	}),
 

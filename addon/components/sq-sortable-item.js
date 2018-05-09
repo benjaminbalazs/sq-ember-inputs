@@ -1,12 +1,13 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
 	classNames: ['sq-sortable-item'],
 
 	attributeBindings: ['reference'],
 
-	reference : Ember.computed('model', function() {
+	reference : computed('model', function() {
 		return this.get('model.id');
 	}),
 

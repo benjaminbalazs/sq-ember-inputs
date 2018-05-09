@@ -1,9 +1,11 @@
-import Ember from 'ember';
+import { later } from '@ember/runloop';
+import { observer, computed } from '@ember/object';
+import Component from '@ember/component';
 import Validators from '../mixins/validators';
 import ClickOutside from '../mixins/clickoutside';
 import Visuals from '../mixins/visuals';
 
-export default Ember.Component.extend(Visuals,Validators,ClickOutside, {
+export default Component.extend(Visuals,Validators,ClickOutside, {
 
 	// PARAMETERS
 
@@ -77,7 +79,7 @@ export default Ember.Component.extend(Visuals,Validators,ClickOutside, {
 
 	//
 
-	value_observer: Ember.observer('value', 'items', function() {
+	value_observer: observer('value', 'items', function() {
 		if ( this.get('items') ) {
 			this.select(this.getSelectedModel());
 		}
@@ -110,7 +112,7 @@ export default Ember.Component.extend(Visuals,Validators,ClickOutside, {
 
 			var self = this;
 
-			Ember.run.later(function() { // A LITTLE HACK FOR FIRST START
+			later(function() { // A LITTLE HACK FOR FIRST START
 				let item = self.get('childViews').findBy('model.id', data.get('id'));
 				if ( item ) {
 					if ( item.get('isDestroyed') === false ) {
@@ -131,7 +133,7 @@ export default Ember.Component.extend(Visuals,Validators,ClickOutside, {
 		this.get('input').validate();
 	},
 
-	isValid : Ember.computed('input.isValid', function() {
+	isValid : computed('input.isValid', function() {
 		return this.get('input.isValid');
 	}),
 

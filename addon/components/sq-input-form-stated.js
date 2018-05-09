@@ -1,5 +1,6 @@
+import { later } from '@ember/runloop';
+import EmberObject from '@ember/object';
 import SqForm from './sq-input-form';
-import Ember from 'ember';
 
 export default SqForm.extend({
 
@@ -86,7 +87,7 @@ export default SqForm.extend({
 
 		this._super();
 
-		this.set('internal', Ember.Object.create({}));
+		this.set('internal', EmberObject.create({}));
 
 		var list = this.get('params').split(',');
 
@@ -104,7 +105,7 @@ export default SqForm.extend({
 		}
 
 		var self = this;
-		Ember.run.later(function() {
+		later(function() {
 			self.sendAction('change', self.get('internal'));
 		});
 

@@ -1,7 +1,11 @@
+import { computed } from '@ember/object';
+import $ from 'jquery';
+import { later } from '@ember/runloop';
+import Component from '@ember/component';
 import Ember from 'ember';
 import Inputviews from '.././mixins/inputviews';
 
-export default Ember.Component.extend(Inputviews, {
+export default Component.extend(Inputviews, {
 
 	classNames: ['sq-file-droplet'],
 	classNameBindings: ['dragging'],
@@ -17,9 +21,9 @@ export default Ember.Component.extend(Inputviews, {
 		if ( this.get('uploading') === false ) {
 
 			var self = this;
-			Ember.run.later(function() {
+			later(function() {
 
-				var input = Ember.$('<input>').attr({ type: 'file', accept: self.get('accept') } );
+				var input = $('<input>').attr({ type: 'file', accept: self.get('accept') } );
 				input.on('change', function(event) {
 					self.handleInputField(event);
 				});
@@ -67,7 +71,7 @@ export default Ember.Component.extend(Inputviews, {
 
 	//
 
-	working: Ember.computed('uploading', 'processing', function() {
+	working: computed('uploading', 'processing', function() {
 		return ( this.get('uploading') || this.get('processing') );
 	}),
 

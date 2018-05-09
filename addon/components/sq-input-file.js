@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import Inputviews from '.././mixins/inputviews';
 
-export default Ember.Component.extend(Inputviews, {
+export default Component.extend(Inputviews, {
 
 	//
 

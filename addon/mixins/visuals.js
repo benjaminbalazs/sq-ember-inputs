@@ -1,12 +1,13 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import Mixin from '@ember/object/mixin';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
 
     shake() {
 
         this.$().addClass('sq-shake').one('webkitAnimationEnd oAnimationEnd', function() {
 
-            Ember.$(this).removeClass('sq-shake');
+            $(this).removeClass('sq-shake');
 
         });
 

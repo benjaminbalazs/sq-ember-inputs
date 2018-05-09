@@ -1,6 +1,6 @@
-import Ember from "ember";
+import TextArea from '@ember/component/text-area';
 
-export default Ember.TextArea.reopen({
+export default TextArea.reopen({
 
 	//
 

@@ -1,7 +1,9 @@
-import Ember from 'ember';
+import { Promise as EmberPromise } from 'rsvp';
+import $ from 'jquery';
+import Component from '@ember/component';
 import Sortable from './../mixins/sortable';
 
-export default Ember.Component.extend(Sortable,{
+export default Component.extend(Sortable,{
 
 	classNames: ['sq-sortable-list'],
 	tagName: 'ul',
@@ -22,12 +24,12 @@ export default Ember.Component.extend(Sortable,{
 		});
 
 		drag.on('drag', function(el) {
-			this.currentIndex = Ember.$(el).index();
+			this.currentIndex = $(el).index();
 		});
 
 		drag.on('drop', function(el) {
 
-			let newIndex = Ember.$(el).index();
+			let newIndex = $(el).index();
 
 			if ( newIndex !== this.currentIndex ) {
 
@@ -53,7 +55,7 @@ export default Ember.Component.extend(Sortable,{
 
 		var positions = [];
 		this.$().children().each(function(index) {
-    		positions[Ember.$(this).attr('reference')] = index;
+    		positions[$(this).attr('reference')] = index;
 		});
 
 		var childs = this.get('childViews');
@@ -75,7 +77,7 @@ export default Ember.Component.extend(Sortable,{
 					list.push(promise);
 				}
 			}
-			Ember.RSVP.Promise.all(list).then(function() {
+			EmberPromise.all(list).then(function() {
 				self.sendAction('complete');
 			});
 		}

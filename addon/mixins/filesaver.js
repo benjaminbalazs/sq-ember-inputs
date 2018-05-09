@@ -1,9 +1,11 @@
-import Ember from 'ember';
+import { Promise as EmberPromise } from 'rsvp';
+import { inject as service } from '@ember/service';
+import Mixin from '@ember/object/mixin';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
 
     saving: false,
-    store: Ember.inject.service(),
+    store: service(),
 
     async save(data) {
 
@@ -27,11 +29,11 @@ export default Ember.Mixin.create({
 
             }
 
-            return Ember.RSVP.Promise.resolve();
+            return EmberPromise.resolve();
 
         } catch ( error ) {
 
-            return Ember.RSVP.Promise.reject(error);
+            return EmberPromise.reject(error);
 
         }
 
