@@ -22,8 +22,6 @@ module.exports = {
 
         app.import(this.treePaths.vendor + '/formatter.js/jquery.formatter.min.js');
 
-        app.import('vendor/assets/sq-dropdown-arrow.svg', { destDir: 'assets/images' });
-
     },
 
     treeForVendor: function(vendorTree) {

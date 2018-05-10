@@ -26,6 +26,9 @@
 		margin-top: -2px;
 		position: absolute;
 		pointer-events: none;
+		svg {
+			float: left;
+		}
 	}
 
 	.sq-input-text {
