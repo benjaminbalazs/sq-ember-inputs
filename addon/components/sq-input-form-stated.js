@@ -111,7 +111,7 @@ export default SqForm.extend({
 
 	},
 
-	willDestroy() {
+	willDestroyElement() {
 
 		var list = this.get('params').split(',');
 

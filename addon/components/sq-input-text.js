@@ -31,7 +31,7 @@ export default Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 	classNames: ['sq-input-animation'],
 
 	classNameBindings: ['defaultClass:sq-input-text', 'persistent', 'medium', 'large', 'small', 'tiny', 'isFilled:filled', 'isValidProxy:valid', 'isInvalidProxy:invalid', 'focus', 'disabled'],
-	attributeBindings: ['dir', 'lang'],
+	attributeBindings: ['dir', 'language'],
 
 	// CLICK ---------------------------------------------------------
 
@@ -159,11 +159,11 @@ export default Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 		return this.get(this.get('serviceName'));
 	}),
 
-	dir: computed('service.previous_direction','ignoreDirection', function() {
-		if ( this.get('ignoreDirection') === true ) {
-			return 'ltr';
+	dir: computed('language', function() {
+		if ( this.get('language') === 'ar' ) {
+			return 'rtl';
 		} else {
-			return this.get('service.previous_direction');
+			return 'ltr';
 		}
 	}),
 
@@ -200,7 +200,7 @@ export default Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 	},
 
-	willDestroy() {
+	willDestroyElement() {
 
 		this._super();
 

@@ -22,6 +22,7 @@
 	}
 
 	input, textarea {
+		font-family: inherit;
 		overflow:hidden;
 		display: inline-block;
 		outline: none;
@@ -139,27 +140,18 @@
 		}
 	}
 
-}
-
-[lang=ar] {
-	input, textarea {
-		font-family: "JF Flat", sans-serif;
-		direction: rtl;
+	&[dir=ltr] {
+		input, textarea {
+			text-align: left;
+		}
 	}
-}
 
-[lang=ur] {
-	input, textarea {
-		font-family: "Changa", sans-serif;
-		direction: rtl;
+	&[dir=rtl] {
+		input, textarea {
+			text-align: right;
+		}
 	}
-}
 
-[lang=en] {
-	input, textarea {
-		font-family: "Roboto", sans-serif;
-		direction: ltr;
-	}
 }
 
 .sq-input-text {

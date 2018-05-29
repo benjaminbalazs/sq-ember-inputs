@@ -7,17 +7,19 @@ export default Mixin.create({
         if ( value && this.get('ignoreLang') !== true ) {
 
 			if ( this.isArabic(value) ) {
-                    
-				this.set('lang', 'ar');
+
+				this.set('language', 'ar');
 
 			} else {
 
-				this.set('lang', 'en');
+				this.set('language', 'en');
 
 			}
 
 		} else {
-			this.set('lang', null);
+
+			this.set('language', this.get('service.previous_language'));
+
 		}
 
     },
