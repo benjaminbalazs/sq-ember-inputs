@@ -7,7 +7,7 @@ export default Component.extend({
 
 	//
 
-	classNames: ['green', 'mobile'],
+	classNames: ['green'],
 	classNameBindings: ['unchanged', 'inactive', 'small'],
 	attributeBindings: ['spinner'],
 	small: true,
