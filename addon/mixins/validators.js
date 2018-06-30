@@ -200,6 +200,7 @@ export default Mixin.create({
 
 			text = text.split(' ').join('');
 			text = text.split('-').join('');
+			text = text.split('.').join('');
 
 			return this.validator_anything(text);
 
