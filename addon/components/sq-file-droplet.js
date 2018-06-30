@@ -100,7 +100,7 @@ export default Component.extend(Inputviews, {
 
 		}).catch(function(error) {
 
-			Ember.Logger.error(error);
+			console.error(error);
 
 			if ( self.get('isDestroyed') !== true ) {
 				self.set('preview', null);
