@@ -56,7 +56,7 @@ export default Service.extend({
             const random = String(Math.floor(Math.random() * (100000 - 1000 + 1)) + 1000);
 
             const key = String(date.getTime()) + random;
-
+            
             client.upload({
                 Key: key,
                 Body: data,
