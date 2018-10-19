@@ -1,12 +1,12 @@
 {{textarea
 		disabled=disabled
 		value=value
-		focus-in="focusIn"
-		focus-out="focusOut"
+		focus-in=(action "focusIn")
+		focus-out=(action "focusOut")
 		required=required
 		maxlength=maxlength
 		cols="1"
-		enterPressed='enterPressed'
+		enterPressed=(action "enterPressed")
 		autoresize=true
 		wrap=wrap
 		linebreak=linebreak

@@ -2,8 +2,8 @@
 		disabled=disabled
 		type=type
 		value=value
-		focus-in="focusIn"
-		focus-out="focusOut"
+		focus-in=(action "focusIn")
+		focus-out=(action "focusOut")
 		required=required
 		maxlength=maxlength
 		dasherize=dasherize
@@ -12,13 +12,13 @@
 		email=email
 		number=number
 		format=format
-		enterPressed='enterPressed'
+		enterPressed=(action "enterPressed")
 		whitespace=whitespace
 		capital=capital
 		transform=transform
 		persistent=persistent
 		price=price
-		register='registerInputChild'
+		register=(action "registerInputChild")
 }}
 
 {{sq-ui-adaptive-label classNames="sq-align-left" value=placeholder tagName='label'}}
