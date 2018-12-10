@@ -183,7 +183,7 @@ export default Component.extend(Visuals,Validators,MaxDisplay,Lang, {
 
 		if ( this.get('whitespace') === false ) {
 			if ( this.get('value') ) {
-				this.set('value', this.get('value').replace(/\s+/, ""));
+				this.set('value', String(this.get('value')).replace(/\s+/, ""));
 			}
 		}
 

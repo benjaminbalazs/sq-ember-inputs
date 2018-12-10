@@ -103,7 +103,7 @@ export default Component.extend(Visuals,Validators,ClickOutside, {
 
 		if ( this.get('selected') ) {
 			let item = this.get('childViews').findBy('model.id', this.get('selected.id'));
-			if ( item.get('isDestroyed') === false ) {
+			if ( item && item.get('isDestroyed') === false ) {
 				item.set('selected', false);
 			}
 		}
