@@ -9,7 +9,9 @@ export default Component.extend({
 	attributeBindings: ['dir'],
 
 	click() {
-		this.sendAction('select', this.get('model'));
+		if ( !this.get('isDestroyed') ) {
+			this.sendAction('select', this.get('model'));
+		}
 	},
 
 	init() {
